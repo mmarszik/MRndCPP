@@ -31,6 +31,5 @@ echo70 "@email mmarszik@gmail.com"
 echo70 "@package MRndCPP"
 echo70 "@token $r"
 echo70 "@brief: "
-echo70 "@description: "
 echo70
 echo "////////////////////////////////////////////////////////////////////////"
