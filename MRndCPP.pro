@@ -4,14 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    trim.cpp \
-    test04.cpp \
-    test03.cpp \
-    test02.cpp \
+    main.cpp \
     test01.cpp \
     test00.cpp \
-    specimen.cpp \
-    rnd_xor3.cpp \
     rnd_xor2.cpp \
     rnd_skip_lin.cpp \
     rnd_sim_lin.cpp \
@@ -61,8 +56,6 @@ HEADERS += \
     use_rnd_comp_2.h \
     use_rnd_comp_1.h \
     use_rnd_comp_0.h \
-    trim.h \
-    specimen.h \
     rnd.h \
     rnd_xor3.h \
     rnd_xor2.h \
@@ -77,7 +70,8 @@ HEADERS += \
     rnd_buff2.h \
     rnd_buff1.h \
     rnd_buff0.h \
-    rnd_base.h
+    rnd_base.h \
+    defs.h
 
 DISTFILES += \
     createAtC++.sh
