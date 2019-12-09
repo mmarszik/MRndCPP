@@ -11,29 +11,28 @@ do
    echo  $def
    echo  $header
 
-   c++ -std=c++14 -O3 -D$def -DTEST00_PROGRAM ../*.cpp ../vendor/MxCPP/mx_array.cpp -o MRndCPP
+   c++ -std=c++14 -O3 -D$def -DTEST00_PROGRAM -I../vendor/MxCPP/ ../*.cpp ../vendor/MxCPP/mx_array.cpp -o MRndCPP
    { time ./MRndCPP > test.txt; } 2> time.txt
    echo "/* TEST00"                                                      >> $header
-   echo "time ./MRndCPP "                                              >> $header
+   echo "time ./MRndCPP "                                                >> $header
    cat test.txt                                                          >> $header
    cat time.txt                                                          >> $header
    echo "*/"                                                             >> $header
 
-#   c++ -std=c++14 -O3 -D$def -DTEST00_PROGRAM ../*.cpp ../vendor/MxCPP/mx_array.cpp -o MRndCPP
+#   c++ -std=c++14 -O3 -D$def -DTEST00_PROGRAM -I../vendor/MxCPP/ ../*.cpp ../vendor/MxCPP/mx_array.cpp -o MRndCPP
 #   { time ./MRndCPP | dieharder -g200 -d0 -k2 >  test.txt; } 2> time.txt   
 #   echo "/* TEST01"                                                      >> $header
-#   echo "time ./MRndCPP | dieharder -g200 -a -k2 "                     >> $header
+#   echo "time ./MRndCPP | dieharder -g200 -a -k2 "                       >> $header
 #   cat test.txt                                                          >> $header
 #   cat time.txt                                                          >> $header
 #   echo "*/"                                                             >> $header
-   
+
 #   { time ./MRndCPP | ./../../PractRand/RNG_test stdin32 -tlmax 1000s > test.txt; } 2> time.txt
 #   echo "/* TEST01"                                                      >> $header
 #   echo "time ./MRndCPP | RNG_test stdin32 -tlmax 20s "     >> $header
 #   cat test.txt                                                          >> $header
 #   cat time.txt                                                          >> $header
 #   echo "*/"                                                             >> $header
-   
    
 done
 

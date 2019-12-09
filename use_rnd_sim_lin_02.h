@@ -37,3 +37,11 @@
 #include "rnd_sim_lin.h"
 
 using TRnd = RndSimLin02;
+/* TEST00
+time ./MRndCPP 
+./test.sh: line 15: ./MRndCPP: No such file or directory
+
+real	0m0.001s
+user	0m0.001s
+sys	0m0.000s
+*/
