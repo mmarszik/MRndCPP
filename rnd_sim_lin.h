@@ -68,12 +68,13 @@ public:
     }
 };
 
-using RndSimLin00 = RndSimLin< TMRND_ULONG, 785269ull, 1259391056969ull,              0ull,  32u >;
-using RndSimLin01 = RndSimLin< TMRND_ULONG, 785269ull, 1259391056969ull, 21641981640689ull,   0u >;
-using RndSimLin02 = RndSimLin< TMRND_ULONG, 991811ull, 2842826673569ull,              0ull,  32u >;
-using RndSimLin03 = RndSimLin< TMRND_ULONG, 991811ull, 2842826673569ull, 12639539681863ull,   0u >;
-using RndSimLin04 = RndSimLin< TMRND_ULONG,1645253ull, 1327634909599ull,  7129848157699ull,   0u >;
-using RndSimLin06 = RndSimLin< TMRND_ULONG,1645253ull, 1327634909599ull,  7129848157699ull,  32u >;
+using RndSimLin00 = RndSimLin< TMRND_ULONG,  785269ull,      1259391056969ull,                 0ull,  32u >;
+using RndSimLin01 = RndSimLin< TMRND_ULONG,  785269ull,      1259391056969ull,    21641981640689ull,   0u >;
+using RndSimLin02 = RndSimLin< TMRND_ULONG,  991811ull,      2842826673569ull,                 0ull,  32u >;
+using RndSimLin03 = RndSimLin< TMRND_ULONG,  991811ull,      2842826673569ull,    12639539681863ull,   0u >;
+using RndSimLin04 = RndSimLin< TMRND_ULONG, 1645253ull,      1327634909599ull,     7129848157699ull,   0u >;
+using RndSimLin06 = RndSimLin< TMRND_ULONG,   51503ull,     83168201779541ull,    76612620731093ull,   0u >;
 
 using RndSimLin05 = RndSimLin< TMRND_ULONGLONG, 12102661ull, 14096522162449405717ull, 0ull, 95u >;
+
 

@@ -19,7 +19,8 @@ SOURCES += \
     rnd_float.cpp \
     rnd_fib.cpp \
     rnd_comp_fib.cpp \
-    rnd_base.cpp
+    rnd_base.cpp \
+    vendor/MxCPP/mx_array.cpp
 
 HEADERS += \
     use_rnd_xor3_0.h \
@@ -75,7 +76,8 @@ HEADERS += \
     rnd_buff0.h \
     rnd_base.h \
     defs.h \
-    use_rnd_sim_lin_06.h
+    use_rnd_sim_lin_06.h \
+    vendor/MxCPP/mx_array.h
 
 DISTFILES += \
     createAtC++.sh
