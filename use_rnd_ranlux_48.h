@@ -49,7 +49,7 @@ public:
     }
 
     TYPE_RESULT operator()() {
-        return static_cast<TYPE_RESULT>( (*this)() );
+        return static_cast<TYPE_RESULT>( std::ranlux48::operator ()() );
     }
 
 };

@@ -49,4 +49,4 @@ using CMRND_FLOAT = const TMRND_FLOAT;
 
 //#define TEST01_PROGRAM
 
-#define USE_RND_RANLUX_48
+//#define USE_RND_RANLUX_48
