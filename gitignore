@@ -1,0 +1,8 @@
+release/*
+debug/*
+vendor/*
+*.autosave
+tests/MRndCPP
+tests/test.txt
+tests/time.txt
+
