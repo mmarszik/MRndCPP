@@ -56,7 +56,7 @@ public:
         for( TMRND_UINT i=0 ; i<std::numeric_limits<decltype(r)>::digits ; i+=BITS ) {
 #pragma GCC diagnostic ignored "-Wshift-count-overflow"
             r <<= BITS;
-#pragma GCC diagnostic error "-Wshift-count-overflow"
+#pragma GCC diagnostic warning "-Wshift-count-overflow"
             r |= rnd() & ((1ull<<BITS)-1);
         }
         return r;

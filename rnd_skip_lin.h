@@ -62,7 +62,9 @@ public:
             for( TMRND_UINT j=0 ; j<skip[is] ; j++ ) {
                 rnd();
             }
+#pragma GCC diagnostic ignored "-Wshift-count-overflow"
             r <<= BITS;
+#pragma GCC diagnostic warning "-Wshift-count-overflow"
             r |= rnd() & ((1ull<<BITS)-1);
             if( ++is >= SKIP_SZIE ) {
                 is = 0;
