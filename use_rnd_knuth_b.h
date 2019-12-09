@@ -37,7 +37,7 @@
 #include <random>
 #include "rnd_base.h"
 
-class TRnd : public std::std::knuth_b {
+class TRnd : public std::knuth_b {
 public:
     typedef RndBase::TYPE_RESULT TYPE_RESULT;
 
@@ -66,5 +66,19 @@ time ./MRndCPP
 
 real	0m0.694s
 user	0m0.694s
+sys	0m0.000s
+*/
+/* TEST00
+time ./MRndCPP 
+655014610
+3386838144
+192173729
+1854295942
+901277944
+864046005
+576472046083594020
+
+real	0m1.705s
+user	0m1.703s
 sys	0m0.000s
 */
