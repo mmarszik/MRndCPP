@@ -39,7 +39,7 @@
 #include "rnd_sim_lin.h"
 #include "rnd_base.h"
 
-template<typename T, T A, T B, T M=0, utyp BITS=32, utyp SHIFT=0>
+template<typename T, T A, T B, T M=0, TMRND_UINT BITS=32, TMRND_UINT SHIFT=0>
 class RndLin : public RndBase {
 private:
     RndSimLin<T,A,B,M,SHIFT> rnd;
@@ -51,9 +51,9 @@ public:
     void seed(const T __sd) {
         rnd.seed(__sd);
     }
-    result_type operator()() {
-        utyp r=0;
-        for( utyp i=0 ; i<std::numeric_limits<decltype(r)>::digits ; i+=BITS ) {
+    TYPE_RESULT operator()() {
+        TMRND_UINT r=0;
+        for( TMRND_UINT i=0 ; i<std::numeric_limits<decltype(r)>::digits ; i+=BITS ) {
 #pragma GCC diagnostic ignored "-Wshift-count-overflow"
             r <<= BITS;
 #pragma GCC diagnostic error "-Wshift-count-overflow"
@@ -63,10 +63,10 @@ public:
     }
 };
 
-using RndLin1  = RndLin<ultyp, 1645253ull, 1327634909599ull,             0ull, 32u, 32u>;
-using RndLin1a = RndLin<ultyp, 1645253ull, 1327634909599ull,             0ull, 16u,  0u>;
-using RndLin2  = RndLin<ultyp, 1645253ull, 1327634909599ull, 7129848157699ull, 32u,  0u>;
-using RndLin2a = RndLin<ultyp, 1645253ull, 1327634909599ull, 7129848157699ull, 16u,  0u>;
-using RndLin2b = RndLin<ultyp, 1645253ull, 1327634909599ull, 7129848157699ull, 11u, 12u>;
-using RndLin2c = RndLin<ultyp, 1645253ull, 1327634909599ull, 7129848157699ull,  8u,  0u>;
+using RndLin1  = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 32u, 32u>;
+using RndLin1a = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 16u,  0u>;
+using RndLin2  = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 32u,  0u>;
+using RndLin2a = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 16u,  0u>;
+using RndLin2b = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 11u, 12u>;
+using RndLin2c = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull,  8u,  0u>;
 

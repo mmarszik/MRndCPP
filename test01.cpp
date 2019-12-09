@@ -41,19 +41,19 @@
 #include <climits>
 #include "rnd.h"
 
-constexpr utyp BUFFSIZE = ( 1 << 12 );
+constexpr TMRND_UINT BUFFSIZE = ( 1 << 12 );
 
-int main(int argc, char *argv[]) {
+int main() {
     std::random_device rd;
-    ultyp seed = 0;
-    for( utyp i=0 ; i<8 ; i++ ) {
+    TMRND_ULONG seed = 0;
+    for( TMRND_UINT i=0 ; i<8 ; i++ ) {
         seed = ( seed << 8 ) | ( rd() & 0xFF );
     }
     TRnd rnd( seed );
-    for( ultyp loop=0 ;true ; loop++ ) {
-        utyp buf[ BUFFSIZE ];
-        for( utyp i=0 ; i<BUFFSIZE ; i++) {
-            buf[i] = static_cast<utyp>( rnd() );
+    for( TMRND_ULONG loop=0 ;true ; loop++ ) {
+        TMRND_UINT buf[ BUFFSIZE ];
+        for( TMRND_UINT i=0 ; i<BUFFSIZE ; i++) {
+            buf[i] = rnd() ;
         }
         fwrite( buf, 1, sizeof(buf), stdout );
     }

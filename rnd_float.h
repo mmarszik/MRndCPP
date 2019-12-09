@@ -41,10 +41,10 @@
 class RndFloat {
 private:
     TRnd &rnd;
-    TRnd::result_type p;
+    TRnd::TYPE_RESULT p;
 
 public:
-    RndFloat(TRnd &rnd, cftyp p) : rnd(rnd), p( static_cast<TRnd::result_type>(p * TRnd::max()) ) {
+    RndFloat(TRnd &rnd, CMRND_FLOAT p) : rnd(rnd), p( static_cast<TRnd::TYPE_RESULT>(p * TRnd::max()) ) {
     }
 
     bool operator()() {

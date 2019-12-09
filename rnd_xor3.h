@@ -34,25 +34,26 @@
 
 #pragma once
 
+#include <mx_array.h>
+
 #include "defs.h"
-#include "m_array.h"
 #include "rnd_base.h"
 
-template<typename TRnd, utyp SIZE1, utyp SIZE2, utyp SIZE3>
+template<typename TRnd, TMRND_UINT SIZE1, TMRND_UINT SIZE2, TMRND_UINT SIZE3>
 class RndXor3 : public RndBase {
 private:
-    using TBuff = MArray<ultyp,SIZE1+SIZE2+SIZE3>;
+    using TBuff = MxArray<TMRND_ULONG,SIZE1+SIZE2+SIZE3>;
     TBuff x;
-    utyp i1,i2,i3;
+    TMRND_UINT i1,i2,i3;
 
 public:
-    RndXor3( cultyp __sd ) {
+    RndXor3( CMRND_ULONG __sd ) {
         seed( __sd );
     }
-    void seed( cultyp __sd ) {
+    void seed( CMRND_ULONG __sd ) {
         TRnd rnd(__sd);
-        for( utyp i=0 ; i<2 ; i++ ) {
-            for( utyp j=0 ; j<SIZE1+SIZE2+SIZE3 ; j++ ) {
+        for( TMRND_UINT i=0 ; i<2 ; i++ ) {
+            for( TMRND_UINT j=0 ; j<SIZE1+SIZE2+SIZE3 ; j++ ) {
                 x[j] = (x[j]<<32) | (rnd() & 0xFFFFFFFFu);
             }
         }
@@ -60,7 +61,7 @@ public:
         i2 = SIZE1 + SIZE2 - 1;
         i3 = SIZE1 + SIZE2 + SIZE3 - 1;
     }
-    result_type operator()() {
+    TYPE_RESULT operator()() {
         if( ++i1 >= SIZE1                 ) i1 = 0;
         if( ++i2 >= SIZE1 + SIZE2         ) i2 = SIZE1;
         if( ++i3 >= SIZE1 + SIZE2 + SIZE3 ) i3 = SIZE1 + SIZE2;

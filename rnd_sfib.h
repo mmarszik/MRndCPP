@@ -34,16 +34,17 @@
 
 #pragma once
 
+#include <mx_array.h>
+
 #include "rnd_lin.h"
-#include "m_array.h"
 #include "rnd_base.h"
 
-template<typename T, utyp SIZE, utyp R, utyp ROT=1, utyp SHIFT=0, utyp INIT=4>
+template<typename T, TMRND_UINT SIZE, TMRND_UINT R, TMRND_UINT ROT=1, TMRND_UINT SHIFT=0, TMRND_UINT INIT=4>
 class RndSFib : public RndBase {
 private:
-    using TBuff = MArray<T,SIZE>;
+    using TBuff = MxArray<T,SIZE>;
     TBuff buff;
-    utyp  i1, i2;
+    TMRND_UINT  i1, i2;
 
 private:
     static T rot( const T v ) {
@@ -57,24 +58,24 @@ public:
     }
     void seed(const T __sd) {
         RndLin2b rnd( __sd );
-        for( utyp i=0 ; i<4 ; i++ ) {
-            for( utyp j=0 ; j<SIZE ; j++ ) {
+        for( TMRND_UINT i=0 ; i<4 ; i++ ) {
+            for( TMRND_UINT j=0 ; j<SIZE ; j++ ) {
                 buff[j] <<= 16;
                 buff[j] ^= rnd();
             }
         }
         i1 = SIZE - 1;
         i2 = SIZE - 1 - R;
-        for( utyp i=0 ; i<SIZE*INIT ; i++ ) {
+        for( TMRND_UINT i=0 ; i<SIZE*INIT ; i++ ) {
             (*this)();
         }
     }
-    result_type operator()() {
+    TYPE_RESULT operator()() {
         if( ++i1 >= SIZE ) i1 = 0;
         if( ++i2 >= SIZE ) i2 = 0;
         return ( buff[i1] += rot(buff[i2]) ) >> SHIFT;
     }
 };
 
-using RndSFib0 =  RndSFib< ultyp, 9689u, 4187u, 1u, 0u>;
+using RndSFib0 =  RndSFib< TMRND_ULONG, 9689u, 4187u, 1u, 0u>;
 

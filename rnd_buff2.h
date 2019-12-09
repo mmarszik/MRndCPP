@@ -42,25 +42,25 @@
 //MM: work fast, but numbers are worse(!!!) than with class TRnd.
 //MM: Attention, SIZE and REPEAT will be used as binary offset,
 //MM: SIZE = 1 << SIZE  and  REPAT = 1 << REPAT.
-template<utyp SIZE, utyp REPEAT, utyp MIN, utyp max>
+template<TMRND_UINT SIZE, TMRND_UINT REPEAT, TMRND_UINT MIN, TMRND_UINT max>
 class RndBuff2 {
 private:
-    using TBuff = MArray< TRnd::result_type , 1<<SIZE >;
-    cutyp max;    // Max range.
+    using TBuff = MxArray< TRnd::TYPE_RESULT , 1<<SIZE >;
+    CMRND_UINT max;    // Max range.
     TRnd  &rnd;   // Pseudo random number generator.
     TBuff buf;    // N-Cyclic buffer to number generator.
-    utyp  next;   // Index to the next given value.
+    TMRND_UINT  next;   // Index to the next given value.
 
 public:
 
-    RndBuff2( TRnd &rnd, cutyp max ) : rnd(rnd), max(max) {
+    RndBuff2( TRnd &rnd, CMRND_UINT max ) : rnd(rnd), max(max) {
         next = 0;
         while( next<SIZE ) {
             buf[ next++ ] = rnd() % (max-MIN+1) + MIN;
         }
     }
 
-    TRnd::result_type operator()() {
+    TRnd::TYPE_RESULT operator()() {
         if( next >= SIZE ) {
             next = 0;
         }
@@ -72,5 +72,5 @@ public:
 
 };
 
-template<utyp MIN>using TRndBuff = RndBuff2<20u, 4u, MIN>;
+template<TMRND_UINT MIN>using TRndBuff = RndBuff2<20u, 4u, MIN>;
 

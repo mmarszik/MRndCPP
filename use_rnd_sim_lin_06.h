@@ -23,19 +23,18 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 03:13:15 CET                               //
+/// @created on 2019-12-09 19:36:47 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token c8d20243-e447-49a0-b4e4-91884a253632                       //
+/// @token 55802526-3e41-4972-98d5-3b3cf98d3648                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#include <iostream>
+#pragma once
 
-int main() {
-    std::cout << "Hello World!" << std::endl;
-    return 0;
-}
+#include "rnd_sim_lin.h"
+
+using TRnd = RndSimLin06;
 

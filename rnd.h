@@ -46,6 +46,8 @@
     #include "use_rnd_sim_lin_04.h"
 #elif  defined( USE_RND_SIM_LIN_05 )
     #include "use_rnd_sim_lin_05.h"
+#elif  defined( USE_RND_SIM_LIN_06 )
+    #include "use_rnd_sim_lin_06.h"
 #elif  defined( USE_RND_FIB_0 )
     #include "use_rnd_fib_0.h"
 #elif  defined( USE_RND_FIB_0a )

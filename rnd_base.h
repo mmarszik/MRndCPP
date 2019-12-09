@@ -41,13 +41,13 @@
 
 class RndBase {
 public:
-    typedef utyp result_type;
+    typedef TMRND_UINT TYPE_RESULT;
 
-    static utyp max() {
-        return std::numeric_limits<utyp>::max();
+    static TMRND_UINT max() {
+        return std::numeric_limits<TMRND_UINT>::max();
     }
 
-    virtual result_type operator()() = 0;
+    virtual TYPE_RESULT operator()() = 0;
 
 };
 

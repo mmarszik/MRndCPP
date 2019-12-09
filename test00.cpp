@@ -40,21 +40,14 @@
 #include <random>
 #include "rnd.h"
 
-int main(int argc, char *argv[]) {
-
-//    std::random_device rd;
-//    ultyp seed = 0;
-//    for( utyp i=0 ; i<8 ; i++ ) {
-//        seed = ( seed << 8 ) | ( rd() & 0xFF );
-//    }
-
-    cultyp seed = 1234567890ull;
+int main() {
+    CMRND_ULONG seed = 1234567890ull;
     TRnd rnd( seed );
-    ultyp x = 0;
-    for( utyp i=0 ; i<6 ; i++ ) {
+    TMRND_ULONG x = 0;
+    for( TMRND_UINT i=0 ; i<6 ; i++ ) {
         std::cout << rnd() << std::endl;
     }
-    for( ultyp i=0 ; i<2000000000ull ; i++ ) {
+    for( TMRND_ULONG i=0 ; i<(1ull<<34u) ; i++ ) {
         x += rnd();
     }
     std::cout << x << std::endl;

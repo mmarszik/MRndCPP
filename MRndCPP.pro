@@ -1,10 +1,13 @@
 TEMPLATE = app
-CONFIG += console c++11
+CONFIG += console c++14
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp \
-    main.cpp \
+QMAKE_CXXFLAGS += -O3
+
+INCLUDEPATH += "vendor/MxCPP"
+
+SOURCES += \
     test01.cpp \
     test00.cpp \
     rnd_xor2.cpp \
@@ -71,7 +74,8 @@ HEADERS += \
     rnd_buff1.h \
     rnd_buff0.h \
     rnd_base.h \
-    defs.h
+    defs.h \
+    use_rnd_sim_lin_06.h
 
 DISTFILES += \
     createAtC++.sh

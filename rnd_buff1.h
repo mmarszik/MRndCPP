@@ -43,30 +43,30 @@
 //MM: numbers are given from buffer, each pseudo random number is given REPEAT
 //MM: times. So the big value of REPEAT and small value of SIZE implicite the
 //MM  worse pseudo random numbers, but accelerate the generate process their.
-template<utyp SIZE, utyp REPEAT, utyp MIN, utyp max>
+template<TMRND_UINT SIZE, TMRND_UINT REPEAT, TMRND_UINT MIN, TMRND_UINT max>
 class RndBuff1 {
 private:
-    using TBuff = MArray<TRnd::result_type,SIZE>;
-    cutyp max;    // Max range.
+    using TBuff = MxArray<TRnd::TYPE_RESULT,SIZE>;
+    CMRND_UINT max;    // Max range.
     TRnd  &rnd;   // Pseudo random number generator.
     TBuff buf;    // N-Cyclic buffer to number generator.
-    utyp  next;   // Index to the next given value.
-    utyp  repeat; // Number repeat to reset buffer.
+    TMRND_UINT  next;   // Index to the next given value.
+    TMRND_UINT  repeat; // Number repeat to reset buffer.
 
 private:
     void reset() {
-        for( utyp i=0 ; i<SIZE ; i++ ) {
+        for( TMRND_UINT i=0 ; i<SIZE ; i++ ) {
             buf[ i ] = rnd() % (max-MIN+1) + MIN;
         }
         repeat = REPEAT;
     }
 
 public:
-    RndBuff1( TRnd &rnd, cutyp max ) : rnd(rnd), max(max) {
+    RndBuff1( TRnd &rnd, CMRND_UINT max ) : rnd(rnd), max(max) {
         next   = SIZE-1;
         repeat = 1;
     }
-    TRnd::result_type operator()() {
+    TRnd::TYPE_RESULT operator()() {
         if( ++next == SIZE ) {
             next = 0;
             if( --repeat == 0 ) {
@@ -77,6 +77,6 @@ public:
     }
 };
 
-template<utyp MIN>
+template<TMRND_UINT MIN>
 using TRndBuff = RndBuff1<1u<<20, 1u<<4, MIN>;
 

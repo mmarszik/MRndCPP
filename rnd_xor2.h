@@ -34,32 +34,33 @@
 
 #pragma once
 
+#include <mx_array.h>
+
 #include "defs.h"
-#include "m_array.h"
 #include "rnd_base.h"
 
-template<typename TRnd, utyp SIZE1, utyp SIZE2>
+template<typename TRnd, TMRND_UINT SIZE1, TMRND_UINT SIZE2>
 class RndXor2 : public RndBase {
 private:
-    using TBuff = MArray<ultyp,SIZE1+SIZE2>;
+    using TBuff = MxArray<TMRND_ULONG,SIZE1+SIZE2>;
     TBuff x;
-    utyp i1,i2;
+    TMRND_UINT i1,i2;
 
 public:
-    RndXor2( cultyp __sd ) {
+    RndXor2( CMRND_ULONG __sd ) {
         seed( __sd );
     }
-    void seed( cultyp __sd ) {
+    void seed( CMRND_ULONG __sd ) {
         TRnd rnd(__sd);
-        for( utyp i=0 ; i<4 ; i++ ) {
-            for( utyp j=0 ; j<SIZE1+SIZE2 ; j++ ) {
+        for( TMRND_UINT i=0 ; i<4 ; i++ ) {
+            for( TMRND_UINT j=0 ; j<SIZE1+SIZE2 ; j++ ) {
                 x[j] = (x[j]<<16) | (rnd() & 0xFFFF);
             }
         }
         i1 = SIZE1 - 1;
         i2 = SIZE1 + SIZE2 - 1;
     }
-    result_type operator()() {
+    TYPE_RESULT operator()() {
         if( ++i1 >= SIZE1        ) i1 = 0;
         if( ++i2 >= SIZE1 + SIZE2) i2 = SIZE1;
         return x[i1] ^ x[i2];

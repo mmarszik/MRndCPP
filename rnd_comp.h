@@ -34,32 +34,33 @@
 
 #pragma once
 
+#include <mx_array.h>
+
 #include "defs.h"
-#include "m_array.h"
 #include "rnd_base.h"
 
 //MM: The composition of two pseudo random number generators with lagged.
-template<class TRnd1, class TRnd2, utyp SIZE>
+template<class TRnd1, class TRnd2, TMRND_UINT SIZE>
 class RndComp : public RndBase {
 private:
-    using TBuff = MArray< utyp , 1u<<SIZE >;
+    using TBuff = MxArray< TMRND_UINT , 1u<<SIZE >;
     TBuff buff;
     TRnd1 rnd1;
     TRnd2 rnd2;
 public:
-    RndComp( cultyp __sd ) {
+    RndComp( CMRND_ULONG __sd ) {
         seed( __sd );
     }
-    void seed( cultyp __sd ) {
+    void seed( CMRND_ULONG __sd ) {
         rnd1.seed( __sd ^ 0x4B3B2985634D008 );
         rnd2.seed( __sd ^ 0x73CD8A180586D6A );
-        for( utyp i=0 ; i < (1u<<SIZE) ; i++ ) {
+        for( TMRND_UINT i=0 ; i < (1u<<SIZE) ; i++ ) {
             buff[i] = rnd1();
         }
     }
-    result_type operator()() {
-        cutyp r = rnd2() & ((1u<<SIZE)-1);
-        cultyp v = buff[r];
+    TYPE_RESULT operator()() {
+        CMRND_UINT r = rnd2() & ((1u<<SIZE)-1);
+        CMRND_ULONG v = buff[r];
         buff[r] = rnd1();
         return v;
     }
