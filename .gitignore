@@ -2,5 +2,7 @@ release/*
 debug/*
 vendor/*
 *.autosave
-test/MRndCPP
+tests/MRndCPP
+tests/test.txt
+tests/time.txt
 

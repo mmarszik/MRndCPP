@@ -35,5 +35,37 @@
 #pragma once
 
 #include <random>
+#include "rnd_base.h"
 
-using TRnd = std::ranlux48;
+class TRnd : public std::ranlux48 {
+public:
+    typedef RndBase::TYPE_RESULT TYPE_RESULT;
+
+    TRnd( std::ranlux48::result_type __sd) : std::ranlux48(__sd) {
+    }
+
+    static TYPE_RESULT max() {
+        return std::numeric_limits<TYPE_RESULT>::max();
+    }
+
+    TYPE_RESULT operator()() {
+        return static_cast<TYPE_RESULT>( (*this)() );
+    }
+
+};
+
+
+/* TEST00
+time ./MRndCPP 
+2458479412
+56640046
+2419309898
+2204864253
+607697875
+4022608612
+576451750571510624
+
+real	0m0.877s
+user	0m0.868s
+sys	0m0.004s
+*/

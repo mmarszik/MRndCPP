@@ -39,3 +39,17 @@
 
 using TRnd = RndComp< RndFib2a, RndFib3a, 9 >;
 
+/* TEST00
+time ./MRndCPP 
+1871541365
+3259764588
+258764547
+23779551
+2346585856
+1841442965
+576452222855676264
+
+real	0m1.403s
+user	0m1.397s
+sys	0m0.004s
+*/

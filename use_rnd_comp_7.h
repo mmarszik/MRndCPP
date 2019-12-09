@@ -39,3 +39,17 @@
 
 using TRnd = RndComp< RndLin2, RndLin2, 7 >;
 
+/* TEST00
+time ./MRndCPP 
+840932236
+52608534
+2736526188
+1716577654
+15303960
+3703642652
+576414977683096911
+
+real	0m1.723s
+user	0m1.722s
+sys	0m0.000s
+*/

@@ -37,3 +37,17 @@
 #include "rnd_fib.h"
 
 using TRnd = RndFib1;
+/* TEST00
+time ./MRndCPP 
+2772671560
+1230292352
+3182881147
+2748660412
+3615175996
+2860307554
+576482278611871217
+
+real	0m0.768s
+user	0m0.767s
+sys	0m0.000s
+*/

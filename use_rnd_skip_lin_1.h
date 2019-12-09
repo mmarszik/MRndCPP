@@ -37,3 +37,17 @@
 #include "rnd_skip_lin.h"
 
 using TRnd = RndSkipLin1;
+/* TEST00
+time ./MRndCPP 
+2410088158
+2584699367
+3398162018
+1879748187
+2318546736
+4079247759
+576459536404054016
+
+real	0m1.087s
+user	0m1.083s
+sys	0m0.004s
+*/

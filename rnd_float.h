@@ -36,6 +36,7 @@
 
 #include "defs.h"
 #include "rnd.h"
+#include "rnd_base.h"
 
 //The optimizer of the random number generator on the float point numbers.
 class RndFloat {

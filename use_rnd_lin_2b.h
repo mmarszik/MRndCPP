@@ -37,3 +37,17 @@
 #include "rnd_lin.h"
 
 using TRnd = RndLin2b;
+/* TEST00
+time ./MRndCPP 
+4081487542
+2598378608
+2001728541
+3754126217
+2651817580
+3324873846
+576454062088637878
+
+real	0m5.026s
+user	0m5.024s
+sys	0m0.000s
+*/

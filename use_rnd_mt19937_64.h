@@ -36,6 +36,37 @@
 
 #include <random>
 
-#include "defs.h"
+#include "rnd_base.h"
 
-using TRnd = std::mt19937_64;
+class TRnd : public std::mt19937_64 {
+public:
+    typedef RndBase::TYPE_RESULT TYPE_RESULT;
+
+    TRnd( std::mt19937_64::result_type __sd) : std::mt19937_64(__sd) {
+    }
+
+    static TYPE_RESULT max() {
+        return std::numeric_limits<TYPE_RESULT>::max();
+    }
+
+    TYPE_RESULT operator()() {
+        return static_cast<TYPE_RESULT>( (*this)() );
+    }
+
+};
+
+
+/* TEST00
+time ./MRndCPP 
+2458479412
+56640046
+2419309898
+2204864253
+607697875
+4022608612
+576451750571510624
+
+real	0m0.704s
+user	0m0.700s
+sys	0m0.004s
+*/

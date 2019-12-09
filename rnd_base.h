@@ -43,8 +43,8 @@ class RndBase {
 public:
     typedef TMRND_UINT TYPE_RESULT;
 
-    static TMRND_UINT max() {
-        return std::numeric_limits<TMRND_UINT>::max();
+    static TYPE_RESULT max() {
+        return std::numeric_limits<TYPE_RESULT>::max();
     }
 
     virtual TYPE_RESULT operator()() = 0;
