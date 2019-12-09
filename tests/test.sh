@@ -7,11 +7,11 @@ TESTS=(USE_RND_SIM_LIN_00 USE_RND_SIM_LIN_01 USE_RND_SIM_LIN_02 USE_RND_SIM_LIN_
 for def in "${TESTS[@]}"
 do
    header=$(echo $def | tr [A-Z] [a-z])
-   header="$header.h"
+   header="../$header.h"
    echo  $def
    echo  $header
 
-   c++ -std=c++14 -O3 -D$def -DTEST00_PROGRAM ./../*.cpp ./../vendor/MxCPP/mx_array.cpp -o MRndCPP
+   c++ -std=c++14 -O3 -D$def -DTEST00_PROGRAM ../*.cpp ../vendor/MxCPP/mx_array.cpp -o MRndCPP
    { time ./MRndCPP > test.txt; } 2> time.txt
    echo "/* TEST00"                                                      >> $header
    echo "time ./MRndCPP "                                              >> $header
@@ -19,7 +19,7 @@ do
    cat time.txt                                                          >> $header
    echo "*/"                                                             >> $header
 
-#   c++ -std=c++14 -O3 -D$def -DTEST00_PROGRAM ../*.cpp ./../vendor/MxCPP/mx_array.cpp -o MRndCPP
+#   c++ -std=c++14 -O3 -D$def -DTEST00_PROGRAM ../*.cpp ../vendor/MxCPP/mx_array.cpp -o MRndCPP
 #   { time ./MRndCPP | dieharder -g200 -d0 -k2 >  test.txt; } 2> time.txt   
 #   echo "/* TEST01"                                                      >> $header
 #   echo "time ./MRndCPP | dieharder -g200 -a -k2 "                     >> $header
