@@ -48,5 +48,4 @@ using CMRND_FLOAT = const TMRND_FLOAT;
 //#define USE_RND_SIM_LIN_06
 
 //#define TEST01_PROGRAM
-
 //#define USE_RND_RANLUX_48
