@@ -112,5 +112,11 @@
     #include "use_rnd_xor3_0.h"
 #endif
 
-#include "rnd_buff0.h"
+#if defined( USE_RND_BUFF0 )
+    #include "rnd_buff0.h"
+#elif defined( USE_RND_BUFF1 )
+    #include "rnd_buff1.h"
+#elif defined( USE_RND_BUFF2 )
+    #include "rnd_buff2.h"
+#elif
 

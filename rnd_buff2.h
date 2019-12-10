@@ -46,10 +46,10 @@ template<TMRND_UINT SIZE, TMRND_UINT REPEAT, TMRND_UINT MIN, TMRND_UINT max>
 class RndBuff2 {
 private:
     using TBuff = MxArray< TRnd::TYPE_RESULT , 1<<SIZE >;
-    CMRND_UINT max;    // Max range.
-    TRnd  &rnd;   // Pseudo random number generator.
-    TBuff buf;    // N-Cyclic buffer to number generator.
-    TMRND_UINT  next;   // Index to the next given value.
+    CMRND_UINT  max;   // Max range.
+    TRnd        &rnd;  // Pseudo random number generator.
+    TBuff       buf;   // N-Cyclic buffer to number generator.
+    TMRND_UINT  next;  // Index to the next given value.
 
 public:
 
