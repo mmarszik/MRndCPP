@@ -266,3 +266,239 @@ real	0m37.656s
 user	0m36.728s
 sys	0m0.804s
 */
+/* TEST00
+time ./MRndCPP 
+753734251
+3857031821
+745688813
+662591381
+2862306613
+3243338222
+18446716533185756661
+
+real	0m26.153s
+user	0m26.100s
+sys	0m0.012s
+*/
+/* TEST01
+time ./MRndCPP | dieharder -g200 -a -k2 
+#=============================================================================#
+#            dieharder version 3.31.1 Copyright 2003 Robert G. Brown          #
+#=============================================================================#
+   rng_name    |rands/second|   Seed   |
+stdin_input_raw|  3.14e+07  |2293429717|
+#=============================================================================#
+        test_name   |ntup| tsamples |psamples|  p-value |Assessment
+#=============================================================================#
+   diehard_birthdays|   0|       100|     100|0.80809635|  PASSED  
+      diehard_operm5|   0|   1000000|     100|0.98000526|  PASSED  
+  diehard_rank_32x32|   0|     40000|     100|0.98964887|  PASSED  
+    diehard_rank_6x8|   0|    100000|     100|0.64268628|  PASSED  
+   diehard_bitstream|   0|   2097152|     100|0.10848131|  PASSED  
+        diehard_opso|   0|   2097152|     100|0.92941230|  PASSED  
+        diehard_oqso|   0|   2097152|     100|0.82856519|  PASSED  
+         diehard_dna|   0|   2097152|     100|0.06054588|  PASSED  
+diehard_count_1s_str|   0|    256000|     100|0.33791190|  PASSED  
+diehard_count_1s_byt|   0|    256000|     100|0.23757080|  PASSED  
+ diehard_parking_lot|   0|     12000|     100|0.09026823|  PASSED  
+    diehard_2dsphere|   2|      8000|     100|0.57974261|  PASSED  
+    diehard_3dsphere|   3|      4000|     100|0.98149117|  PASSED  
+     diehard_squeeze|   0|    100000|     100|0.62576225|  PASSED  
+        diehard_sums|   0|       100|     100|0.37653528|  PASSED  
+        diehard_runs|   0|    100000|     100|0.73757579|  PASSED  
+        diehard_runs|   0|    100000|     100|0.29363568|  PASSED  
+       diehard_craps|   0|    200000|     100|0.56674813|  PASSED  
+       diehard_craps|   0|    200000|     100|0.78269931|  PASSED  
+ marsaglia_tsang_gcd|   0|  10000000|     100|0.93232951|  PASSED  
+ marsaglia_tsang_gcd|   0|  10000000|     100|0.49727515|  PASSED  
+         sts_monobit|   1|    100000|     100|0.97466667|  PASSED  
+            sts_runs|   2|    100000|     100|0.29913878|  PASSED  
+          sts_serial|   1|    100000|     100|0.25761938|  PASSED  
+          sts_serial|   2|    100000|     100|0.02878495|  PASSED  
+          sts_serial|   3|    100000|     100|0.27655509|  PASSED  
+          sts_serial|   3|    100000|     100|0.39637780|  PASSED  
+          sts_serial|   4|    100000|     100|0.27584913|  PASSED  
+          sts_serial|   4|    100000|     100|0.15543117|  PASSED  
+          sts_serial|   5|    100000|     100|0.62120048|  PASSED  
+          sts_serial|   5|    100000|     100|0.81732504|  PASSED  
+          sts_serial|   6|    100000|     100|0.60873883|  PASSED  
+          sts_serial|   6|    100000|     100|0.14259928|  PASSED  
+          sts_serial|   7|    100000|     100|0.62849904|  PASSED  
+          sts_serial|   7|    100000|     100|0.43519367|  PASSED  
+          sts_serial|   8|    100000|     100|0.74041348|  PASSED  
+          sts_serial|   8|    100000|     100|0.22118660|  PASSED  
+          sts_serial|   9|    100000|     100|0.64318880|  PASSED  
+          sts_serial|   9|    100000|     100|0.81572978|  PASSED  
+          sts_serial|  10|    100000|     100|0.89006520|  PASSED  
+          sts_serial|  10|    100000|     100|0.72789509|  PASSED  
+          sts_serial|  11|    100000|     100|0.75985609|  PASSED  
+          sts_serial|  11|    100000|     100|0.60763403|  PASSED  
+          sts_serial|  12|    100000|     100|0.35209051|  PASSED  
+          sts_serial|  12|    100000|     100|0.02852020|  PASSED  
+          sts_serial|  13|    100000|     100|0.29049408|  PASSED  
+          sts_serial|  13|    100000|     100|0.25381670|  PASSED  
+          sts_serial|  14|    100000|     100|0.51010681|  PASSED  
+          sts_serial|  14|    100000|     100|0.51890428|  PASSED  
+          sts_serial|  15|    100000|     100|0.11728768|  PASSED  
+          sts_serial|  15|    100000|     100|0.61252911|  PASSED  
+          sts_serial|  16|    100000|     100|0.10822212|  PASSED  
+          sts_serial|  16|    100000|     100|0.17651744|  PASSED  
+         rgb_bitdist|   1|    100000|     100|0.99698413|   WEAK   
+         rgb_bitdist|   2|    100000|     100|0.81888143|  PASSED  
+         rgb_bitdist|   3|    100000|     100|0.26824070|  PASSED  
+         rgb_bitdist|   4|    100000|     100|0.67749206|  PASSED  
+         rgb_bitdist|   5|    100000|     100|0.93639107|  PASSED  
+         rgb_bitdist|   6|    100000|     100|0.34767469|  PASSED  
+         rgb_bitdist|   7|    100000|     100|0.76453837|  PASSED  
+         rgb_bitdist|   8|    100000|     100|0.99287930|  PASSED  
+         rgb_bitdist|   9|    100000|     100|0.28302088|  PASSED  
+         rgb_bitdist|  10|    100000|     100|0.08778546|  PASSED  
+         rgb_bitdist|  11|    100000|     100|0.75336098|  PASSED  
+         rgb_bitdist|  12|    100000|     100|0.13649123|  PASSED  
+rgb_minimum_distance|   2|     10000|    1000|0.95898820|  PASSED  
+rgb_minimum_distance|   3|     10000|    1000|0.12836853|  PASSED  
+rgb_minimum_distance|   4|     10000|    1000|0.79751402|  PASSED  
+rgb_minimum_distance|   5|     10000|    1000|0.83057694|  PASSED  
+    rgb_permutations|   2|    100000|     100|0.49355536|  PASSED  
+    rgb_permutations|   3|    100000|     100|0.68961213|  PASSED  
+    rgb_permutations|   4|    100000|     100|0.68284016|  PASSED  
+    rgb_permutations|   5|    100000|     100|0.41709421|  PASSED  
+      rgb_lagged_sum|   0|   1000000|     100|0.61207379|  PASSED  
+      rgb_lagged_sum|   1|   1000000|     100|0.93284432|  PASSED  
+      rgb_lagged_sum|   2|   1000000|     100|0.69881897|  PASSED  
+      rgb_lagged_sum|   3|   1000000|     100|0.21127960|  PASSED  
+      rgb_lagged_sum|   4|   1000000|     100|0.10954698|  PASSED  
+      rgb_lagged_sum|   5|   1000000|     100|0.74538151|  PASSED  
+      rgb_lagged_sum|   6|   1000000|     100|0.32167528|  PASSED  
+      rgb_lagged_sum|   7|   1000000|     100|0.91581180|  PASSED  
+      rgb_lagged_sum|   8|   1000000|     100|0.99618507|   WEAK   
+      rgb_lagged_sum|   9|   1000000|     100|0.61684785|  PASSED  
+      rgb_lagged_sum|  10|   1000000|     100|0.71202829|  PASSED  
+      rgb_lagged_sum|  11|   1000000|     100|0.38282405|  PASSED  
+      rgb_lagged_sum|  12|   1000000|     100|0.94031320|  PASSED  
+      rgb_lagged_sum|  13|   1000000|     100|0.23819965|  PASSED  
+      rgb_lagged_sum|  14|   1000000|     100|0.88655248|  PASSED  
+      rgb_lagged_sum|  15|   1000000|     100|0.25680704|  PASSED  
+      rgb_lagged_sum|  16|   1000000|     100|0.03446961|  PASSED  
+      rgb_lagged_sum|  17|   1000000|     100|0.35145771|  PASSED  
+      rgb_lagged_sum|  18|   1000000|     100|0.89535235|  PASSED  
+      rgb_lagged_sum|  19|   1000000|     100|0.32214894|  PASSED  
+      rgb_lagged_sum|  20|   1000000|     100|0.51276352|  PASSED  
+      rgb_lagged_sum|  21|   1000000|     100|0.11845801|  PASSED  
+      rgb_lagged_sum|  22|   1000000|     100|0.29389016|  PASSED  
+      rgb_lagged_sum|  23|   1000000|     100|0.50674929|  PASSED  
+      rgb_lagged_sum|  24|   1000000|     100|0.21904227|  PASSED  
+      rgb_lagged_sum|  25|   1000000|     100|0.80993752|  PASSED  
+      rgb_lagged_sum|  26|   1000000|     100|0.81343884|  PASSED  
+      rgb_lagged_sum|  27|   1000000|     100|0.14156376|  PASSED  
+      rgb_lagged_sum|  28|   1000000|     100|0.93467384|  PASSED  
+      rgb_lagged_sum|  29|   1000000|     100|0.74375236|  PASSED  
+      rgb_lagged_sum|  30|   1000000|     100|0.60456379|  PASSED  
+      rgb_lagged_sum|  31|   1000000|     100|0.44556691|  PASSED  
+      rgb_lagged_sum|  32|   1000000|     100|0.97656305|  PASSED  
+     rgb_kstest_test|   0|     10000|    1000|0.13381644|  PASSED  
+     dab_bytedistrib|   0|  51200000|       1|0.29732566|  PASSED  
+             dab_dct| 256|     50000|       1|0.00229480|   WEAK   
+Preparing to run test 207.  ntuple = 0
+        dab_filltree|  32|  15000000|       1|0.54361863|  PASSED  
+        dab_filltree|  32|  15000000|       1|0.29489318|  PASSED  
+Preparing to run test 208.  ntuple = 0
+       dab_filltree2|   0|   5000000|       1|0.40028749|  PASSED  
+       dab_filltree2|   1|   5000000|       1|0.15819235|  PASSED  
+Preparing to run test 209.  ntuple = 0
+        dab_monobit2|  12|  65000000|       1|0.04026034|  PASSED  
+
+real	48m46.124s
+user	45m2.120s
+sys	3m36.920s
+*/
+/* TEST01
+time ./MRndCPP | RNG_test stdin32 -tlmax 100s 
+RNG_test using PractRand version 0.93
+RNG = RNG_stdin32, seed = 0x3381348f
+test set = normal, folding = standard (32 bit)
+
+rng=RNG_stdin32, seed=0x3381348f
+length= 128 megabytes (2^27 bytes), time= 2.3 seconds
+  no anomalies in 117 test result(s)
+
+rng=RNG_stdin32, seed=0x3381348f
+length= 256 megabytes (2^28 bytes), time= 5.1 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low8/32]BCFN(2+1,13-3,T)         R=  +7.9  p =  1.5e-3   unusual          
+  [Low1/32]DC6-9x1Bytes-1           R=  +5.3  p = 0.010     unusual          
+  ...and 122 test result(s) without anomalies
+
+rng=RNG_stdin32, seed=0x3381348f
+length= 512 megabytes (2^29 bytes), time= 9.9 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low1/32]BCFN(2+0,13-5,T)         R= +16.6  p =  1.0e-6   very suspicious  
+  [Low1/32]DC6-9x1Bytes-1           R=  +9.4  p =  3.9e-5   suspicious       
+  ...and 130 test result(s) without anomalies
+
+rng=RNG_stdin32, seed=0x3381348f
+length= 1 gigabyte (2^30 bytes), time= 19.3 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low8/32]BCFN(2+1,13-2,T)         R= +10.3  p =  7.6e-5   mildly suspicious
+  [Low1/32]BCFN(2+0,13-4,T)         R= +18.8  p =  3.8e-8   very suspicious  
+  [Low1/32]DC6-9x1Bytes-1           R= +10.1  p =  5.3e-6   very suspicious  
+  ...and 138 test result(s) without anomalies
+
+rng=RNG_stdin32, seed=0x3381348f
+length= 2 gigabytes (2^31 bytes), time= 37.1 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low8/32]BCFN(2+1,13-1,T)         R= +18.5  p =  2.1e-9    VERY SUSPICIOUS 
+  [Low1/32]BCFN(2+0,13-3,T)         R= +31.3  p =  1.3e-14    FAIL !         
+  [Low1/32]DC6-9x1Bytes-1           R= +19.1  p =  1.4e-11    FAIL           
+  ...and 145 test result(s) without anomalies
+
+
+real	0m37.814s
+user	0m36.776s
+sys	0m0.960s
+*/
+/* TEST01
+time ./MRndCPP | RNG_test stdin32 -tlmax 1000s 
+RNG_test using PractRand version 0.93
+RNG = RNG_stdin32, seed = 0x4819fe0d
+test set = normal, folding = standard (32 bit)
+
+rng=RNG_stdin32, seed=0x4819fe0d
+length= 128 megabytes (2^27 bytes), time= 2.2 seconds
+  no anomalies in 117 test result(s)
+
+rng=RNG_stdin32, seed=0x4819fe0d
+length= 256 megabytes (2^28 bytes), time= 5.0 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low1/32]BCFN(2+0,13-5,T)         R=  +8.0  p =  2.7e-3   unusual          
+  ...and 123 test result(s) without anomalies
+
+rng=RNG_stdin32, seed=0x4819fe0d
+length= 512 megabytes (2^29 bytes), time= 9.8 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low1/32]BCFN(2+0,13-5,T)         R= +12.2  p =  6.0e-5   mildly suspicious
+  [Low1/32]DC6-9x1Bytes-1           R=  +6.0  p =  3.8e-3   unusual          
+  ...and 130 test result(s) without anomalies
+
+rng=RNG_stdin32, seed=0x4819fe0d
+length= 1 gigabyte (2^30 bytes), time= 19.2 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low8/32]BCFN(2+2,13-3,T)         R= +12.6  p =  9.5e-6   suspicious       
+  [Low1/32]BCFN(2+0,13-4,T)         R= +17.8  p =  9.9e-8   very suspicious  
+  [Low1/32]DC6-9x1Bytes-1           R= +11.7  p =  4.4e-7   very suspicious  
+  ...and 138 test result(s) without anomalies
+
+rng=RNG_stdin32, seed=0x4819fe0d
+length= 2 gigabytes (2^31 bytes), time= 37.1 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low8/32]BCFN(2+1,13-1,T)         R= +17.3  p =  8.7e-9    VERY SUSPICIOUS 
+  [Low8/32]BCFN(2+2,13-2,T)         R= +11.6  p =  1.5e-5   suspicious       
+  [Low1/32]BCFN(2+0,13-3,T)         R= +32.5  p =  3.6e-15    FAIL !         
+  [Low1/32]DC6-9x1Bytes-1           R= +17.7  p =  1.2e-10    FAIL           
+  ...and 144 test result(s) without anomalies
+
+
+real	0m37.791s
+user	0m36.864s
+sys	0m0.804s
+*/
