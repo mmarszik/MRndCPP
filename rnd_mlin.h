@@ -34,7 +34,7 @@
 
 #pragma once
 
-#include <mx_array.h>
+#include <MxCPP/mx_array.h>
 
 #include "defs.h"
 #include "rnd_base.h"
@@ -71,7 +71,7 @@ public:
     }
     TYPE_RESULT operator()() {
         v = v * 543657589ull + 4253133281ull;
-        CMRND_UINT i = v >> (64-SIZE0);
+        CMRND_UINT i = v >> ( 64 - SIZE0 );
         return ( V[i] = V[i] * A[i] + B[i] ) >> 95;
     }
 };
