@@ -34,7 +34,7 @@
 
 #pragma once
 
-#include <mx_array.h>
+#include <MxCPP/mx_array.h>
 
 #include "rnd_lin.h"
 #include "rnd_base.h"
