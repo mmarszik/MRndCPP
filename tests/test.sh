@@ -21,42 +21,42 @@ do
    cat time.txt                                                          >> $header
    echo "*/"                                                             >> $header
 
-#   c++ -std=c++14 -O3 -D$def -DTEST01_PROGRAM -I../vendor/ ../*.cpp ../vendor/MxCPP/mx_array.cpp -o MRndCPP
-#   { time ./MRndCPP | dieharder -g200 -a -k2 >  test.txt; } 2> time.txt   
-#   echo "/* TEST01"                                                      >> $header
-#   echo "time ./MRndCPP | dieharder -g200 -a -k2 "                       >> $header
-#   cat test.txt                                                          >> $header
-#   cat time.txt                                                          >> $header
-#   echo "*/"                                                             >> $header
+   c++ -std=c++14 -O3 -D$def -DTEST01_PROGRAM -I../vendor/ ../*.cpp ../vendor/MxCPP/mx_array.cpp -o MRndCPP
+   { time ./MRndCPP | dieharder -g200 -a -k2 >  test.txt; } 2> time.txt   
+   echo "/* TEST01"                                                      >> $header
+   echo "time ./MRndCPP | dieharder -g200 -a -k2 "                       >> $header
+   cat test.txt                                                          >> $header
+   cat time.txt                                                          >> $header
+   echo "*/"                                                             >> $header
 
-#   { time ./MRndCPP | ./../../PractRand/RNG_test stdin32 -tlmax 100s > test.txt; } 2> time.txt
-#   echo "/* TEST01"                                                      >> $header
-#   echo "time ./MRndCPP | RNG_test stdin32 -tlmax 100s "                 >> $header
-#   cat test.txt                                                          >> $header
-#   cat time.txt                                                          >> $header
-#   echo "*/"                                                             >> $header
+   { time ./MRndCPP | ./../../PractRand/RNG_test stdin32 -tlmax 100s > test.txt; } 2> time.txt
+   echo "/* TEST01"                                                      >> $header
+   echo "time ./MRndCPP | RNG_test stdin32 -tlmax 100s "                 >> $header
+   cat test.txt                                                          >> $header
+   cat time.txt                                                          >> $header
+   echo "*/"                                                             >> $header
 
-#   { time ./MRndCPP | ./../../PractRand/RNG_test stdin32 -tlmax 100s > test.txt; } 2> time.txt
-#   echo "/* TEST01"                                                      >> $header
-#   echo "time ./MRndCPP | RNG_test stdin32 -tlmax 100s "                 >> $header
-#   cat test.txt                                                          >> $header
-#   cat time.txt                                                          >> $header
-#   echo "*/"                                                             >> $header
+   { time ./MRndCPP | ./../../PractRand/RNG_test stdin32 -tlmax 100s > test.txt; } 2> time.txt
+   echo "/* TEST01"                                                      >> $header
+   echo "time ./MRndCPP | RNG_test stdin32 -tlmax 100s "                 >> $header
+   cat test.txt                                                          >> $header
+   cat time.txt                                                          >> $header
+   echo "*/"                                                             >> $header
 
-#   { time ./MRndCPP | ./../../PractRand/RNG_test stdin32 -tlmax 100s > test.txt; } 2> time.txt
-#   echo "/* TEST01"                                                      >> $header
-#   echo "time ./MRndCPP | RNG_test stdin32 -tlmax 100s "                 >> $header
-#   cat test.txt                                                          >> $header
-#   cat time.txt                                                          >> $header
-#   echo "*/"                                                             >> $header
+   { time ./MRndCPP | ./../../PractRand/RNG_test stdin32 -tlmax 100s > test.txt; } 2> time.txt
+   echo "/* TEST01"                                                      >> $header
+   echo "time ./MRndCPP | RNG_test stdin32 -tlmax 100s "                 >> $header
+   cat test.txt                                                          >> $header
+   cat time.txt                                                          >> $header
+   echo "*/"                                                             >> $header
    
 
-#   { time ./MRndCPP | ./../../PractRand/RNG_test stdin32 -tlmax 3600s > test.txt; } 2> time.txt
-#   echo "/* TEST01"                       s                               >> $header
-#   echo "time ./MRndCPP | RNG_test stdin32 -tlmax 1000s "                >> $header
-#   cat test.txt                                                          >> $header
-#   cat time.txt                                                          >> $header
-#   echo "*/"                                                             >> $header
+   { time ./MRndCPP | ./../../PractRand/RNG_test stdin32 -tlmax 3600s > test.txt; } 2> time.txt
+   echo "/* TEST01"                       s                               >> $header
+   echo "time ./MRndCPP | RNG_test stdin32 -tlmax 1000s "                >> $header
+   cat test.txt                                                          >> $header
+   cat time.txt                                                          >> $header
+   echo "*/"                                                             >> $header
    
 done
 

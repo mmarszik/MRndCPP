@@ -41,7 +41,6 @@
 #include "rnd_mlin.h"
 #include "rnd_fib.h"
 
-
 //The below class contain the implementation of adapter for pseudo
 //random number generators. You should set size1 and size2 as primary
 //numbers.  The adapter work very fast but random numbers can be not
@@ -52,7 +51,7 @@
 template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndAddRot : public RndBase {
 private:
-    using TBUFF = MxArray<RndBase::TYPE_RESULT, SIZE1+SIZE2 >;
+    using TBUFF = MxArray<TYPE_RESULT, SIZE1+SIZE2 >;
 
 private:
     TRND       rnd;
@@ -78,13 +77,14 @@ public:
         rnd.seed( __sd );
     }
 
+
     TMRND_UINT operator()() {
         if( i1 == 0 && i2 == SIZE1 ) {
             reset();
         }
-        if( ++i1 >= SIZE1         ) i1 = 0;
-        if( ++i2 >= SIZE1 + SIZE2 ) i2 = SIZE1;
-        return rot( buff[i1] ) + rot( buff[i2] );
+        if( i1 >= SIZE1         ) i1 = 0;
+        if( i2 >= SIZE1 + SIZE2 ) i2 = SIZE1;
+        return rot( buff[i1++] ) + rot( buff[i2++] );
     }
 
 };

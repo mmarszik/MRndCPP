@@ -38,4 +38,3 @@
 #include "rnd_fib.h"
 
 using TRnd = RndComp< RndFib2a, RndFib3a, 9 >;
-
