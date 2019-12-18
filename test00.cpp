@@ -47,7 +47,7 @@ int main() {
     for( TMRND_UINT i=0 ; i<6 ; i++ ) {
         std::cout << rnd() << std::endl;
     }
-    for( TMRND_ULONG i=0 ; i<(1ull<<33u) ; i++ ) {
+    for( TMRND_ULONG i=0 ; i<(1ull<<27u) ; i++ ) {
         x += rnd();
     }
     std::cout << x << std::endl;

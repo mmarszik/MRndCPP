@@ -48,7 +48,7 @@ private:
 
 private:
     static T rot( const T v ) {
-        return ( v << ROT ) | ( v >> ( sizeof(T)*CHAR_BIT - ROT ) );
+        return ( v << ROT ) | ( v >> ( MLimits<T>::digits() - ROT ) );
     }
 
 public:

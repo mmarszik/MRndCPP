@@ -53,7 +53,7 @@ public:
     void seed(const T __sd) {
         RndLin2b rnd( __sd );
         CMRND_UINT INIT_BITS = 16;
-        for( TMRND_UINT i=0 ; i<sizeof(T)*CHAR_BIT/INIT_BITS ; i++ ) {
+        for( TMRND_UINT i=0 ; i<MLimits<T>::digits()/INIT_BITS ; i++ ) {
             for( TMRND_UINT j=0 ; j<SIZE ; j++ ) {
                 buff[j] <<= INIT_BITS;
                 buff[j] ^= rnd();
@@ -85,22 +85,21 @@ using RndFib2a =  RndFib< TMRND_ULONG,     521u, 353u, 4112492776315134143ull, 2
 using RndFib3  =  RndFib< TMRND_ULONG,     607u, 334u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 5u >;
 using RndFib3a =  RndFib< TMRND_ULONG,     607u, 334u, 1438097939015544337ull, 2095838886465443359ull, 1126833020129680393ull,  0ull, 4u, 5u >;
 
-using RndFib4   =  RndFib< TMRND_ULONGLONG, 75u, 38u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 5u >;
-using RndFib5   =  RndFib< TMRND_ULONGLONG, 52u, 31u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 52u >;
-using RndFib6   =  RndFib< TMRND_ULONGLONG, 82u, 56u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 51u >;
-using RndFib7   =  RndFib< TMRND_ULONGLONG, 89u, 88u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 0u >;
-using RndFib8   =  RndFib< TMRND_ULONGLONG, 88u, 73u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 17u >;
-using RndFib9   =  RndFib< TMRND_ULONGLONG, 20u, 3u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 32u >;
-using RndFib10  =  RndFib< TMRND_ULONGLONG, 58u, 19u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 58u >;
-using RndFib11  =  RndFib< TMRND_ULONGLONG, 84u, 9u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 20u >;
-using RndFib12  =  RndFib< TMRND_ULONGLONG, 70u, 51u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 60u >;
-using RndFib13  =  RndFib< TMRND_ULONGLONG, 75u, 9u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 23u >;
-using RndFib14  =  RndFib< TMRND_ULONGLONG, 97u, 36u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 0u >;
-using RndFib15  =  RndFib< TMRND_ULONGLONG, 97u, 47u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 90u >;
-using RndFib16  =  RndFib< TMRND_ULONGLONG, 69u, 68u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 64u >;
-using RndFib17  =  RndFib< TMRND_ULONGLONG, 76u, 47u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 55u >;
-using RndFib18  =  RndFib< TMRND_ULONGLONG, 62u, 37u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 55u >;
-using RndFib19  =  RndFib< TMRND_ULONGLONG, 80u, 63u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 19u >;
-using RndFib20  =  RndFib< TMRND_ULONGLONG, 73u, 19u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 88u >;
-
+using RndFib4  =  RndFib< TMRND_ULONGLONG, 197u, 94u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 83u >;
+using RndFib5  =  RndFib< TMRND_ULONGLONG, 157u, 98u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 62u >;
+using RndFib6  =  RndFib< TMRND_ULONGLONG, 82u, 59u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 21u >;
+using RndFib7  =  RndFib< TMRND_ULONGLONG, 118u, 61u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 1u >;
+using RndFib8  =  RndFib< TMRND_ULONGLONG, 179u, 167u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 78u >;
+using RndFib9  =  RndFib< TMRND_ULONGLONG, 186u, 180u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 27u >;
+using RndFib10  =  RndFib< TMRND_ULONGLONG, 123u, 10u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 87u >;
+using RndFib11  =  RndFib< TMRND_ULONGLONG, 163u, 36u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 49u >;
+using RndFib12  =  RndFib< TMRND_ULONGLONG, 116u, 114u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 94u >;
+using RndFib13  =  RndFib< TMRND_ULONGLONG, 99u, 48u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 45u >;
+using RndFib14  =  RndFib< TMRND_ULONGLONG, 157u, 34u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 46u >;
+using RndFib15  =  RndFib< TMRND_ULONGLONG, 111u, 108u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 21u >;
+using RndFib16  =  RndFib< TMRND_ULONGLONG, 99u, 94u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 31u >;
+using RndFib17  =  RndFib< TMRND_ULONGLONG, 135u, 114u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 62u >;
+using RndFib18  =  RndFib< TMRND_ULONGLONG, 127u, 96u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 26u >;
+using RndFib19  =  RndFib< TMRND_ULONGLONG, 79u, 46u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 52u >;
+using RndFib20  =  RndFib< TMRND_ULONGLONG, 192u, 145u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 58u >;
 

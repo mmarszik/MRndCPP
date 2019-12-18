@@ -53,7 +53,7 @@ public:
     }
     TYPE_RESULT operator()() {
         TMRND_UINT r=0;
-        for( TMRND_UINT i=0 ; i<sizeof(r)*CHAR_BIT ; i+=BITS ) {
+        for( TMRND_UINT i=0 ; i<MLimits<decltype(r)>::digits() ; i+=BITS ) {
 #pragma GCC diagnostic ignored "-Wshift-count-overflow"
             r <<= BITS;
 #pragma GCC diagnostic warning "-Wshift-count-overflow"
