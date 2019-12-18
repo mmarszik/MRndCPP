@@ -48,7 +48,7 @@ private:
 
 private:
     static T rot( const T v ) {
-        return ( v << ROT ) | ( v >> ( std::numeric_limits<T>::digits - ROT ) );
+        return ( v << ROT ) | ( v >> ( sizeof(T)*CHAR_BIT - ROT ) );
     }
 
 public:
@@ -58,9 +58,10 @@ public:
     }
     void seed(const T __sd) {
         RndLin2b rnd( __sd );
-        for( TMRND_UINT i=0 ; i<4 ; i++ ) {
+        CMRND_UINT INIT_BITS = 16;
+        for( TMRND_UINT i=0 ; i<sizeof(T)*CHAR_BIT/INIT_BITS ; i++ ) {
             for( TMRND_UINT j=0 ; j<SIZE ; j++ ) {
-                buff[j] <<= 16;
+                buff[j] <<= INIT_BITS;
                 buff[j] ^= rnd();
             }
         }

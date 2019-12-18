@@ -34,7 +34,7 @@
 
 #pragma once
 
-#include <limits>
+#include <climits>
 
 #include <MxCPP/mx_array.h>
 #include "rnd_sim_lin.h"
@@ -58,7 +58,7 @@ public:
     }
     TYPE_RESULT operator()() {
         TMRND_UINT r=0;
-        for( TMRND_UINT i=0 ; i<std::numeric_limits<decltype(r)>::digits ; i+=BITS ) {
+        for( TMRND_UINT i=0 ; i < sizeof(r)*CHAR_BIT ; i+=BITS ) {
             for( TMRND_UINT j=0 ; j<skip[is] ; j++ ) {
                 rnd();
             }

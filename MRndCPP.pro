@@ -7,10 +7,10 @@ QMAKE_CXXFLAGS += -O3
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_MLIN_0
+DEFINES += USE_RND_FIB_5
 DEFINES += USE_RND_BUFF0
 DEFINES += MX_USING_ARRAY_3
-DEFINES += TEST01_PROGRAM
+DEFINES += TEST02_PROGRAM
 
 
 SOURCES += \
@@ -26,7 +26,9 @@ SOURCES += \
     rnd_fib.cpp \
     rnd_comp_fib.cpp \
     rnd_base.cpp \
-    vendor/MxCPP/mx_array.cpp
+    vendor/MxCPP/mx_array.cpp \
+    test02.cpp \
+    vendor/MiscCPP/m_limits.cpp
 
 HEADERS += \
     use_rnd_xor3_0.h \
@@ -83,8 +85,27 @@ HEADERS += \
     rnd_base.h \
     defs.h \
     use_rnd_sim_lin_06.h \
-    vendor/MxCPP/mx_array.h
+    vendor/MxCPP/mx_array.h \
+    use_rnd_fib_4.h \
+    use_rnd_fib_10.h \
+    use_rnd_fib_11.h \
+    use_rnd_fib_12.h \
+    use_rnd_fib_13.h \
+    use_rnd_fib_14.h \
+    use_rnd_fib_15.h \
+    use_rnd_fib_16.h \
+    use_rnd_fib_17.h \
+    use_rnd_fib_18.h \
+    use_rnd_fib_19.h \
+    use_rnd_fib_20.h \
+    use_rnd_fib_5.h \
+    use_rnd_fib_6.h \
+    use_rnd_fib_7.h \
+    use_rnd_fib_8.h \
+    use_rnd_fib_9.h \
+    vendor/MiscCPP/m_limits.h
 
 DISTFILES += \
-    createAtC++.sh
+    createAtC++.sh \
+    tests/test.sh
 

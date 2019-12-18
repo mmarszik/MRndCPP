@@ -34,17 +34,16 @@
 
 #pragma once
 
-#include <limits>
 
 #include "defs.h"
-
+#include <MiscCPP/m_limits.h>
 
 class RndBase {
 public:
     typedef TMRND_UINT TYPE_RESULT;
 
     static TYPE_RESULT max() {
-        return std::numeric_limits<TYPE_RESULT>::max();
+        return MLimits<TYPE_RESULT>::max();
     }
 
     virtual TYPE_RESULT operator()() = 0;

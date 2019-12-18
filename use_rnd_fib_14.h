@@ -23,50 +23,17 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:54:19 CET                               //
+/// @created on 2019-12-18 01:26:23 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 082856b4-4191-4c27-bdb9-1b2dcdc8664f                       //
+/// @token 18e8b81c-8466-40c9-a4f8-e7d3ee9bd9ef                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <climits>
 
-#include "defs.h"
-#include "rnd_sim_lin.h"
-#include "rnd_base.h"
+#include "rnd_fib.h"
 
-template<typename T, T A, T B, T M=0, TMRND_UINT BITS=32, TMRND_UINT SHIFT=0>
-class RndLin : public RndBase {
-private:
-    RndSimLin<T,A,B,M,SHIFT> rnd;
-public:
-    RndLin() {
-    }
-    RndLin(const T __sd) : rnd(__sd) {
-    }
-    void seed(const T __sd) {
-        rnd.seed(__sd);
-    }
-    TYPE_RESULT operator()() {
-        TMRND_UINT r=0;
-        for( TMRND_UINT i=0 ; i<sizeof(r)*CHAR_BIT ; i+=BITS ) {
-#pragma GCC diagnostic ignored "-Wshift-count-overflow"
-            r <<= BITS;
-#pragma GCC diagnostic warning "-Wshift-count-overflow"
-            r |= rnd() & ((1ull<<BITS)-1);
-        }
-        return r;
-    }
-};
-
-using RndLin1  = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 32u, 32u>;
-using RndLin1a = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 16u,  0u>;
-using RndLin2  = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 32u,  0u>;
-using RndLin2a = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 16u,  0u>;
-using RndLin2b = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 11u, 12u>;
-using RndLin2c = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull,  8u,  0u>;
-
+using TRnd = RndFib14;
