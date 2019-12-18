@@ -7,10 +7,10 @@ QMAKE_CXXFLAGS += -O3
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_FIB_4
+DEFINES += USE_RND_FIB_5
 DEFINES += USE_RND_BUFF0
 DEFINES += MX_USING_ARRAY_3
-DEFINES += TEST01_PROGRAM
+DEFINES += TEST02_PROGRAM
 
 
 SOURCES += \
@@ -26,7 +26,9 @@ SOURCES += \
     rnd_fib.cpp \
     rnd_comp_fib.cpp \
     rnd_base.cpp \
-    vendor/MxCPP/mx_array.cpp
+    vendor/MxCPP/mx_array.cpp \
+    test02.cpp \
+    vendor/MiscCPP/m_limits.cpp
 
 HEADERS += \
     use_rnd_xor3_0.h \
@@ -100,7 +102,8 @@ HEADERS += \
     use_rnd_fib_6.h \
     use_rnd_fib_7.h \
     use_rnd_fib_8.h \
-    use_rnd_fib_9.h
+    use_rnd_fib_9.h \
+    vendor/MiscCPP/m_limits.h
 
 DISTFILES += \
     createAtC++.sh \

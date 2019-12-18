@@ -23,50 +23,72 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:54:19 CET                               //
+/// @created on 2019-12-18 02:48:12 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 082856b4-4191-4c27-bdb9-1b2dcdc8664f                       //
+/// @token b51eefca-bfe8-40a2-91c3-6640138f8fe8                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
-#include <climits>
-
 #include "defs.h"
-#include "rnd_sim_lin.h"
-#include "rnd_base.h"
 
-template<typename T, T A, T B, T M=0, TMRND_UINT BITS=32, TMRND_UINT SHIFT=0>
-class RndLin : public RndBase {
-private:
-    RndSimLin<T,A,B,M,SHIFT> rnd;
-public:
-    RndLin() {
-    }
-    RndLin(const T __sd) : rnd(__sd) {
-    }
-    void seed(const T __sd) {
-        rnd.seed(__sd);
-    }
-    TYPE_RESULT operator()() {
-        TMRND_UINT r=0;
-        for( TMRND_UINT i=0 ; i<sizeof(r)*CHAR_BIT ; i+=BITS ) {
-#pragma GCC diagnostic ignored "-Wshift-count-overflow"
-            r <<= BITS;
-#pragma GCC diagnostic warning "-Wshift-count-overflow"
-            r |= rnd() & ((1ull<<BITS)-1);
-        }
-        return r;
-    }
-};
+#ifdef TEST02_PROGRAM
 
-using RndLin1  = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 32u, 32u>;
-using RndLin1a = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 16u,  0u>;
-using RndLin2  = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 32u,  0u>;
-using RndLin2a = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 16u,  0u>;
-using RndLin2b = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 11u, 12u>;
-using RndLin2c = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull,  8u,  0u>;
+#include <iostream>
+#include <limits>
+#include <climits>
+#include <typeinfo>
 
+#include <MiscCPP/m_limits.h>
+
+std::ostream& operator<<( std::ostream& dest, __uint128_t value ) {
+    std::string buf;
+    while( value ) {
+        char c[2] = "0";
+        c[0] += value % 10;
+        value /= 10;
+        buf = c + buf;
+    }
+    if( buf.size() == 0 ) {
+        buf = "0";
+    }
+    dest << buf;
+    return dest;
+}
+
+std::ostream& operator<<( std::ostream& dest, __int128_t value ) {
+    if( value < 0 ) {
+        dest << "-";
+        dest << (__uint128_t) -value;
+    } else {
+        dest << (__uint128_t) value;
+    }
+    return dest;
+}
+
+
+int main() {
+    std::cout << MLimits<TMRND_ULONGLONG>::digits() << std::endl;
+    std::cout << MLimits<TMRND_ULONGLONG>::max() << std::endl;
+    std::cout << MLimits<TMRND_ULONGLONG>::min() << std::endl;
+
+    std::cout << MLimits<TMRND_LONGLONG>::digits() << std::endl;
+    std::cout << MLimits<TMRND_LONGLONG>::max() << std::endl;
+    std::cout << MLimits<TMRND_LONGLONG>::min() << std::endl;
+
+    std::cout << std::numeric_limits<TMRND_ULONGLONG>::is_specialized << std::endl;
+    std::cout << std::numeric_limits<TMRND_LONGLONG>::is_specialized << std::endl;
+
+    std::cout << sizeof(__int128_t) * CHAR_BIT << std::endl;
+
+    std::cout << std::numeric_limits<double>::digits << std::endl;
+
+    std::cout << typeid(__int128).hash_code() << std::endl;
+    std::cout << typeid(__int128_t).hash_code() << std::endl;
+    std::cout << typeid(TMRND_LONGLONG).hash_code() << std::endl;
+    return 0;
+}
+
+#endif

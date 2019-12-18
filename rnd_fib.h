@@ -35,7 +35,7 @@
 #pragma once
 
 #include <MxCPP/mx_array.h>
-
+#include <climits>
 #include "rnd_lin.h"
 #include "rnd_base.h"
 
@@ -52,9 +52,10 @@ public:
     }
     void seed(const T __sd) {
         RndLin2b rnd( __sd );
-        for( TMRND_UINT i=0 ; i<4 ; i++ ) {
+        CMRND_UINT INIT_BITS = 16;
+        for( TMRND_UINT i=0 ; i<sizeof(T)*CHAR_BIT/INIT_BITS ; i++ ) {
             for( TMRND_UINT j=0 ; j<SIZE ; j++ ) {
-                buff[j] <<= 16;
+                buff[j] <<= INIT_BITS;
                 buff[j] ^= rnd();
             }
         }
@@ -84,8 +85,8 @@ using RndFib2a =  RndFib< TMRND_ULONG,     521u, 353u, 4112492776315134143ull, 2
 using RndFib3  =  RndFib< TMRND_ULONG,     607u, 334u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 5u >;
 using RndFib3a =  RndFib< TMRND_ULONG,     607u, 334u, 1438097939015544337ull, 2095838886465443359ull, 1126833020129680393ull,  0ull, 4u, 5u >;
 
-using RndFib4   =  RndFib< TMRND_ULONGLONG, 53u, 9u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 13u >;
-using RndFib5   =  RndFib< TMRND_ULONGLONG, 52u, 31u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 4u >;
+using RndFib4   =  RndFib< TMRND_ULONGLONG, 75u, 38u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 5u >;
+using RndFib5   =  RndFib< TMRND_ULONGLONG, 52u, 31u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 52u >;
 using RndFib6   =  RndFib< TMRND_ULONGLONG, 82u, 56u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 51u >;
 using RndFib7   =  RndFib< TMRND_ULONGLONG, 89u, 88u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 0u >;
 using RndFib8   =  RndFib< TMRND_ULONGLONG, 88u, 73u,                   1ull,                   1ull,                   0ull,  0ull, 4u, 17u >;

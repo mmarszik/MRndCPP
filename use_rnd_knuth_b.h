@@ -34,8 +34,10 @@
 
 #pragma once
 
-#include <random>
 #include "rnd_base.h"
+
+#include <random>
+
 
 class TRnd : public std::knuth_b {
 public:
@@ -45,7 +47,7 @@ public:
     }
 
     static TYPE_RESULT max() {
-        return std::numeric_limits<TYPE_RESULT>::max();
+        return MLimits<TYPE_RESULT>::max();
     }
 
     TYPE_RESULT operator()() {
