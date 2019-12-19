@@ -7,10 +7,10 @@ QMAKE_CXXFLAGS += -O3
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_FIB_5
+DEFINES += USE_RND_ADD_ROT_3c
 DEFINES += USE_RND_BUFF0
-DEFINES += MX_USING_ARRAY_3
-DEFINES += TEST02_PROGRAM
+DEFINES += MX_USING_ARRAY_2
+DEFINES += TEST00_PROGRAM
 
 
 SOURCES += \
@@ -28,7 +28,8 @@ SOURCES += \
     rnd_base.cpp \
     vendor/MxCPP/mx_array.cpp \
     test02.cpp \
-    vendor/MiscCPP/m_limits.cpp
+    vendor/MiscCPP/m_limits.cpp \
+    rnd_add_rot.cpp
 
 HEADERS += \
     use_rnd_xor3_0.h \
@@ -103,7 +104,55 @@ HEADERS += \
     use_rnd_fib_7.h \
     use_rnd_fib_8.h \
     use_rnd_fib_9.h \
-    vendor/MiscCPP/m_limits.h
+    vendor/MiscCPP/m_limits.h \
+    use_rnd_xor_ch_x_0b.h \
+    use_rnd_xor_ch_x_0c.h \
+    use_rnd_xor_ch_x_1a.h \
+    use_rnd_xor_ch_x_1b.h \
+    use_rnd_xor_ch_x_1c.h \
+    use_rnd_xor_ch_x_2a.h \
+    use_rnd_xor_ch_x_2b.h \
+    use_rnd_xor_ch_x_2c.h \
+    use_rnd_xor_ch_x_3a.h \
+    use_rnd_xor_ch_x_3b.h \
+    use_rnd_xor_ch_x_3c.h \
+    use_rnd_xor_ch_x_4a.h \
+    use_rnd_xor_ch_x_4b.h \
+    use_rnd_xor_ch_x_4c.h \
+    use_rnd_xor_ch_x_5a.h \
+    use_rnd_xor_ch_x_5b.h \
+    use_rnd_xor_ch_x_5c.h \
+    use_rnd_xor_ch_x_6a.h \
+    use_rnd_xor_ch_x_6b.h \
+    use_rnd_xor_ch_x_6c.h \
+    use_rnd_xor_ch_x_7a.h \
+    use_rnd_xor_ch_x_7b.h \
+    use_rnd_xor_ch_x_7c.h \
+    use_rnd_add_rot_0a.h \
+    rnd_add_rot.h \
+    use_rnd_add_rot_0b.h \
+    use_rnd_add_rot_0c.h \
+    use_rnd_add_rot_1a.h \
+    use_rnd_add_rot_1b.h \
+    use_rnd_add_rot_1c.h \
+    use_rnd_add_rot_2a.h \
+    use_rnd_add_rot_2b.h \
+    use_rnd_add_rot_2c.h \
+    use_rnd_add_rot_3a.h \
+    use_rnd_add_rot_3b.h \
+    use_rnd_add_rot_3c.h \
+    use_rnd_add_rot_4a.h \
+    use_rnd_add_rot_4b.h \
+    use_rnd_add_rot_4c.h \
+    use_rnd_add_rot_5a.h \
+    use_rnd_add_rot_5b.h \
+    use_rnd_add_rot_5c.h \
+    use_rnd_add_rot_6a.h \
+    use_rnd_add_rot_6b.h \
+    use_rnd_add_rot_6c.h \
+    use_rnd_add_rot_7a.h \
+    use_rnd_add_rot_7b.h \
+    use_rnd_add_rot_7c.h
 
 DISTFILES += \
     createAtC++.sh \

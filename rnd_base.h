@@ -40,7 +40,7 @@
 
 class RndBase {
 public:
-    typedef TMRND_UINT TYPE_RESULT;
+    using TYPE_RESULT = TMRND_UINT;
 
     static TYPE_RESULT max() {
         return MLimits<TYPE_RESULT>::max();
