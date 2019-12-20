@@ -44,7 +44,7 @@ private:
 
 public:
     RndBuff0( TRnd &rnd, CMRND_UINT max ) : rnd(rnd), max(max) {
-    }    
+    }
     TRnd::TYPE_RESULT operator()() {
         return static_cast<TRnd::TYPE_RESULT>( rnd() % (max - MIN + 1) + MIN );
     }
