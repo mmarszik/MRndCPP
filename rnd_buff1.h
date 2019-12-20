@@ -57,19 +57,16 @@ private:
     TRnd::TYPE_RESULT range() {
         return rnd() % ( max - min + 1 ) + min;
     }
-
     void reset() {
         for( TMRND_UINT i=0 ; i<SIZE1 ; i++ )
             buf1[i] = range();
         for( TMRND_UINT i=0 ; i<SIZE2 ; i++ )
             buf2[i] = range();
     }
-
 public:
     RndBuff1( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
         setMinMax(min,max);
     }
-
     void setMinMax(CMRND_UINT min, CMRND_UINT max ) {
         this->min = min;
         this->max = max;
@@ -77,7 +74,6 @@ public:
         i2 = SIZE2;
         select = 0;
     }
-
     TRnd::TYPE_RESULT operator()() {
         if( i1 == SIZE1 && i2 == SIZE2 ) {
             reset();

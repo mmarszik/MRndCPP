@@ -45,8 +45,7 @@ private:
 public:
     RndBuff0( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
         setMinMax( min, max );
-    }    
-
+    }
     void setMinMax( CMRND_UINT min, CMRND_UINT max  ) {
         this->min = min;
         this->max = max;
