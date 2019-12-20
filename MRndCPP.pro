@@ -7,9 +7,9 @@ QMAKE_CXXFLAGS += -O3
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_ADD_ROT_3c
-DEFINES += USE_RND_BUFF0
-DEFINES += MX_USING_ARRAY_2
+DEFINES += USE_RND_ADD_ROT_0c
+DEFINES += USE_RND_BUFF1
+#DEFINES += MX_USING_ARRAY_2
 DEFINES += TEST00_PROGRAM
 
 
@@ -80,7 +80,6 @@ HEADERS += \
     rnd_float.h \
     rnd_fib.h \
     rnd_comp.h \
-    rnd_buff2.h \
     rnd_buff1.h \
     rnd_buff0.h \
     rnd_base.h \

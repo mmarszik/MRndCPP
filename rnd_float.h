@@ -45,7 +45,12 @@ private:
     TRnd::TYPE_RESULT p;
 
 public:
-    RndFloat(TRnd &rnd, CMRND_FLOAT p) : rnd(rnd), p( static_cast<TRnd::TYPE_RESULT>(p * TRnd::max()) ) {
+    RndFloat(TRnd &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
+        setP( p );
+    }
+
+    void setP( CMRND_FLOAT p ) {
+        this->p = static_cast<TRnd::TYPE_RESULT>(p * TRnd::max());
     }
 
     bool operator()() {

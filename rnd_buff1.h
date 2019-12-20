@@ -35,48 +35,67 @@
 #pragma once
 
 #include "rnd.h"
-#include "m_array.h"
+#include <MxCPP/mx_array.h>
 
 //MM: Attention: It is opposite of the good random number generator ;-)
-//MM: It is pseudo random number generator with cyclic buffer. It work fast
-//MM: but numbers are worse(!!!) than with class TRnd. Next pseudo random
-//MM: numbers are given from buffer, each pseudo random number is given REPEAT
-//MM: times. So the big value of REPEAT and small value of SIZE implicite the
-//MM  worse pseudo random numbers, but accelerate the generate process their.
-template<TMRND_UINT SIZE, TMRND_UINT REPEAT, TMRND_UINT MIN, TMRND_UINT max>
+//MM: It is pseudo random number generator with the double cyclic buffer. It work fast
+//MM: but numbers are worse(!!!) than with class TRnd.
+template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndBuff1 {
 private:
-    using TBuff = MxArray<TRnd::TYPE_RESULT,SIZE>;
-    CMRND_UINT  max;    // Max range.
+    using TBuff1 = MxArray<TRnd::TYPE_RESULT,SIZE1>;
+    using TBuff2 = MxArray<TRnd::TYPE_RESULT,SIZE2>;
     TRnd        &rnd;   // Pseudo random number generator.
-    TBuff       buf;    // N-Cyclic buffer to number generator.
-    TMRND_UINT  next;   // Index to the next given value.
-    TMRND_UINT  repeat; // Number repeat to reset buffer.
+    TMRND_UINT  min;    // Min range.
+    TMRND_UINT  max;    // Max range.
+    TBuff1      buf1;   // N-Cyclic buffer to number generator.
+    TBuff2      buf2;   // N-Cyclic buffer to number generator.
+    TMRND_UINT  i1,i2;  // Index to the next given value.
+    TMRND_UINT  select; // Select first or second buffer.
 
 private:
+    TRnd::TYPE_RESULT range() {
+        return rnd() % ( max - min + 1 ) + min;
+    }
+
     void reset() {
-        for( TMRND_UINT i=0 ; i<SIZE ; i++ ) {
-            buf[ i ] = rnd() % (max-MIN+1) + MIN;
-        }
-        repeat = REPEAT;
+        for( TMRND_UINT i=0 ; i<SIZE1 ; i++ )
+            buf1[i] = range();
+        for( TMRND_UINT i=0 ; i<SIZE2 ; i++ )
+            buf2[i] = range();
     }
 
 public:
-    RndBuff1( TRnd &rnd, CMRND_UINT max ) : rnd(rnd), max(max) {
-        next   = SIZE-1;
-        repeat = 1;
+    RndBuff1( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
+        setMinMax(min,max);
     }
+
+    void setMinMax(CMRND_UINT min, CMRND_UINT max ) {
+        this->min = min;
+        this->max = max;
+        i1 = SIZE1;
+        i2 = SIZE2;
+        select = 0;
+    }
+
     TRnd::TYPE_RESULT operator()() {
-        if( ++next == SIZE ) {
-            next = 0;
-            if( --repeat == 0 ) {
-                reset();
-            }
+        if( i1 == SIZE1 && i2 == SIZE2 ) {
+            reset();
         }
-        return buf[ next ];
+        if( 1 & select++ ) {
+            if( i1 == SIZE1 ) {
+                i1 = 0;
+            }
+            return buf1[i1++];
+        }
+        if( i2 == SIZE2 ) {
+            i2 = 0;
+        }
+        return buf2[i2++];
     }
+
 };
 
-template<TMRND_UINT MIN>
-using TRndBuff = RndBuff1<1u<<20, 1u<<4, MIN>;
+
+using TRndBuff = RndBuff1<4159, 3137>;
 
