@@ -209,7 +209,5 @@
     #include "rnd_buff0.h"
 #elif defined( USE_RND_BUFF1 )
     #include "rnd_buff1.h"
-#elif defined( USE_RND_BUFF2 )
-    #include "rnd_buff2.h"
 #endif
 

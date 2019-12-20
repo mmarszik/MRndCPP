@@ -36,19 +36,24 @@
 
 #include "rnd.h"
 
-template<TRnd::TYPE_RESULT MIN>
 class RndBuff0  {
 private:
     TRnd  &rnd;      // Pseudo random number generator.
-    CMRND_UINT max;  // Max range.
+    TMRND_UINT min;  // Min range.
+    TMRND_UINT max;  // Max range.
 
 public:
-    RndBuff0( TRnd &rnd, CMRND_UINT max ) : rnd(rnd), max(max) {
+    RndBuff0( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
+        setMinMax( min, max );
+    }    
+
+    void setMinMax( CMRND_UINT min, CMRND_UINT max  ) {
+        this->min = min;
+        this->max = max;
     }
     TRnd::TYPE_RESULT operator()() {
-        return static_cast<TRnd::TYPE_RESULT>( rnd() % (max - MIN + 1) + MIN );
+        return static_cast<TRnd::TYPE_RESULT>( rnd() % (max - min + 1) + min );
     }
 };
 
-template<TRnd::TYPE_RESULT MIN>
-using TRndBuff = RndBuff0<MIN>;
+using TRndBuff = RndBuff0;

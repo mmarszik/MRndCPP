@@ -36,6 +36,7 @@
 
 #include <MxCPP/mx_array.h>
 #include <random>
+#include <climits>
 
 #include "rnd_lin.h"
 #include "rnd_mlin.h"
@@ -51,65 +52,72 @@
 template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndAddRot : public RndBase {
 private:
-    using TBUFF = MxArray<TYPE_RESULT, SIZE1+SIZE2 >;
+    using TBUFF1 = MxArray<TYPE_RESULT, SIZE1>;
+    using TBUFF2 = MxArray<TYPE_RESULT, SIZE2>;
 
 private:
     TRND       rnd;
-    TBUFF      buff;
+    TBUFF1     buff1;
+    TBUFF2     buff2;
     TMRND_UINT i1, i2;
 
 private:
     void reset() {
-        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
-            buff[i] = rnd();
-        }
+        for( TMRND_UINT i=0 ; i<SIZE1 ; i++ )
+            buff1[i] = rnd();
+        for( TMRND_UINT i=0 ; i<SIZE2 ; i++ )
+            buff2[i] = rnd();
     }
 
     static TYPE_RESULT rot( TYPE_RESULT &v ) {
-        return v = (v << 1) | ( v >> (MLimits<TYPE_RESULT>::digits()-1) );
+        return v = (v << 1) | ( v >> ( MLimits<TYPE_RESULT>::digits() - 1 ) );
     }
 
 public:
-    RndAddRot( const RndBase::TYPE_RESULT __sd ) : rnd(__sd), i1(0), i2(SIZE1) {
+    RndAddRot( const RndBase::TYPE_RESULT __sd ) {
+        seed( __sd );
     }
 
     void seed( const RndBase::TYPE_RESULT __sd ) {
         rnd.seed( __sd );
+        i1 = SIZE1;
+        i2 = SIZE2;
     }
 
-
     TMRND_UINT operator()() {
-        if( i1 == 0 && i2 == SIZE1 ) {
+        if( i1 == SIZE1 && i2 == SIZE2 ) {
             reset();
         }
-        if( i1 >= SIZE1         ) i1 = 0;
-        if( i2 >= SIZE1 + SIZE2 ) i2 = SIZE1;
-        return rot( buff[i1++] ) + rot( buff[i2++] );
+        if( i1 == SIZE1 ) i1 = 0;
+        if( i2 == SIZE2 ) i2 = 0;
+        return rot(buff1[i1++]) + rot(buff2[i2++]);
     }
 
 };
 
-using RndAddRot0a  = RndAddRot<std::mt19937_64 ,   631,  641 >;
-using RndAddRot0b  = RndAddRot<std::mt19937_64 ,   557,  563 >;
-using RndAddRot0c  = RndAddRot<std::mt19937_64 ,  1301, 1303 >;
-using RndAddRot1a  = RndAddRot<std::ranlux48   ,   631,  641 >;
-using RndAddRot1b  = RndAddRot<std::ranlux48   ,   557,  563 >;
-using RndAddRot1c  = RndAddRot<std::ranlux48   ,  1301, 1303 >;
-using RndAddRot2a  = RndAddRot<RndLin2b        ,   631,  641 >;
-using RndAddRot2b  = RndAddRot<RndLin2b        ,   557,  563 >;
-using RndAddRot2c  = RndAddRot<RndLin2b        ,  1301, 1303 >;
-using RndAddRot3a  = RndAddRot<RndMLin         ,   631,  641 >;
-using RndAddRot3b  = RndAddRot<RndMLin         ,   557,  563 >;
-using RndAddRot3c  = RndAddRot<RndMLin         ,  1301, 1303 >;
-using RndAddRot4a  = RndAddRot<RndFib0         ,   631,  641 >;
-using RndAddRot4b  = RndAddRot<RndFib0         ,   557,  563 >;
-using RndAddRot4c  = RndAddRot<RndFib0         ,  1301, 1303 >;
-using RndAddRot5a  = RndAddRot<RndFib0a        ,   631,  641 >;
-using RndAddRot5b  = RndAddRot<RndFib0a        ,   557,  563 >;
-using RndAddRot5c  = RndAddRot<RndFib0a        ,  1301, 1303 >;
-using RndAddRot6a  = RndAddRot<RndFib3         ,   631,  641 >;
-using RndAddRot6b  = RndAddRot<RndFib3         ,   557,  563 >;
-using RndAddRot6c  = RndAddRot<RndFib3         ,  1301, 1303 >;
-using RndAddRot7a  = RndAddRot<RndFib3a        ,   631,  641 >;
-using RndAddRot7b  = RndAddRot<RndFib3a        ,   557,  563 >;
-using RndAddRot7c  = RndAddRot<RndFib3a        ,  1301, 1303 >;
+
+
+using RndAddRot0a  = RndAddRot<std::mt19937_64 ,   3061,  2711 >;
+using RndAddRot0b  = RndAddRot<std::mt19937_64 ,   3019,  2957 >;
+using RndAddRot0c  = RndAddRot<std::mt19937_64 ,   3011,  1973 >;
+using RndAddRot1a  = RndAddRot<std::ranlux48   ,   3061,  2711 >;
+using RndAddRot1b  = RndAddRot<std::ranlux48   ,   3019,  2957 >;
+using RndAddRot1c  = RndAddRot<std::ranlux48   ,   3011,  1973 >;
+using RndAddRot2a  = RndAddRot<RndLin2b        ,   3061,  2711 >;
+using RndAddRot2b  = RndAddRot<RndLin2b        ,   3019,  2957 >;
+using RndAddRot2c  = RndAddRot<RndLin2b        ,   3011,  1973 >;
+using RndAddRot3a  = RndAddRot<RndMLin         ,   3061,  2711 >;
+using RndAddRot3b  = RndAddRot<RndMLin         ,   3019,  2957 >;
+using RndAddRot3c  = RndAddRot<RndMLin         ,   3011,  1973 >;
+using RndAddRot4a  = RndAddRot<RndFib0         ,   3061,  2711 >;
+using RndAddRot4b  = RndAddRot<RndFib0         ,   3019,  2957 >;
+using RndAddRot4c  = RndAddRot<RndFib0         ,   3011,  1973 >;
+using RndAddRot5a  = RndAddRot<RndFib0a        ,   3061,  2711 >;
+using RndAddRot5b  = RndAddRot<RndFib0a        ,   3019,  2957 >;
+using RndAddRot5c  = RndAddRot<RndFib0a        ,   3011,  1973 >;
+using RndAddRot6a  = RndAddRot<RndFib3         ,   3061,  2711 >;
+using RndAddRot6b  = RndAddRot<RndFib3         ,   3019,  2957 >;
+using RndAddRot6c  = RndAddRot<RndFib3         ,   3011,  1973 >;
+using RndAddRot7a  = RndAddRot<RndFib3a        ,   3061,  2711 >;
+using RndAddRot7b  = RndAddRot<RndFib3a        ,   3019,  2957 >;
+using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
