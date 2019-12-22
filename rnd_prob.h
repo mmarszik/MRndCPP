@@ -40,16 +40,16 @@
 
 //The optimizer of the random number generator on the
 //probability between <0,p>
-class RndProbability {
+class RndProb {
 private:
     TRnd &rnd;
     TRnd::TYPE_RESULT p;
 
 public:
-    RndProbability(TRnd &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
+    RndProb(TRnd &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
         setP( p );
     }
-    RndProbability(const RndProbability& other) : rnd(other.rnd) {
+    RndProb(const RndProb& other) : rnd(other.rnd) {
         setP( other.p );
     }
     void setP( CMRND_FLOAT p ) {
@@ -60,4 +60,4 @@ public:
     }
 };
 
-using TRndFloat = RndProbability;
+using TRndProb = RndProb;

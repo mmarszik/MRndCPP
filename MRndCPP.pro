@@ -153,7 +153,7 @@ HEADERS += \
     use_rnd_add_rot_7a.h \
     use_rnd_add_rot_7b.h \
     use_rnd_add_rot_7c.h \
-    rnd_probability.h
+    rnd_prob.h
 
 DISTFILES += \
     createAtC++.sh \
