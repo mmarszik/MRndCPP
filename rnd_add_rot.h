@@ -38,6 +38,12 @@
 #include <random>
 #include <climits>
 
+#ifdef _MSC_VER
+#include <intrin.h>
+#else
+#include <x86intrin.h>  // Not just <immintrin.h> for compilers other than icc
+#endif
+
 #include "rnd_lin.h"
 #include "rnd_mlin.h"
 #include "rnd_fib.h"

@@ -38,24 +38,26 @@
 #include "rnd.h"
 #include "rnd_base.h"
 
-//The optimizer of the random number generator on the float point numbers.
-class RndFloat {
+//The optimizer of the random number generator on the
+//probability between <0,p>
+class RndProbability {
 private:
     TRnd &rnd;
     TRnd::TYPE_RESULT p;
 
 public:
-    RndFloat(TRnd &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
+    RndProbability(TRnd &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
         setP( p );
     }
-
+    RndProbability(const RndProbability& other) : rnd(other.rnd) {
+        setP( other.p );
+    }
     void setP( CMRND_FLOAT p ) {
         this->p = static_cast<TRnd::TYPE_RESULT>(p * TRnd::max());
     }
-
     bool operator()() {
         return rnd() < p;
     }
 };
 
-using TRndFloat = RndFloat;
+using TRndFloat = RndProbability;

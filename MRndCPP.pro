@@ -4,6 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 QMAKE_CXXFLAGS += -O3
+QMAKE_CXXFLAGS += -mtune=native
+QMAKE_CXXFLAGS += -mavx
 
 INCLUDEPATH += "vendor"
 
@@ -77,7 +79,6 @@ HEADERS += \
     rnd_sfib.h \
     rnd_mlin.h \
     rnd_lin.h \
-    rnd_float.h \
     rnd_fib.h \
     rnd_comp.h \
     rnd_buff1.h \
@@ -151,7 +152,8 @@ HEADERS += \
     use_rnd_add_rot_6c.h \
     use_rnd_add_rot_7a.h \
     use_rnd_add_rot_7b.h \
-    use_rnd_add_rot_7c.h
+    use_rnd_add_rot_7c.h \
+    rnd_probability.h
 
 DISTFILES += \
     createAtC++.sh \
