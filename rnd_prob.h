@@ -34,6 +34,8 @@
 
 #pragma once
 
+#include <new>
+
 #include "defs.h"
 #include "rnd.h"
 #include "rnd_base.h"
