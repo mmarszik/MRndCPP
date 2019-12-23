@@ -33,7 +33,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
-
+#include <new>
 #include "rnd.h"
 #include <MxCPP/mx_array.h>
 
@@ -69,6 +69,9 @@ public:
     }
     RndBuff1( const RndBuff1& other ) : rnd(other.rnd) {
         setMinMax( other.min, other.max );
+    }
+    RndBuff1& operator = (const RndBuff1& other) {
+        return *( new(this)RndBuff1(other) );
     }
     void setMinMax(CMRND_UINT min, CMRND_UINT max ) {
         this->min = min;

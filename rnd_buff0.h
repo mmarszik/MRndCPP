@@ -35,6 +35,7 @@
 #pragma once
 
 #include "rnd.h"
+#include <new>
 
 class RndBuff0  {
 private:
@@ -48,6 +49,9 @@ public:
     }
     RndBuff0( const RndBuff0& other ) : rnd(other.rnd) {
         setMinMax( other.min, other.max );
+    }
+    RndBuff0& operator = (const RndBuff0& other) {
+        return *( new(this)RndBuff0(other) );
     }
     void setMinMax( CMRND_UINT min, CMRND_UINT max  ) {
         this->min = min;

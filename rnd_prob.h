@@ -52,6 +52,9 @@ public:
     RndProb(const RndProb& other) : rnd(other.rnd) {
         setP( other.p );
     }
+    RndProb& operator = (const RndProb& other) {
+        return *( new(this)RndProb(other) );
+    }
     void setP( CMRND_FLOAT p ) {
         this->p = static_cast<TRnd::TYPE_RESULT>(p * TRnd::max());
     }
