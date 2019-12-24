@@ -54,14 +54,13 @@ private:
     TMRND_UINT  select; // Select first or second buffer.
 
 private:
-    TRnd::TYPE_RESULT range() {
-        return rnd() % ( max - min + 1 ) + min;
-    }
     void reset() {
-        for( TMRND_UINT i=0 ; i<SIZE1 ; i++ )
-            buf1[i] = range();
-        for( TMRND_UINT i=0 ; i<SIZE2 ; i++ )
-            buf2[i] = range();
+        for( TMRND_UINT i=0 ; i<SIZE1 ; i++ ) {
+            buf1[i] = rnd.range(min,max);
+        }
+        for( TMRND_UINT i=0 ; i<SIZE2 ; i++ ) {
+            buf2[i] = rnd.range(min,max);
+        }
     }
 public:
     RndBuff1( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
@@ -73,7 +72,7 @@ public:
     RndBuff1& operator = (const RndBuff1& other) {
         return *( new(this)RndBuff1(other) );
     }
-    void setMinMax(CMRND_UINT min, CMRND_UINT max ) {
+    void setMinMax(CMRND_UINT min, CMRND_UINT max   ) {
         this->min = min;
         this->max = max;
         i1 = SIZE1;
@@ -99,5 +98,4 @@ public:
 };
 
 
-using TRndBuff = RndBuff1<4159, 3137>;
 
