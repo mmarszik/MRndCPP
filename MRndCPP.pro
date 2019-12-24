@@ -12,6 +12,8 @@ INCLUDEPATH += "vendor"
 DEFINES += USE_RND_MLIN_0
 DEFINES += USE_RND_BUFF_1a
 DEFINES += USE_RND_F_BUFF_1a
+DEFINES += USE_RND_PROB_0
+
 #DEFINES += MX_USING_ARRAY_2
 DEFINES += TEST03_PROGRAM
 
@@ -38,7 +40,8 @@ SOURCES += \
     test03.cpp \
     sandbox00.cpp \
     rnd_buff0.cpp \
-    rnd_buff1.cpp
+    rnd_buff1.cpp \
+    rnd_prob.cpp
 
 HEADERS += \
     use_rnd_xor3_0.h \
@@ -167,7 +170,9 @@ HEADERS += \
     use_rnd_buff_0.h \
     use_rnd_buff_1a.h \
     use_rnd_f_buff_1a.h \
-    use_rnd_f_buff_0.h
+    use_rnd_f_buff_0.h \
+    use_rnd_prob_0.h \
+    prob.h
 
 DISTFILES += \
     createAtC++.sh \

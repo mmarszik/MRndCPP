@@ -23,46 +23,13 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:53:05 CET                               //
+/// @created on 2019-12-24 12:21:07 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 3c1b3ba5-afd2-4ffb-bbf3-2087ca7d4de7                       //
+/// @token 4837c5b6-85a7-4b83-b709-b3ecb957c996                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
-
-#include <new>
-
-#include "rnd.h"
-#include "rnd_base.h"
-
-//The optimizer of the random number generator on the
-//probability between <0,p>
-template<class TRND>
-class RndProb {
-private:
-    TRND &rnd;
-    RndBase::TYPE_RESULT p;
-
-public:
-    RndProb(TRND &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
-        setP( p );
-    }
-    RndProb(const RndProb& other) : rnd(other.rnd) {
-        setP( other.p );
-    }
-    RndProb& operator = (const RndProb& other) {
-        return *( new(this)RndProb(other) );
-    }
-    void setP( CMRND_FLOAT p ) {
-        this->p = static_cast<RndBase::TYPE_RESULT>(p * TRND::max());
-    }
-    bool operator()() {
-        return rnd() < p;
-    }
-};
-
-using TRndProb0 = RndProb<TRnd>;
+#include "rnd_prob.h"
