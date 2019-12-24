@@ -23,27 +23,17 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-23 12:39:07 CET                               //
+/// @created on 2019-12-24 21:11:33 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 17fa7dd3-fcef-4ba6-829f-a24dad9e144b                       //
+/// @token 4b9011f5-4d60-4149-b434-557ac6237d02                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#if defined( USE_RND_BUFF_0 )
-    #include "use_rnd_buff_0.h"
-#elif defined( USE_RND_BUFF_1a )
-    #include "use_rnd_buff_1a.h"
-#endif
+#include "rnd_buff2.h"
 
-
-
-#if defined( USE_RND_F_BUFF_0 )
-    #include "use_rnd_f_buff_0.h"
-#elif defined( USE_RND_F_BUFF_1a )
-    #include "use_rnd_f_buff_1a.h"
-#endif
+using TRndBuff = RndBuff2<79,97,127,157>;

@@ -23,42 +23,29 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-23 11:05:06 CET                               //
+/// @created on 2019-12-23 12:39:07 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 7692dea4-6aea-4d5e-b687-7abd38f356fd                       //
+/// @token 17fa7dd3-fcef-4ba6-829f-a24dad9e144b                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#include "defs.h"
+#pragma once
 
-#ifdef TEST03_PROGRAM
-
-#include <iostream>
-#include "rnd.h"
-#include "buffs.h"
-
-int main() {
-    CMRND_ULONG seed = 1234567890ull;
-    TRnd rnd( seed );
-    TRndBuff rndBuf(rnd,0,23);
-    TMRND_ULONG x = 0;
-    for( TMRND_UINT i=0 ; i<100 ; i++ ) {
-        std::cout << rndBuf() << ", ";
-    }
-    std::cout << std::endl;
-    for( TMRND_ULONG i=0 ; i<(1ull<<35u) ; i++ ) {
-        x += rndBuf();
-    }
-    std::cout << x << std::endl;
-    return 0;
-}
-
+#if defined( USE_RND_BUFF_0 )
+    #include "use_rnd_buff_0.h"
+#elif defined( USE_RND_BUFF_1a )
+    #include "use_rnd_buff_1a.h"
+#elif defined( USE_RND_BUFF_2a )
+    #include "use_rnd_buff_2a.h"
 #endif
 
 
 
-
-
+#if defined( USE_RND_F_BUFF_0 )
+    #include "use_rnd_f_buff_0.h"
+#elif defined( USE_RND_F_BUFF_1a )
+    #include "use_rnd_f_buff_1a.h"
+#endif

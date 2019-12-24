@@ -5,7 +5,7 @@ CONFIG -= qt
 
 QMAKE_CXXFLAGS += -O3
 QMAKE_CXXFLAGS += -mtune=native
-QMAKE_CXXFLAGS += -mavx
+#QMAKE_CXXFLAGS += -mavx
 
 INCLUDEPATH += "vendor"
 
@@ -14,7 +14,7 @@ DEFINES += USE_RND_BUFF_1a
 DEFINES += USE_RND_F_BUFF_1a
 DEFINES += USE_RND_PROB_0
 
-#DEFINES += MX_USING_ARRAY_2
+#DEFINES += MX_USING_ARRAY_3
 DEFINES += TEST03_PROGRAM
 
 
@@ -41,7 +41,9 @@ SOURCES += \
     sandbox00.cpp \
     rnd_buff0.cpp \
     rnd_buff1.cpp \
-    rnd_prob.cpp
+    rnd_prob.cpp \
+    test04.cpp \
+    rnd_buff2.cpp
 
 HEADERS += \
     use_rnd_xor3_0.h \
@@ -166,13 +168,15 @@ HEADERS += \
     rnd_prob.h \
     rnd_f_buff0.h \
     rnd_f_buff1.h \
-    buff.h \
     use_rnd_buff_0.h \
     use_rnd_buff_1a.h \
     use_rnd_f_buff_1a.h \
     use_rnd_f_buff_0.h \
     use_rnd_prob_0.h \
-    prob.h
+    prob.h \
+    rnd_buff2.h \
+    buffs.h \
+    use_rnd_buff_2a.h
 
 DISTFILES += \
     createAtC++.sh \
