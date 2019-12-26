@@ -32,10 +32,9 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#include "defs.h"
-
 #ifdef TEST00_PROGRAM
 
+#include "defs.h"
 #include <iostream>
 #include <random>
 #include "rnd.h"
@@ -47,7 +46,7 @@ int main() {
     for( TMRND_UINT i=0 ; i<6 ; i++ ) {
         std::cout << rnd() << std::endl;
     }
-    for( TMRND_ULONG i=0 ; i<(1ull<<31u) ; i++ ) {
+    for( TMRND_ULONG i=0 ; i<(1ull<<34u) ; i++ ) {
         x += rnd();
     }
     std::cout << x << std::endl;

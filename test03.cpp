@@ -32,10 +32,10 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#include "defs.h"
 
 #ifdef TEST03_PROGRAM
 
+#include "defs.h"
 #include <iostream>
 #include "rnd.h"
 #include "buffs.h"

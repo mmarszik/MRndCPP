@@ -76,7 +76,7 @@ public:
 
 template<typename T, T A, T B, T M, TMRND_UINT BITS, TMRND_UINT SHIFT> CMRND_UINT RndSkipLin<T,A,B,M,BITS,SHIFT>::skip[SKIP_SZIE] = {1,2,0,2,2,0,2,2,2,1,2,0,1,2,2,2,1,2,2,2,2,1,1,0,3,1,2,2,2,2,2,3,2,2,3,2,1,1,1,2,1,2,2,2,1,2,1,2,1,2,3,1,1,3,2,0,2,0,0,1,2,2,2,1};
 
-using RndSkipLin1  = RndSkipLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 32u,  0u>;
+using RndSkipLin1  = RndSkipLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 32u, 31u>;
 using RndSkipLin2a = RndSkipLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 16u,  0u>;
 using RndSkipLin2b = RndSkipLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 11u, 12u>;
 using RndSkipLin2c = RndSkipLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull,  8u,  0u>;

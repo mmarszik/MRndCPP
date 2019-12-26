@@ -32,10 +32,10 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#include "defs.h"
 
 #ifdef TEST02_PROGRAM
 
+#include "defs.h"
 #include <iostream>
 #include <limits>
 #include <climits>

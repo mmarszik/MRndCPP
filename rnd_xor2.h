@@ -34,11 +34,66 @@
 
 #pragma once
 
-#include <MxCPP/mx_array.h>
-
 #include "defs.h"
 #include "rnd_base.h"
 
+template<typename TRND, TMRND_UINT SIZE1, TMRND_UINT SIZE2>
+class RndXor2 : public RndBase {
+private:
+    TRND       rnd;
+    TMRND_UINT *const buff;
+    TMRND_UINT *i1,*i2;
+    TMRND_UINT *const end1, *const end2;
+
+private:
+    void reset() {
+        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+            buff[i] = rnd();
+        }
+    }
+    static TMRND_RESULT rot( TMRND_RESULT *v ) {
+        return *v = (*v << 1) | ( *v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
+    }
+public:
+    RndXor2( CMRND_RESULT __sd ) : buff(new TMRND_UINT[SIZE1+SIZE2]), end1(buff+SIZE1),end2(buff+SIZE1+SIZE2) {
+        seed( __sd );
+    }
+    RndXor2( const RndXor2 &other ) : buff(new TMRND_UINT[SIZE1+SIZE2]), end1(buff+SIZE1),end2(buff+SIZE1+SIZE2) {
+        rnd = other.rnd;
+        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+            buff[i] = other.buff[i];
+        }
+        i1 = other.i1;
+        i2 = other.i2;
+    }
+    RndXor2& operator = (const RndXor2 &other) {
+        delete[] buff;
+        return *( new(this)RndXor2( other ) );
+    }
+    ~RndXor2() {
+        delete[] buff;
+    }
+    void seed( CMRND_RESULT __sd ) {
+        rnd.seed( __sd );
+        i1 = end1;
+        i2 = end2;
+    }
+    TMRND_RESULT operator()() {
+        if( i1 == end1 ) {
+            i1 = buff;
+            if( i2 == end2 ) {
+                reset();
+            }
+        }
+        if( i2 == end2 ) {
+            i2 = end1;
+        }
+        return *i1++ ^ *i2++;
+    }
+};
+
+
+/*
 template<typename TRnd, TMRND_UINT SIZE1, TMRND_UINT SIZE2>
 class RndXor2 : public RndBase {
 private:
@@ -66,4 +121,4 @@ public:
         return x[i1] ^ x[i2];
     }
 };
-
+*/

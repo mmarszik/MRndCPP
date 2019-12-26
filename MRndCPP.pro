@@ -9,13 +9,13 @@ QMAKE_CXXFLAGS += -mtune=native
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_MLIN_0
+DEFINES += USE_RND_RANLUX_48
 DEFINES += USE_RND_BUFF_0
 DEFINES += USE_RND_F_BUFF_1a
 DEFINES += USE_RND_PROB_0
 
-DEFINES += MX_USING_ARRAY_4
-DEFINES += TEST03_PROGRAM
+#DEFINES += MX_USING_ARRAY_4
+DEFINES += TEST00_PROGRAM
 
 
 SOURCES += \
@@ -46,7 +46,6 @@ SOURCES += \
     rnd_buff2.cpp
 
 HEADERS += \
-    use_rnd_xor3_0.h \
     use_rnd_xor2_0.h \
     use_rnd_skip_lin_2b.h \
     use_rnd_skip_lin_1.h \
@@ -59,7 +58,6 @@ HEADERS += \
     use_rnd_ranlux_48.h \
     use_rnd_mt19937_64.h \
     use_rnd_mlin_0.h \
-    use_rnd_ministd.h \
     use_rnd_lin_2c.h \
     use_rnd_lin_2b.h \
     use_rnd_lin_2a.h \
@@ -84,7 +82,6 @@ HEADERS += \
     use_rnd_comp_1.h \
     use_rnd_comp_0.h \
     rnd.h \
-    rnd_xor3.h \
     rnd_xor2.h \
     rnd_skip_lin.h \
     rnd_sim_lin.h \
@@ -117,29 +114,6 @@ HEADERS += \
     use_rnd_fib_8.h \
     use_rnd_fib_9.h \
     vendor/MiscCPP/m_limits.h \
-    use_rnd_xor_ch_x_0b.h \
-    use_rnd_xor_ch_x_0c.h \
-    use_rnd_xor_ch_x_1a.h \
-    use_rnd_xor_ch_x_1b.h \
-    use_rnd_xor_ch_x_1c.h \
-    use_rnd_xor_ch_x_2a.h \
-    use_rnd_xor_ch_x_2b.h \
-    use_rnd_xor_ch_x_2c.h \
-    use_rnd_xor_ch_x_3a.h \
-    use_rnd_xor_ch_x_3b.h \
-    use_rnd_xor_ch_x_3c.h \
-    use_rnd_xor_ch_x_4a.h \
-    use_rnd_xor_ch_x_4b.h \
-    use_rnd_xor_ch_x_4c.h \
-    use_rnd_xor_ch_x_5a.h \
-    use_rnd_xor_ch_x_5b.h \
-    use_rnd_xor_ch_x_5c.h \
-    use_rnd_xor_ch_x_6a.h \
-    use_rnd_xor_ch_x_6b.h \
-    use_rnd_xor_ch_x_6c.h \
-    use_rnd_xor_ch_x_7a.h \
-    use_rnd_xor_ch_x_7b.h \
-    use_rnd_xor_ch_x_7c.h \
     use_rnd_add_rot_0a.h \
     rnd_add_rot.h \
     use_rnd_add_rot_0b.h \

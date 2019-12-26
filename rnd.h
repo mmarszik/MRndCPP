@@ -149,9 +149,6 @@
 
 #elif  defined( USE_RND_XOR2_0 )
     #include "use_rnd_xor2_0.h"
-#elif  defined( USE_RND_XOR3_0 )
-    #include "use_rnd_xor3_0.h"
-
 
 #elif  defined( USE_RND_ADD_ROT_0a )
     #include "use_rnd_add_rot_0a.h"
@@ -202,6 +199,4 @@
 #elif  defined( USE_RND_ADD_ROT_7c )
     #include "use_rnd_add_rot_7c.h"
 
-
 #endif
-

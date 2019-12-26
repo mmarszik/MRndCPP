@@ -131,6 +131,8 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 
 
 
+
+
 //template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndAddRot : public RndBase {
 //private:

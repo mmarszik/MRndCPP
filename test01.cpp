@@ -32,10 +32,10 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#include "defs.h"
 
 #ifdef TEST01_PROGRAM
 
+#include "defs.h"
 #include <cstdio>
 #include <random>
 #include <climits>
