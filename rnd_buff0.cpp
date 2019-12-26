@@ -1,3 +1,4 @@
+
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
 /// It is file containing source code of library of pseudo random     //
@@ -23,42 +24,14 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-11-30 09:14:47 CET                               //
+/// @created on 2019-12-23 12:32:49 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 31447f18-ce96-4e91-a79f-8d0524260371                       //
+/// @token a26df547-352e-4fd0-ad51-ea0470fc65b0                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
-
-#include "rnd.h"
-#include <new>
-
-class RndBuff0  {
-private:
-    TRnd       &rnd; // Pseudo random number generator.
-    TMRND_UINT min;  // Min range.
-    TMRND_UINT max;  // Max range.
-
-public:
-    RndBuff0( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
-        setMinMax( min, max );
-    }
-    RndBuff0( const RndBuff0& other ) : rnd(other.rnd) {
-        setMinMax( other.min, other.max );
-    }
-    RndBuff0& operator = (const RndBuff0& other) {
-        return *( new(this)RndBuff0(other) );
-    }
-    void setMinMax( CMRND_UINT min, CMRND_UINT max  ) {
-        this->min = min;
-        this->max = max;
-    }
-    TRnd::TYPE_RESULT operator()() {
-        return rnd.range(min,max);
-    }
-};
+#include "rnd_buff0.h"
 

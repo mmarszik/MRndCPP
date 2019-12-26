@@ -23,39 +23,19 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:53:05 CET                               //
+/// @created on 2019-12-24 12:22:16 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 3c1b3ba5-afd2-4ffb-bbf3-2087ca7d4de7                       //
+/// @token 987aa766-7146-4dd9-8fdd-4acc882f7efe                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#include "defs.h"
-#include "rnd.h"
-#include "rnd_base.h"
+#include "rnd_prob.h"
 
-//The optimizer of the random number generator on the float point numbers.
-class RndFloat {
-private:
-    TRnd &rnd;
-    TRnd::TYPE_RESULT p;
+using TRndProb = TRndProb0;
 
-public:
-    RndFloat(TRnd &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
-        setP( p );
-    }
 
-    void setP( CMRND_FLOAT p ) {
-        this->p = static_cast<TRnd::TYPE_RESULT>(p * TRnd::max());
-    }
-
-    bool operator()() {
-        return rnd() < p;
-    }
-};
-
-using TRndFloat = RndFloat;

@@ -48,5 +48,23 @@ public:
 
     virtual TYPE_RESULT operator()() = 0;
 
+    TYPE_RESULT range(const TYPE_RESULT _min, const TYPE_RESULT _max) {
+        return (*this)() % (_max - _min + 1) + _min;
+    }
+    TYPE_RESULT range(const TYPE_RESULT _max) {
+        return range(0,_max);
+    }
+
+    //Get float between <_min,_max>
+    TMRND_FLOAT getFloat(CMRND_FLOAT _min, CMRND_FLOAT _max) {
+        return ( _max - _min ) * (*this)() / max() + _min;
+    }
+
+    //Get float between <0,_max>
+    TMRND_FLOAT getFloat(CMRND_FLOAT _max=1) {
+        return getFloat(0,_max);
+    }
+
+
 };
 

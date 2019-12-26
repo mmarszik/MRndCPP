@@ -23,42 +23,42 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-11-30 09:14:47 CET                               //
+/// @created on 2019-12-23 11:05:06 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 31447f18-ce96-4e91-a79f-8d0524260371                       //
+/// @token 7692dea4-6aea-4d5e-b687-7abd38f356fd                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#include "defs.h"
 
+#ifdef TEST03_PROGRAM
+
+#include <iostream>
 #include "rnd.h"
-#include <new>
+#include "buffs.h"
 
-class RndBuff0  {
-private:
-    TRnd       &rnd; // Pseudo random number generator.
-    TMRND_UINT min;  // Min range.
-    TMRND_UINT max;  // Max range.
+int main() {
+    CMRND_ULONG seed = 1234567890ull;
+    TRnd rnd( seed );
+    TRndBuff rndBuf(rnd,0,23);
+    TMRND_ULONG x = 0;
+    for( TMRND_UINT i=0 ; i<100 ; i++ ) {
+        std::cout << rndBuf() << ", ";
+    }
+    std::cout << std::endl;
+    for( TMRND_ULONG i=0 ; i<(1ull<<35u) ; i++ ) {
+        x += rndBuf();
+    }
+    std::cout << x << std::endl;
+    return 0;
+}
 
-public:
-    RndBuff0( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
-        setMinMax( min, max );
-    }
-    RndBuff0( const RndBuff0& other ) : rnd(other.rnd) {
-        setMinMax( other.min, other.max );
-    }
-    RndBuff0& operator = (const RndBuff0& other) {
-        return *( new(this)RndBuff0(other) );
-    }
-    void setMinMax( CMRND_UINT min, CMRND_UINT max  ) {
-        this->min = min;
-        this->max = max;
-    }
-    TRnd::TYPE_RESULT operator()() {
-        return rnd.range(min,max);
-    }
-};
+#endif
+
+
+
+
 

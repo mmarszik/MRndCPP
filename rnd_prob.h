@@ -23,42 +23,46 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-11-30 09:14:47 CET                               //
+/// @created on 2019-12-08 02:53:05 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 31447f18-ce96-4e91-a79f-8d0524260371                       //
+/// @token 3c1b3ba5-afd2-4ffb-bbf3-2087ca7d4de7                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#include "rnd.h"
 #include <new>
 
-class RndBuff0  {
+#include "rnd.h"
+#include "rnd_base.h"
+
+//The optimizer of the random number generator on the
+//probability between <0,p>
+template<class TRND>
+class RndProb {
 private:
-    TRnd       &rnd; // Pseudo random number generator.
-    TMRND_UINT min;  // Min range.
-    TMRND_UINT max;  // Max range.
+    TRND &rnd;
+    RndBase::TYPE_RESULT p;
 
 public:
-    RndBuff0( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
-        setMinMax( min, max );
+    RndProb(TRND &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
+        setP( p );
     }
-    RndBuff0( const RndBuff0& other ) : rnd(other.rnd) {
-        setMinMax( other.min, other.max );
+    RndProb(const RndProb& other) : rnd(other.rnd) {
+        setP( other.p );
     }
-    RndBuff0& operator = (const RndBuff0& other) {
-        return *( new(this)RndBuff0(other) );
+    RndProb& operator = (const RndProb& other) {
+        return *( new(this)RndProb(other) );
     }
-    void setMinMax( CMRND_UINT min, CMRND_UINT max  ) {
-        this->min = min;
-        this->max = max;
+    void setP( CMRND_FLOAT p ) {
+        this->p = static_cast<RndBase::TYPE_RESULT>(p * TRND::max());
     }
-    TRnd::TYPE_RESULT operator()() {
-        return rnd.range(min,max);
+    bool operator()() {
+        return rnd() < p;
     }
 };
 
+using TRndProb0 = RndProb<TRnd>;

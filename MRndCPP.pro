@@ -4,12 +4,17 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 QMAKE_CXXFLAGS += -O3
+QMAKE_CXXFLAGS += -mtune=native
+#QMAKE_CXXFLAGS += -mavx
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_ADD_ROT_0c
-DEFINES += USE_RND_BUFF1
-#DEFINES += MX_USING_ARRAY_2
+DEFINES += USE_RND_MLIN_0
+DEFINES += USE_RND_BUFF_1a
+DEFINES += USE_RND_F_BUFF_1a
+DEFINES += USE_RND_PROB_0
+
+#DEFINES += MX_USING_ARRAY_3
 DEFINES += TEST00_PROGRAM
 
 
@@ -29,7 +34,16 @@ SOURCES += \
     vendor/MxCPP/mx_array.cpp \
     test02.cpp \
     vendor/MiscCPP/m_limits.cpp \
-    rnd_add_rot.cpp
+    rnd_add_rot.cpp \
+    rnd_f_buff0.cpp \
+    rnd_f_buff1.cpp \
+    test03.cpp \
+    sandbox00.cpp \
+    rnd_buff0.cpp \
+    rnd_buff1.cpp \
+    rnd_prob.cpp \
+    test04.cpp \
+    rnd_buff2.cpp
 
 HEADERS += \
     use_rnd_xor3_0.h \
@@ -77,7 +91,6 @@ HEADERS += \
     rnd_sfib.h \
     rnd_mlin.h \
     rnd_lin.h \
-    rnd_float.h \
     rnd_fib.h \
     rnd_comp.h \
     rnd_buff1.h \
@@ -151,7 +164,19 @@ HEADERS += \
     use_rnd_add_rot_6c.h \
     use_rnd_add_rot_7a.h \
     use_rnd_add_rot_7b.h \
-    use_rnd_add_rot_7c.h
+    use_rnd_add_rot_7c.h \
+    rnd_prob.h \
+    rnd_f_buff0.h \
+    rnd_f_buff1.h \
+    use_rnd_buff_0.h \
+    use_rnd_buff_1a.h \
+    use_rnd_f_buff_1a.h \
+    use_rnd_f_buff_0.h \
+    use_rnd_prob_0.h \
+    prob.h \
+    rnd_buff2.h \
+    buffs.h \
+    use_rnd_buff_2a.h
 
 DISTFILES += \
     createAtC++.sh \

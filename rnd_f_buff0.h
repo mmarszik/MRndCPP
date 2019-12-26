@@ -23,11 +23,11 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-11-30 09:14:47 CET                               //
+/// @created on 2019-12-23 10:59:16 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 31447f18-ce96-4e91-a79f-8d0524260371                       //
+/// @token 707fc08e-546b-4def-9cc0-28af16a0a0fb                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
@@ -37,28 +37,28 @@
 #include "rnd.h"
 #include <new>
 
-class RndBuff0  {
+class RndFBuff0 {
 private:
-    TRnd       &rnd; // Pseudo random number generator.
-    TMRND_UINT min;  // Min range.
-    TMRND_UINT max;  // Max range.
+    TRnd        &rnd; // Pseudo random number generator.
+    TMRND_FLOAT min;  // Min range.
+    TMRND_FLOAT max;  // Max range.
 
 public:
-    RndBuff0( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
+    RndFBuff0(TRnd &rnd, CMRND_FLOAT min=0, CMRND_FLOAT max=0) : rnd(rnd) {
         setMinMax( min, max );
     }
-    RndBuff0( const RndBuff0& other ) : rnd(other.rnd) {
+    RndFBuff0( const RndFBuff0& other ) : rnd(other.rnd) {
         setMinMax( other.min, other.max );
     }
-    RndBuff0& operator = (const RndBuff0& other) {
-        return *( new(this)RndBuff0(other) );
+    RndFBuff0& operator = (const RndFBuff0& other) {
+        return *( new(this)RndFBuff0(other) );
     }
-    void setMinMax( CMRND_UINT min, CMRND_UINT max  ) {
+    void setMinMax(CMRND_FLOAT min, CMRND_FLOAT max) {
         this->min = min;
         this->max = max;
     }
-    TRnd::TYPE_RESULT operator()() {
-        return rnd.range(min,max);
+    TMRND_FLOAT operator()() {
+        return rnd.getFloat(min,max);
     }
 };
 

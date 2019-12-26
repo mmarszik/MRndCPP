@@ -23,42 +23,29 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-11-30 09:14:47 CET                               //
+/// @created on 2019-12-23 12:39:07 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 31447f18-ce96-4e91-a79f-8d0524260371                       //
+/// @token 17fa7dd3-fcef-4ba6-829f-a24dad9e144b                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#include "rnd.h"
-#include <new>
+#if defined( USE_RND_BUFF_0 )
+    #include "use_rnd_buff_0.h"
+#elif defined( USE_RND_BUFF_1a )
+    #include "use_rnd_buff_1a.h"
+#elif defined( USE_RND_BUFF_2a )
+    #include "use_rnd_buff_2a.h"
+#endif
 
-class RndBuff0  {
-private:
-    TRnd       &rnd; // Pseudo random number generator.
-    TMRND_UINT min;  // Min range.
-    TMRND_UINT max;  // Max range.
 
-public:
-    RndBuff0( TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0 ) : rnd(rnd) {
-        setMinMax( min, max );
-    }
-    RndBuff0( const RndBuff0& other ) : rnd(other.rnd) {
-        setMinMax( other.min, other.max );
-    }
-    RndBuff0& operator = (const RndBuff0& other) {
-        return *( new(this)RndBuff0(other) );
-    }
-    void setMinMax( CMRND_UINT min, CMRND_UINT max  ) {
-        this->min = min;
-        this->max = max;
-    }
-    TRnd::TYPE_RESULT operator()() {
-        return rnd.range(min,max);
-    }
-};
 
+#if defined( USE_RND_F_BUFF_0 )
+    #include "use_rnd_f_buff_0.h"
+#elif defined( USE_RND_F_BUFF_1a )
+    #include "use_rnd_f_buff_1a.h"
+#endif

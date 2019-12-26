@@ -205,9 +205,3 @@
 
 #endif
 
-#if defined( USE_RND_BUFF0 )
-    #include "rnd_buff0.h"
-#elif defined( USE_RND_BUFF1 )
-    #include "rnd_buff1.h"
-#endif
-
