@@ -56,7 +56,7 @@ public:
         rnd.seed(__sd);
         is = 0;
     }
-    TYPE_RESULT operator()() {
+    TMRND_RESULT operator()() {
         TMRND_UINT r=0;
         for( TMRND_UINT i=0 ; i < MLimits<decltype(r)>::digits() ; i+=BITS ) {
             for( TMRND_UINT j=0 ; j<skip[is] ; j++ ) {

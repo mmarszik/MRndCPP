@@ -51,7 +51,7 @@ public:
     void seed(const T __sd) {
         rnd.seed(__sd);
     }
-    TYPE_RESULT operator()() {
+    TMRND_RESULT operator()() {
         TMRND_UINT r=0;
         for( TMRND_UINT i=0 ; i<MLimits<decltype(r)>::digits() ; i+=BITS ) {
 #pragma GCC diagnostic ignored "-Wshift-count-overflow"

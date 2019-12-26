@@ -36,23 +36,18 @@
 #include <new>
 #include "rnd.h"
 
-
 //MM: Attention: It is opposite of the good random number generator ;-)
 //MM: It is pseudo random number generator with the double cyclic buffer. It work fast
 //MM: but numbers are worse(!!!) than with class TRnd.
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndBuff1 {
 private:
-    TRnd        &rnd;       // Pseudo random number generator.
-    TMRND_UINT  min;        // Min range.
-    TMRND_UINT  max;        // Max range.
-    TMRND_UINT *const buff; // N-Cyclic buffer to number generator.
-    TMRND_UINT  select;     // Select first or second buffer.
-
-    const TRnd::TYPE_RESULT *i1;
-    const TRnd::TYPE_RESULT *i2;
-    const TRnd::TYPE_RESULT *const end1;
-    const TRnd::TYPE_RESULT *const end2;
+    TRnd          &rnd;        // Pseudo random number generator.
+    TMRND_RESULT  min,max;     // Min-max range.
+    TMRND_RESULT  *const buff; // N-Cyclic buffers to number generator.
+    TMRND_UINT    select;      // Select first or second buffer.
+    CMRND_RESULT  *i1, *i2;
+    CMRND_RESULT  *const end1, *const end2;
 
 private:
     void reset() {
@@ -60,11 +55,12 @@ private:
             buff[i] = rnd.range(min,max);
         }
     }
+
 public:
-    RndBuff1(TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0) : rnd(rnd), buff(new TRnd::TYPE_RESULT[SIZE1+SIZE2]), end1(buff+SIZE1), end2(buff+SIZE1+SIZE2) {
+    RndBuff1(TRnd &rnd, CMRND_RESULT min=0, CMRND_RESULT max=0) : rnd(rnd), buff(new TMRND_RESULT[SIZE1+SIZE2]), end1(buff+SIZE1), end2(end1+SIZE2) {
         setMinMax(min,max);
     }
-    RndBuff1(const RndBuff1& other) : rnd(other.rnd), end1(end1), end2(end2) {
+    RndBuff1(const RndBuff1& other) : rnd(other.rnd), buff(new TMRND_RESULT[SIZE1+SIZE2]), end1(buff+SIZE1), end2(end1+SIZE2) {
         this->min = other.min;
         this->max = other.max;
         this->i1  = this->buff + (other.i1 - other.buff);
@@ -74,20 +70,20 @@ public:
         }
     }
     RndBuff1& operator = (const RndBuff1& other) {
+        delete[] buff;
         return *( new(this)RndBuff1(other) );
     }
     ~RndBuff1() {
         delete[] buff;
     }
-
-    void setMinMax(CMRND_UINT min, CMRND_UINT max) {
+    void setMinMax(CMRND_RESULT min, CMRND_RESULT max) {
         this->min = min;
         this->max = max;
         i1 = end1;
         i2 = end2;
         select = 0;
     }
-    TRnd::TYPE_RESULT operator()() {
+    TMRND_RESULT operator()() {
         if( 1 & select++ ) {
             if( i1 == end1 ) {
                 if( i2 == end2 ) {
@@ -106,7 +102,6 @@ public:
             return *i2++;
         }
     }
-
 };
 
 
@@ -114,8 +109,8 @@ public:
 //template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndBuff1 {
 //private:
-//    using TBuff1 = MxArray<TRnd::TYPE_RESULT,SIZE1>;
-//    using TBuff2 = MxArray<TRnd::TYPE_RESULT,SIZE2>;
+//    using TBuff1 = MxArray<TMRND_RESULT,SIZE1>;
+//    using TBuff2 = MxArray<TMRND_RESULT,SIZE2>;
 //    TRnd        &rnd;   // Pseudo random number generator.
 //    TMRND_UINT  min;    // Min range.
 //    TMRND_UINT  max;    // Max range.
@@ -150,7 +145,7 @@ public:
 //        i2 = SIZE2;
 //        select = 0;
 //    }
-//    TRnd::TYPE_RESULT operator()() {
+//    TMRND_RESULT operator()() {
 //        if( i1 == SIZE1 && i2 == SIZE2 ) {
 //            reset();
 //        }
@@ -173,8 +168,8 @@ public:
 //template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndBuff1 {
 //private:
-//    using TBuff1 = MxArray<TRnd::TYPE_RESULT,SIZE1>;
-//    using TBuff2 = MxArray<TRnd::TYPE_RESULT,SIZE2>;
+//    using TBuff1 = MxArray<TMRND_RESULT,SIZE1>;
+//    using TBuff2 = MxArray<TMRND_RESULT,SIZE2>;
 //    TRnd        &rnd;   // Pseudo random number generator.
 //    TMRND_UINT  min;    // Min range.
 //    TMRND_UINT  max;    // Max range.
@@ -182,10 +177,10 @@ public:
 //    TBuff2      buf2;   // N-Cyclic buffer to number generator.
 //    TMRND_UINT  select; // Select first or second buffer.
 
-//    const TRnd::TYPE_RESULT *i1;
-//    const TRnd::TYPE_RESULT *i2;
-//    const TRnd::TYPE_RESULT *const end1;
-//    const TRnd::TYPE_RESULT *const end2;
+//    CMRND_RESULT *i1;
+//    CMRND_RESULT *i2;
+//    CMRND_RESULT *const end1;
+//    CMRND_RESULT *const end2;
 
 
 //private:
@@ -214,7 +209,7 @@ public:
 //        i2 = end2;
 //        select = 0;
 //    }
-//    TRnd::TYPE_RESULT operator()() {
+//    TMRND_RESULT operator()() {
 //        if( i1 == end1 && i2 == end2 ) {
 //            reset();
 //        }
@@ -236,8 +231,8 @@ public:
 //template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndBuff1 {
 //private:
-//    using TBuff1 = MxArray<TRnd::TYPE_RESULT,SIZE1>;
-//    using TBuff2 = MxArray<TRnd::TYPE_RESULT,SIZE2>;
+//    using TBuff1 = MxArray<TMRND_RESULT,SIZE1>;
+//    using TBuff2 = MxArray<TMRND_RESULT,SIZE2>;
 //    TRnd        &rnd;   // Pseudo random number generator.
 //    TMRND_UINT  min;    // Min range.
 //    TMRND_UINT  max;    // Max range.
@@ -245,10 +240,10 @@ public:
 //    TBuff2      buf2;   // N-Cyclic buffer to number generator.
 //    TMRND_UINT  select; // Select first or second buffer.
 
-//    const TRnd::TYPE_RESULT *i1;
-//    const TRnd::TYPE_RESULT *i2;
-//    const TRnd::TYPE_RESULT *const end1;
-//    const TRnd::TYPE_RESULT *const end2;
+//    CMRND_RESULT *i1;
+//    CMRND_RESULT *i2;
+//    CMRND_RESULT *const end1;
+//    CMRND_RESULT *const end2;
 
 
 //private:
@@ -277,7 +272,7 @@ public:
 //        i2 = end2;
 //        select = 0;
 //    }
-//    TRnd::TYPE_RESULT operator()() {
+//    TMRND_RESULT operator()() {
 //        if( 1 & select++ ) {
 //            if( i1 == end1 ) {
 //                if( i2 == end2 ) {
@@ -303,18 +298,18 @@ public:
 //template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndBuff1 {
 //private:
-//    using TBuff1 = MxArray<TRnd::TYPE_RESULT,SIZE1>;
-//    using TBuff2 = MxArray<TRnd::TYPE_RESULT,SIZE2>;
+//    using TBuff1 = MxArray<TMRND_RESULT,SIZE1>;
+//    using TBuff2 = MxArray<TMRND_RESULT,SIZE2>;
 //    TRnd        &rnd;   // Pseudo random number generator.
 //    TMRND_UINT  min;    // Min range.
 //    TMRND_UINT  max;    // Max range.
 //    TBuff1      buf1;   // N-Cyclic buffer to number generator.
 //    TBuff2      buf2;   // N-Cyclic buffer to number generator.
 //    TMRND_UINT  select; // Select first or second buffer.
-//    const TRnd::TYPE_RESULT *i1;
-//    const TRnd::TYPE_RESULT *i2;
-//    const TRnd::TYPE_RESULT *const end1;
-//    const TRnd::TYPE_RESULT *const end2;
+//    CMRND_RESULT *i1;
+//    CMRND_RESULT *i2;
+//    CMRND_RESULT *const end1;
+//    CMRND_RESULT *const end2;
 //private:
 //    void reset() {
 //        for( TMRND_UINT i=0 ; i<SIZE1 ; i++ ) {
@@ -341,7 +336,7 @@ public:
 //        i2 = end2;
 //        select = 0;
 //    }
-//    TRnd::TYPE_RESULT operator()() {
+//    TMRND_RESULT operator()() {
 //        if( 1 & select++ ) {
 //            if( i1 == end1 ) {
 //                if( i2 == end2 ) {
@@ -367,17 +362,17 @@ public:
 //template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndBuff1 {
 //private:
-//    using TBuff1 = TRnd::TYPE_RESULT[SIZE1+SIZE2];
+//    using TBuff1 = TMRND_RESULT[SIZE1+SIZE2];
 //private:
 //    TRnd        &rnd;       // Pseudo random number generator.
 //    TMRND_UINT  min;        // Min range.
 //    TMRND_UINT  max;        // Max range.
 //    TBuff1      buff; // N-Cyclic buffer to number generator.
 //    TMRND_UINT  select;     // Select first or second buffer.
-//    const TRnd::TYPE_RESULT *i1;
-//    const TRnd::TYPE_RESULT *i2;
-//    const TRnd::TYPE_RESULT *const end1;
-//    const TRnd::TYPE_RESULT *const end2;
+//    CMRND_RESULT *i1;
+//    CMRND_RESULT *i2;
+//    CMRND_RESULT *const end1;
+//    CMRND_RESULT *const end2;
 //private:
 //    void reset() {
 //        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
@@ -401,7 +396,7 @@ public:
 //        i2 = end2;
 //        select = 0;
 //    }
-//    TRnd::TYPE_RESULT operator()() {
+//    TMRND_RESULT operator()() {
 //        if( 1 & select++ ) {
 //            if( i1 == end1 ) {
 //                if( i2 == end2 ) {

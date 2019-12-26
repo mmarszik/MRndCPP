@@ -45,7 +45,7 @@ template<class TRND>
 class RndProb {
 private:
     TRND &rnd;
-    RndBase::TYPE_RESULT p;
+    TMRND_RESULT p;
 
 public:
     RndProb(TRND &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
@@ -58,7 +58,7 @@ public:
         return *( new(this)RndProb(other) );
     }
     void setP( CMRND_FLOAT p ) {
-        this->p = static_cast<RndBase::TYPE_RESULT>(p * TRND::max());
+        this->p = static_cast<TMRND_RESULT>(p * TRND::max());
     }
     bool operator()() {
         return rnd() < p;

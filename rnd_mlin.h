@@ -69,7 +69,7 @@ public:
             (*this)();
         }
     }
-    TYPE_RESULT operator()() {
+    TMRND_RESULT operator()() {
         v = v * 543657589ull + 4253133281ull;
         CMRND_UINT i = v >> ( 64 - SIZE0 );
         return ( V[i] = V[i] * A[i] + B[i] ) >> 95;

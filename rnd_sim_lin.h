@@ -54,7 +54,7 @@ public:
             (*this)();
         }
     }
-    TYPE_RESULT operator()() {
+    TMRND_RESULT operator()() {
         if( M == 0 ) {
             if( SHIFT == 0 ) {
                 return v = v * A + B;

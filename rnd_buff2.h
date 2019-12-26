@@ -36,10 +36,8 @@
 #include <new>
 #include "rnd.h"
 
-
-
 //MM: Attention: It is opposite of the good random number generator ;-)
-//MM: It is pseudo random number generator with the double cyclic buffer. It work fast
+//MM: It is pseudo random number generator with the four cyclic buffer. It work fast
 //MM: but numbers are worse(!!!) than with class TRnd.
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT SIZE3, CMRND_UINT SIZE4>
 class RndBuff2 {
@@ -50,9 +48,9 @@ private:
     TMRND_UINT *const buff; // N-Cyclic buffer to number generator.
     TMRND_UINT  select;     // Select first or second buffer.
 
-    const TRnd::TYPE_RESULT *ptr[4];
-    const TRnd::TYPE_RESULT *end[4];
-    const TRnd::TYPE_RESULT *start[4];
+    CMRND_RESULT *ptr[4];
+    CMRND_RESULT *end[4];
+    CMRND_RESULT *start[4];
 
 private:
     void reset() {
@@ -62,7 +60,7 @@ private:
     }
 
 public:
-    RndBuff2(TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0) : rnd(rnd), buff(new TRnd::TYPE_RESULT[SIZE1+SIZE2+SIZE3+SIZE4]) {
+    RndBuff2(TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0) : rnd(rnd), buff(new TMRND_RESULT[SIZE1+SIZE2+SIZE3+SIZE4]) {
         ptr[0] = end[0] = buff   + SIZE1;
         ptr[1] = end[1] = end[0] + SIZE2;
         ptr[2] = end[2] = end[1] + SIZE3;
@@ -74,18 +72,24 @@ public:
         setMinMax(min,max);
     }
 
-    RndBuff2(const RndBuff2& other) : rnd(other.rnd) {
+    RndBuff2(const RndBuff2& other) : rnd(other.rnd), buff(new TMRND_RESULT[SIZE1+SIZE2+SIZE3+SIZE4]) {
         this->min = other.min;
         this->max = other.max;
-        for( TMRND_UINT i=0 ; i<4 ; i++ ) {
-            ptr[i] = buff + (other.ptr[i] - other.buff);
-        }
+        ptr[0] = end[0] = buff   + SIZE1;
+        ptr[1] = end[1] = end[0] + SIZE2;
+        ptr[2] = end[2] = end[1] + SIZE3;
+        ptr[3] = end[3] = end[2] + SIZE4;
+        start[0] = buff;
+        start[1] = start[0] + SIZE1;
+        start[2] = start[1] + SIZE2;
+        start[3] = start[2] + SIZE3;
         for( TMRND_UINT i=0 ; i<SIZE1+SIZE2+SIZE3+SIZE4 ; i++ ) {
             buff[i] = other.buff[i];
         }
     }
 
     RndBuff2& operator = (const RndBuff2& other) {
+        delete[] buff;
         return *( new(this)RndBuff2(other) );
     }
 
@@ -102,7 +106,7 @@ public:
         select = 0;
     }
 
-    TRnd::TYPE_RESULT operator()() {
+    TMRND_RESULT operator()() {
         select &= 3;
         if( ptr[select] == end[select] ) {
             if( ptr[0] == end[0] && ptr[1] == end[1] && ptr[2] == end[2] && ptr[3] == end[3] ) {
@@ -128,14 +132,14 @@ public:
 //    TMRND_UINT *const buff; // N-Cyclic buffer to number generator.
 //    TMRND_UINT  select;     // Select first or second buffer.
 
-//    const TRnd::TYPE_RESULT *i1;
-//    const TRnd::TYPE_RESULT *i2;
-//    const TRnd::TYPE_RESULT *i3;
-//    const TRnd::TYPE_RESULT *i4;
-//    const TRnd::TYPE_RESULT *const end1;
-//    const TRnd::TYPE_RESULT *const end2;
-//    const TRnd::TYPE_RESULT *const end3;
-//    const TRnd::TYPE_RESULT *const end4;
+//    CMRND_RESULT *i1;
+//    CMRND_RESULT *i2;
+//    CMRND_RESULT *i3;
+//    CMRND_RESULT *i4;
+//    CMRND_RESULT *const end1;
+//    CMRND_RESULT *const end2;
+//    CMRND_RESULT *const end3;
+//    CMRND_RESULT *const end4;
 
 //private:
 //    void reset() {
@@ -145,7 +149,7 @@ public:
 //    }
 
 //public:
-//    RndBuff2(TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0) : rnd(rnd), buff(new TRnd::TYPE_RESULT[SIZE1+SIZE2+SIZE3+SIZE4]), end1(buff+SIZE1), end2(buff+SIZE1+SIZE2),end3(buff+SIZE1+SIZE2+SIZE3),end4(buff+SIZE1+SIZE2+SIZE3+SIZE4) {
+//    RndBuff2(TRnd &rnd, CMRND_UINT min=0, CMRND_UINT max=0) : rnd(rnd), buff(new TMRND_RESULT[SIZE1+SIZE2+SIZE3+SIZE4]), end1(buff+SIZE1), end2(buff+SIZE1+SIZE2),end3(buff+SIZE1+SIZE2+SIZE3),end4(buff+SIZE1+SIZE2+SIZE3+SIZE4) {
 //        setMinMax(min,max);
 //    }
 
@@ -179,7 +183,7 @@ public:
 //        select = 0;
 //    }
 
-//    TRnd::TYPE_RESULT operator()() {
+//    TMRND_RESULT operator()() {
 //        switch( 3 & select++) {
 //            case 0:
 //                if( i1 == end1 ) {

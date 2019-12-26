@@ -40,18 +40,16 @@
 
 class RndBase {
 public:
-    using TYPE_RESULT = TMRND_UINT;
-
-    static TYPE_RESULT max() {
-        return MLimits<TYPE_RESULT>::max();
+    static TMRND_RESULT max() {
+        return MLimits<TMRND_RESULT>::max();
     }
 
-    virtual TYPE_RESULT operator()() = 0;
+    virtual TMRND_RESULT operator()() = 0;
 
-    TYPE_RESULT range(const TYPE_RESULT _min, const TYPE_RESULT _max) {
+    TMRND_RESULT range(CMRND_RESULT _min, CMRND_RESULT _max) {
         return (*this)() % (_max - _min + 1) + _min;
     }
-    TYPE_RESULT range(const TYPE_RESULT _max) {
+    TMRND_RESULT range(CMRND_RESULT _max) {
         return range(0,_max);
     }
 

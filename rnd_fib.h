@@ -65,7 +65,7 @@ public:
             (*this)();
         }
     }
-    TYPE_RESULT operator()() {
+    TMRND_RESULT operator()() {
         if( ++i1 >= SIZE ) i1 = 0;
         if( ++i2 >= SIZE ) i2 = 0;
         if( MOD == 0 ) {

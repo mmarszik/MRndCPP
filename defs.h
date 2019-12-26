@@ -42,5 +42,7 @@ using TMRND_ULONGLONG = __uint128_t;
 using CMRND_UINT = const TMRND_UINT;
 using TMRND_FLOAT = double;
 using CMRND_FLOAT = const TMRND_FLOAT;
+using TMRND_RESULT = TMRND_UINT;
+using CMRND_RESULT = const TMRND_RESULT;
 
 

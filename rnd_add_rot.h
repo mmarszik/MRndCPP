@@ -34,15 +34,8 @@
 
 #pragma once
 
-#include <MxCPP/mx_array.h>
 #include <random>
-#include <climits>
-
-#ifdef _MSC_VER
-#include <intrin.h>
-#else
-#include <x86intrin.h>  // Not just <immintrin.h> for compilers other than icc
-#endif
+#include <new>
 
 #include "rnd_lin.h"
 #include "rnd_mlin.h"
@@ -69,22 +62,34 @@ private:
             buff[i] = rnd();
         }
     }
-    static TYPE_RESULT rot( TYPE_RESULT *v ) {
-        return *v = (*v << 1) | ( *v >> ( MLimits<TYPE_RESULT>::digits() - 1 ) );
+    static TMRND_RESULT rot( TMRND_RESULT *v ) {
+        return *v = (*v << 1) | ( *v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
     }
 public:
-    RndAddRot( const RndBase::TYPE_RESULT __sd ) : buff(new TMRND_UINT[SIZE1+SIZE2]), end1(buff+SIZE1),end2(buff+SIZE1+SIZE2) {
+    RndAddRot( CMRND_RESULT __sd ) : buff(new TMRND_UINT[SIZE1+SIZE2]), end1(buff+SIZE1),end2(buff+SIZE1+SIZE2) {
         seed( __sd );
+    }
+    RndAddRot( const RndAddRot &other ) : buff(new TMRND_UINT[SIZE1+SIZE2]), end1(buff+SIZE1),end2(buff+SIZE1+SIZE2) {
+        rnd = other.rnd;
+        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+            buff[i] = other.buff[i];
+        }
+        i1 = other.i1;
+        i2 = other.i2;
+    }
+    RndAddRot& operator = (const RndAddRot &other) {
+        delete[] buff;
+        return *( new(this)RndAddRot( other ) );
     }
     ~RndAddRot() {
         delete[] buff;
     }
-    void seed( const RndBase::TYPE_RESULT __sd ) {
+    void seed( CMRND_RESULT __sd ) {
         rnd.seed( __sd );
         i1 = end1;
         i2 = end2;
     }
-    TMRND_UINT operator()() {
+    TMRND_RESULT operator()() {
         if( i1 == end1 ) {
             if( i2 == end2 ) {
                 reset();
@@ -125,11 +130,12 @@ using RndAddRot7b  = RndAddRot<RndFib3a        ,   3019,  2957 >;
 using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 
 
+
 //template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndAddRot : public RndBase {
 //private:
-//    using TBUFF1 = MxArray<TYPE_RESULT, SIZE1>;
-//    using TBUFF2 = MxArray<TYPE_RESULT, SIZE2>;
+//    using TBUFF1 = MxArray<TMRND_RESULT, SIZE1>;
+//    using TBUFF2 = MxArray<TMRND_RESULT, SIZE2>;
 
 //private:
 //    TRND       rnd;
@@ -145,16 +151,16 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 //            buff2[i] = rnd();
 //    }
 
-//    static TYPE_RESULT rot( TYPE_RESULT &v ) {
-//        return v = (v << 1) | ( v >> ( MLimits<TYPE_RESULT>::digits() - 1 ) );
+//    static TMRND_RESULT rot( TMRND_RESULT &v ) {
+//        return v = (v << 1) | ( v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
 //    }
 
 //public:
-//    RndAddRot( const RndBase::TYPE_RESULT __sd ) {
+//    RndAddRot( CMRND_RESULT __sd ) {
 //        seed( __sd );
 //    }
 
-//    void seed( const RndBase::TYPE_RESULT __sd ) {
+//    void seed( CMRND_RESULT __sd ) {
 //        rnd.seed( __sd );
 //        i1 = SIZE1;
 //        i2 = SIZE2;
@@ -175,8 +181,8 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 //template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndAddRot : public RndBase {
 //private:
-//    using TBUFF1 = MxArray<TYPE_RESULT, SIZE1>;
-//    using TBUFF2 = MxArray<TYPE_RESULT, SIZE2>;
+//    using TBUFF1 = MxArray<TMRND_RESULT, SIZE1>;
+//    using TBUFF2 = MxArray<TMRND_RESULT, SIZE2>;
 
 //private:
 //    TRND       rnd;
@@ -192,16 +198,16 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 //            buff2[i] = rnd();
 //    }
 
-//    static TYPE_RESULT rot( TYPE_RESULT &v ) {
-//        return v = (v << 1) | ( v >> ( MLimits<TYPE_RESULT>::digits() - 1 ) );
+//    static TMRND_RESULT rot( TMRND_RESULT &v ) {
+//        return v = (v << 1) | ( v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
 //    }
 
 //public:
-//    RndAddRot( const RndBase::TYPE_RESULT __sd ) {
+//    RndAddRot( CMRND_RESULT __sd ) {
 //        seed( __sd );
 //    }
 
-//    void seed( const RndBase::TYPE_RESULT __sd ) {
+//    void seed( CMRND_RESULT __sd ) {
 //        rnd.seed( __sd );
 //        i1 = SIZE1;
 //        i2 = SIZE2;
@@ -223,8 +229,8 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 //template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndAddRot : public RndBase {
 //private:
-//    using TBUFF1 = MxArray<TYPE_RESULT, SIZE1>;
-//    using TBUFF2 = MxArray<TYPE_RESULT, SIZE2>;
+//    using TBUFF1 = MxArray<TMRND_RESULT, SIZE1>;
+//    using TBUFF2 = MxArray<TMRND_RESULT, SIZE2>;
 
 //private:
 //    TRND       rnd;
@@ -243,16 +249,16 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 //            buff2[i] = rnd();
 //    }
 
-//    static TYPE_RESULT rot( TYPE_RESULT &v ) {
-//        return v = (v << 1) | ( v >> ( MLimits<TYPE_RESULT>::digits() - 1 ) );
+//    static TMRND_RESULT rot( TMRND_RESULT &v ) {
+//        return v = (v << 1) | ( v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
 //    }
 
 //public:
-//    RndAddRot( const RndBase::TYPE_RESULT __sd ) : end1(&buff1[0]+SIZE1),end2(&buff2[0]+SIZE2) {
+//    RndAddRot( CMRND_RESULT __sd ) : end1(&buff1[0]+SIZE1),end2(&buff2[0]+SIZE2) {
 //        seed( __sd );
 //    }
 
-//    void seed( const RndBase::TYPE_RESULT __sd ) {
+//    void seed( CMRND_RESULT __sd ) {
 //        rnd.seed( __sd );
 //        i1 = end1;
 //        i2 = end2;
@@ -274,8 +280,8 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 //template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 //class RndAddRot : public RndBase {
 //private:
-//    using TBUFF1 = MxArray<TYPE_RESULT, SIZE1>;
-//    using TBUFF2 = MxArray<TYPE_RESULT, SIZE2>;
+//    using TBUFF1 = MxArray<TMRND_RESULT, SIZE1>;
+//    using TBUFF2 = MxArray<TMRND_RESULT, SIZE2>;
 
 //private:
 //    TRND       rnd;
@@ -295,16 +301,16 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 //            buff2[i] = rnd();
 //    }
 
-//    static TYPE_RESULT rot( TYPE_RESULT *v ) {
-//        return *v = (*v << 1) | ( *v >> ( MLimits<TYPE_RESULT>::digits() - 1 ) );
+//    static TMRND_RESULT rot( TMRND_RESULT *v ) {
+//        return *v = (*v << 1) | ( *v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
 //    }
 
 //public:
-//    RndAddRot( const RndBase::TYPE_RESULT __sd ) : end1(&buff1[0]+SIZE1),end2(&buff2[0]+SIZE2) {
+//    RndAddRot( CMRND_RESULT __sd ) : end1(&buff1[0]+SIZE1),end2(&buff2[0]+SIZE2) {
 //        seed( __sd );
 //    }
 
-//    void seed( const RndBase::TYPE_RESULT __sd ) {
+//    void seed( CMRND_RESULT __sd ) {
 //        rnd.seed( __sd );
 //        i1 = end1;
 //        i2 = end2;
@@ -344,12 +350,12 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 //            buff2[i] = rnd();
 //    }
 
-//    static TYPE_RESULT rot( TYPE_RESULT *v ) {
-//        return *v = (*v << 1) | ( *v >> ( MLimits<TYPE_RESULT>::digits() - 1 ) );
+//    static TMRND_RESULT rot( TMRND_RESULT *v ) {
+//        return *v = (*v << 1) | ( *v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
 //    }
 
 //public:
-//    RndAddRot( const RndBase::TYPE_RESULT __sd ) : buff1(new TMRND_UINT[SIZE1]), buff2(new TMRND_UINT[SIZE2]), end1(&buff1[0]+SIZE1),end2(&buff2[0]+SIZE2) {
+//    RndAddRot( CMRND_RESULT __sd ) : buff1(new TMRND_UINT[SIZE1]), buff2(new TMRND_UINT[SIZE2]), end1(&buff1[0]+SIZE1),end2(&buff2[0]+SIZE2) {
 //        seed( __sd );
 //    }
 
@@ -358,7 +364,7 @@ using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
 //        delete[] buff2;
 //    }
 
-//    void seed( const RndBase::TYPE_RESULT __sd ) {
+//    void seed( CMRND_RESULT __sd ) {
 //        rnd.seed( __sd );
 //        i1 = end1;
 //        i2 = end2;

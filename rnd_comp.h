@@ -58,7 +58,7 @@ public:
             buff[i] = rnd1();
         }
     }
-    TYPE_RESULT operator()() {
+    TMRND_RESULT operator()() {
         CMRND_UINT r = rnd2() & ((1u<<SIZE)-1);
         CMRND_ULONG v = buff[r];
         buff[r] = rnd1();

@@ -39,17 +39,17 @@
 
 class TRnd : public std::mt19937_64 {
 public:
-    typedef RndBase::TYPE_RESULT TYPE_RESULT;
+    typedef TMRND_RESULT TMRND_RESULT;
 
     TRnd( std::mt19937_64::result_type __sd) : std::mt19937_64(__sd) {
     }
 
-    static TYPE_RESULT max() {
-        return MLimits<TYPE_RESULT>::max();
+    static TMRND_RESULT max() {
+        return MLimits<TMRND_RESULT>::max();
     }
 
-    TYPE_RESULT operator()() {
-        return static_cast<TYPE_RESULT>( std::mt19937_64::operator ()() );
+    TMRND_RESULT operator()() {
+        return static_cast<TMRND_RESULT>( std::mt19937_64::operator ()() );
     }
 
 };

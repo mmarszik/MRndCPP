@@ -61,7 +61,7 @@ public:
         i2 = SIZE1 + SIZE2 - 1;
         i3 = SIZE1 + SIZE2 + SIZE3 - 1;
     }
-    TYPE_RESULT operator()() {
+    TMRND_RESULT operator()() {
         if( ++i1 >= SIZE1                 ) i1 = 0;
         if( ++i2 >= SIZE1 + SIZE2         ) i2 = SIZE1;
         if( ++i3 >= SIZE1 + SIZE2 + SIZE3 ) i3 = SIZE1 + SIZE2;
