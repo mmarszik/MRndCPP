@@ -199,4 +199,9 @@
 #elif  defined( USE_RND_ADD_ROT_7c )
     #include "use_rnd_add_rot_7c.h"
 
+
+#elif  defined( USE_RND_WYHASH64_0 )
+    #include "use_rnd_wyhash64_0.h"
+
+
 #endif
