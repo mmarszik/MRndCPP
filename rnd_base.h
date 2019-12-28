@@ -46,6 +46,9 @@ public:
     static TMRND_RESULT max() {
         return MLimits<TMRND_RESULT>::max();
     }
+    static TMRND_RESULT min() {
+        return 0;
+    }
 
     virtual TMRND_RESULT operator()() = 0;
 
