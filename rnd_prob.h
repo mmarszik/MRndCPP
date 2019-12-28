@@ -45,6 +45,36 @@ template<class TRND>
 class RndProb {
 private:
     TRND &rnd;
+    TMRND_ULONG p;
+    static_assert( sizeof(p) > sizeof(TMRND_RESULT) , "sizeof(p) > sizeof(TMRND_RESULT)" );
+
+public:
+    RndProb(TRND &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
+        setP( p );
+    }
+    RndProb(const RndProb& other) : rnd(other.rnd) {
+        setP( other.p );
+    }
+    RndProb& operator = (const RndProb& other) {
+        return *( new(this)RndProb(other) );
+    }
+    void setP( CMRND_FLOAT p ) {
+        this->p = static_cast<TMRND_ULONG>(p * ( TRND::max() + 1 ) );
+    }
+    bool operator()() {
+        return rnd() < p;
+    }
+};
+
+
+using TRndProb0 = RndProb<TRnd>;
+
+
+/*
+template<class TRND>
+class RndProb {
+private:
+    TRND &rnd;
     TMRND_RESULT p;
     constexpr static TMRND_RESULT mask = ~(((TMRND_RESULT)1) << (MLimits<TMRND_RESULT>::digits()-1));
 
@@ -65,5 +95,4 @@ public:
         return ( rnd() & mask ) < p;
     }
 };
-
-using TRndProb0 = RndProb<TRnd>;
+*/
