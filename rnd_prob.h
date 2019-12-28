@@ -46,6 +46,7 @@ class RndProb {
 private:
     TRND &rnd;
     TMRND_RESULT p;
+    constexpr static TMRND_RESULT mask = ~(((TMRND_RESULT)1) << (MLimits<TMRND_RESULT>::digits()-1));
 
 public:
     RndProb(TRND &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
@@ -58,10 +59,10 @@ public:
         return *( new(this)RndProb(other) );
     }
     void setP( CMRND_FLOAT p ) {
-        this->p = static_cast<TMRND_RESULT>(p * TRND::max());
+        this->p = static_cast<TMRND_RESULT>(p * ( TRND::max() & mask ) );
     }
     bool operator()() {
-        return rnd() < p;
+        return ( rnd() & mask ) < p;
     }
 };
 
