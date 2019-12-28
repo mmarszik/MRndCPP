@@ -9,13 +9,13 @@ QMAKE_CXXFLAGS += -mtune=native
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_WYHASH64_0
+DEFINES += USE_RND_SIM_LIN_05
 DEFINES += USE_RND_BUFF_0
 DEFINES += USE_RND_F_BUFF_1a
 DEFINES += USE_RND_PROB_0
 
 #DEFINES += MX_USING_ARRAY_4
-DEFINES += TEST01_PROGRAM
+DEFINES += TEST00_PROGRAM
 
 
 SOURCES += \
@@ -153,7 +153,10 @@ HEADERS += \
     buffs.h \
     use_rnd_buff_2a.h \
     rnd_wyhash64.h \
-    use_rnd_wyhash64_0.h
+    use_rnd_wyhash64_0.h \
+    use_rnd_add_rot_8a.h \
+    use_rnd_add_rot_8b.h \
+    use_rnd_add_rot_8c.h
 
 DISTFILES += \
     createAtC++.sh \

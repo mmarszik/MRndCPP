@@ -23,60 +23,15 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:54:44 CET                               //
+/// @created on 2019-12-28 04:43:45 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 8d12b7d9-d14f-4ffd-a295-b5accf826291                       //
+/// @token 74fb4bb9-f6b4-44f1-8b8e-fef357e44dbf                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#include "rnd_add_rot.h"
 
-#include <MxCPP/mx_array.h>
-
-#include "rnd_lin.h"
-#include "rnd_base.h"
-
-template<typename T, TMRND_UINT SIZE, TMRND_UINT R, TMRND_UINT ROT=1, TMRND_UINT SHIFT=0, TMRND_UINT INIT=4>
-class RndSFib : public RndBase {
-private:
-    using TBuff = MxArray<T,SIZE>;
-    TBuff buff;
-    TMRND_UINT  i1, i2;
-
-private:
-    static T rot( const T v ) {
-        return ( v << ROT ) | ( v >> ( MLimits<T>::digits() - ROT ) );
-    }
-
-public:
-    RndSFib(){}
-    RndSFib(const T __sd) {
-        seed(__sd);
-    }
-    void seed(const T __sd) {
-        RndLin2b rnd( __sd );
-        CMRND_UINT INIT_BITS = 16;
-        for( TMRND_UINT i=0 ; i< MLimits<T>::digits() / INIT_BITS ; i++ ) {
-            for( TMRND_UINT j=0 ; j<SIZE ; j++ ) {
-                buff[j] <<= INIT_BITS;
-                buff[j] ^= rnd();
-            }
-        }
-        i1 = SIZE - 1;
-        i2 = SIZE - 1 - R;
-        for( TMRND_UINT i=0 ; i<SIZE*INIT ; i++ ) {
-            (*this)();
-        }
-    }
-    TMRND_RESULT operator()() {
-        if( ++i1 >= SIZE ) i1 = 0;
-        if( ++i2 >= SIZE ) i2 = 0;
-        return ( buff[i1] += rot(buff[i2]) ) >> SHIFT;
-    }
-};
-
-using RndSFib0 =  RndSFib< TMRND_ULONG, 9689u, 4187u, 1u, 0u>;
-
+using TRnd = RndAddRot8b;

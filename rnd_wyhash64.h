@@ -36,25 +36,13 @@
 
 #include "rnd_base.h"
 
-template<CMRND_ULONG A=0x60bee2bee120fc15ull, CMRND_ULONG B=0xa3b195354a39b70dull, CMRND_ULONG C=0x1b03738712fad5c9ull, CMRND_UINT BITS=16u>
+template<CMRND_ULONG A=0x60bee2bee120fc15ull, CMRND_ULONG B=0xa3b195354a39b70dull, CMRND_ULONG C=0x1b03738712fad5c9ull>
 class RndWyhash64 : public RndBase {
-
     static_assert( sizeof(TMRND_UINT)      ==  4 , "sizeof(TMRND_UINT)      ==  4" );
     static_assert( sizeof(TMRND_ULONG)     ==  8 , "sizeof(TMRND_ULONG)     ==  8" );
     static_assert( sizeof(TMRND_ULONGLONG) == 16 , "sizeof(TMRND_ULONGLONG) == 16" );
-
 private:
     TMRND_ULONG x;
-
-private:
-    TMRND_UINT getValue() {
-        x += A;
-        TMRND_ULONGLONG t = (TMRND_ULONGLONG)x * B;
-        CMRND_ULONG m = (t >> 64) ^ t;
-        t = (TMRND_ULONGLONG)m * C;
-        return (t >> 64) ^ t;
-    }
-
 public:
     RndWyhash64(CMRND_ULONG __sd = 0x25EC1CDA937545ECull) {
         seed( __sd );
@@ -63,19 +51,14 @@ public:
         x = __sd;
     }
     TMRND_RESULT operator()() {
-        TMRND_RESULT r;
-        for( TMRND_UINT i=0 ; i<MLimits<TMRND_RESULT>::digits() ; i+=BITS ) {
-#pragma GCC diagnostic ignored "-Wuninitialized"
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-            r <<= BITS;
-#pragma GCC diagnostic warning "-Wuninitialized"
-#pragma GCC diagnostic warning "-Wmaybe-uninitialized"
-            r |= getValue() & ((1u<<BITS)-1);
-        }
-        return r;
+        x += A;
+        TMRND_ULONGLONG t = (TMRND_ULONGLONG)x * B;
+        CMRND_ULONG m = (t >> 64) ^ t;
+        t = (TMRND_ULONGLONG)m * C;
+        return (t >> 64) ^ t;
     }
-
 };
+
 
 using RndWyhash64_0 = RndWyhash64<>;
 

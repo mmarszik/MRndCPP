@@ -40,6 +40,8 @@
 #include "rnd_lin.h"
 #include "rnd_mlin.h"
 #include "rnd_fib.h"
+#include "rnd_wyhash64.h"
+
 
 //The below class contain the implementation of adapter for pseudo
 //random number generators. You should set size1 and size2 as primary
@@ -62,7 +64,7 @@ private:
             buff[i] = rnd();
         }
     }
-    static TMRND_RESULT rot( TMRND_RESULT *v ) {
+    static inline TMRND_RESULT rot( TMRND_RESULT *v) {
         return *v = (*v << 1) | ( *v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
     }
 public:
@@ -128,7 +130,9 @@ using RndAddRot6c  = RndAddRot<RndFib3         ,   3011,  1973 >;
 using RndAddRot7a  = RndAddRot<RndFib3a        ,   3061,  2711 >;
 using RndAddRot7b  = RndAddRot<RndFib3a        ,   3019,  2957 >;
 using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
-
+using RndAddRot8a  = RndAddRot<RndWyhash64_0   ,   3061,  2711 >;
+using RndAddRot8b  = RndAddRot<RndWyhash64_0   ,   3019,  2957 >;
+using RndAddRot8c  = RndAddRot<RndWyhash64_0   ,   3011,  1973 >;
 
 
 
