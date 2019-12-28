@@ -59,7 +59,7 @@ public:
         return *( new(this)RndProb(other) );
     }
     void setP( CMRND_FLOAT p ) {
-        this->p = static_cast<TMRND_RESULT>(p * ( TRND::max() & mask ) );
+        this->p = static_cast<TMRND_RESULT>(p * ( ( TRND::max() & mask ) + 1 ) );
     }
     bool operator()() {
         return ( rnd() & mask ) < p;
