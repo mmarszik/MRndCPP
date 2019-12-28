@@ -34,6 +34,7 @@
 
 #pragma once
 
+using TMRND_INT = int;
 using TMRND_UINT = unsigned int;
 using TMRND_ULONG = unsigned long long;
 using CMRND_ULONG = const TMRND_ULONG;
@@ -46,5 +47,9 @@ using CMRND_FLOAT = const TMRND_FLOAT;
 using CMRND_LONGLONG = const TMRND_LONGLONG;
 using CMRND_ULONGLONG = const TMRND_ULONGLONG;
 
-using TMRND_RESULT = TMRND_UINT;
-using CMRND_RESULT = const TMRND_RESULT;
+using TMRND_RESULT  = TMRND_UINT;
+using CMRND_RESULT  = const TMRND_RESULT;
+
+using TMRND_IRESULT = TMRND_INT;
+using CMRND_IRESULT = const TMRND_IRESULT;
+

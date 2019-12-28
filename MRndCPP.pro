@@ -43,7 +43,6 @@ SOURCES += \
     rnd_buff1.cpp \
     rnd_prob.cpp \
     test04.cpp \
-    rnd_buff2.cpp \
     rnd_wyhash64.cpp
 
 HEADERS += \
@@ -149,7 +148,6 @@ HEADERS += \
     use_rnd_f_buff_0.h \
     use_rnd_prob_0.h \
     prob.h \
-    rnd_buff2.h \
     buffs.h \
     use_rnd_buff_2a.h \
     rnd_wyhash64.h \

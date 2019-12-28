@@ -46,10 +46,10 @@ public:
 
     virtual TMRND_RESULT operator()() = 0;
 
-    TMRND_RESULT range(CMRND_RESULT _min, CMRND_RESULT _max) {
+    TMRND_IRESULT range(CMRND_IRESULT _min, CMRND_IRESULT _max) {
         return (*this)() % (_max - _min + 1) + _min;
     }
-    TMRND_RESULT range(CMRND_RESULT _max) {
+    TMRND_IRESULT range(CMRND_IRESULT _max) {
         return range(0,_max);
     }
 

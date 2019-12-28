@@ -40,11 +40,11 @@
 class RndBuff0  {
 private:
     TRnd                 &rnd; // Pseudo random number generator.
-    TMRND_RESULT min;  // Min range.
-    TMRND_RESULT max;  // Max range.
+    TMRND_IRESULT min;  // Min range.
+    TMRND_IRESULT max;  // Max range.
 
 public:
-    RndBuff0( TRnd &rnd, CMRND_RESULT min=0, CMRND_RESULT max=0 ) : rnd(rnd) {
+    RndBuff0( TRnd &rnd, CMRND_IRESULT min=0, CMRND_IRESULT max=0 ) : rnd(rnd) {
         setMinMax( min, max );
     }
     RndBuff0( const RndBuff0& other ) : rnd(other.rnd) {
@@ -53,11 +53,11 @@ public:
     RndBuff0& operator = (const RndBuff0& other) {
         return *( new(this)RndBuff0(other) );
     }
-    void setMinMax( CMRND_RESULT min, CMRND_RESULT max  ) {
+    void setMinMax( CMRND_IRESULT min, CMRND_IRESULT max  ) {
         this->min = min;
         this->max = max;
     }
-    TMRND_RESULT operator()() {
+    TMRND_IRESULT operator()() {
         return rnd.range(min,max);
     }
 };
