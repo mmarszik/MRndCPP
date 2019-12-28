@@ -40,6 +40,9 @@
 
 class RndBase {
 public:
+    using result_type = TMRND_RESULT;
+
+public:
     static TMRND_RESULT max() {
         return MLimits<TMRND_RESULT>::max();
     }
