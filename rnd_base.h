@@ -53,7 +53,7 @@ public:
     virtual TMRND_RESULT operator()() = 0;
 
     TMRND_IRESULT range(CMRND_IRESULT _min, CMRND_IRESULT _max) {
-        return (*this)() % (_max - _min + 1) + _min;
+        return static_cast<TMRND_IRESULT>((*this)() % (_max - _min + 1)) + _min;
     }
     TMRND_IRESULT range(CMRND_IRESULT _max) {
         return range(0,_max);
