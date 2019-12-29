@@ -49,7 +49,7 @@ int main() {
         std::cout << rndBuf() << ", ";
     }
     std::cout << std::endl;
-    for( TMRND_ULONG i=0 ; i<(1ull<<35u) ; i++ ) {
+    for( TMRND_ULONG i=0 ; i<(1ull<<34u) ; i++ ) {
         x += rndBuf();
     }
     std::cout << x << std::endl;

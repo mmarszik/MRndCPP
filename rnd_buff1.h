@@ -83,6 +83,7 @@ public:
         i2 = end2;
         select = 0;
     }
+
     TMRND_IRESULT operator()() {
         if( 1 & select++ ) {
             if( i1 == end1 ) {
@@ -102,6 +103,31 @@ public:
             return *i2++;
         }
     }
+
+//    TMRND_IRESULT operator()() {
+//        if( 1 & select++ ) {
+//            if( i1 == end1 ) {
+//                if( i2 == end2 ) {
+//                    reset();
+//                }
+//                i1 = buff;
+//            }
+//            if( *i1 > max )
+//                *i1 = min;
+//            return (*i1++)++;
+//        } else {
+//            if( i2 == end2 ) {
+//                if( i1 == end1 ) {
+//                    reset();
+//                }
+//                i2 = end1;
+//            }
+//            if( *i2 > max )
+//                *i2 = min;
+//            return (*i2++)++;
+//        }
+//    }
+
 };
 
 
