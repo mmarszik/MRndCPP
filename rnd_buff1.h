@@ -40,8 +40,8 @@
 //MM: It is pseudo random number generator with the double cyclic buffer. It work fast
 //MM: but numbers are worse(!!!) than with class TRnd.
 
-
 #ifdef TMRND_RND_BUFF_V1
+
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndBuff1 {
 private:
@@ -108,10 +108,9 @@ public:
     }
 
 };
-#endif
 
+#elif defined( TMRND_RND_BUFF_V2 )
 
-#ifdef TMRND_RND_BUFF_V2
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndBuff1 {
 private:
@@ -168,10 +167,9 @@ public:
     }
 
 };
-#endif
 
+#elif defined( TMRND_RND_BUFF_V3 )
 
-#ifdef TMRND_RND_BUFF_V3
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndBuff1 {
 private:
@@ -222,20 +220,20 @@ public:
         }
         if( 1 & select++ ) {
             if( i1 == end1 ) {
-                i1 = buf1;
+                i1 = &buf1[0];
             }
             return *i1++;
         }
         if( i2 == end2 ) {
-            i2 = buf2;
+            i2 = &buf2[0];
         }
         return *i2++;
     }
 
 };
-#endif
 
-#ifdef TMRND_RND_BUFF_V4
+#elif defined( TMRND_RND_BUFF_V4 )
+
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndBuff1 {
 private:
@@ -286,7 +284,7 @@ public:
                 if( i2 == end2 ) {
                     reset();
                 }
-                i1 = buf1;
+                i1 = &buf1[0];
             }
             return *i1++;
         }
@@ -294,16 +292,15 @@ public:
             if( i1 == end1 ) {
                 reset();
             }
-            i2 = buf2;
+            i2 = &buf2[0];
         }
         return *i2++;
     }
 
 };
-#endif
 
+#elif defined( TMRND_RND_BUFF_V5 )
 
-#ifdef TMRND_RND_BUFF_V5
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndBuff1 {
 private:
@@ -365,18 +362,18 @@ public:
         }
     }
 };
-#endif
 
-#ifdef TMRND_RND_BUFF_V6
+#else
+
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndBuff1 {
 private:
-    using TBuff1 = TMRND_IRESULT[SIZE1+SIZE2];
+    using TBuff1 = MxArray<TMRND_IRESULT,SIZE1+SIZE2>;
 private:
     TRnd        &rnd;       // Pseudo random number generator.
     TMRND_UINT  min;        // Min range.
     TMRND_UINT  max;        // Max range.
-    TBuff1      buff; // N-Cyclic buffer to number generator.
+    TBuff1      buff;       // N-Cyclic buffer to number generator.
     TMRND_UINT  select;     // Select first or second buffer.
     CMRND_IRESULT *i1;
     CMRND_IRESULT *i2;
@@ -411,7 +408,7 @@ public:
                 if( i2 == end2 ) {
                     reset();
                 }
-                i1 = buff;
+                i1 = &buff[0];
             }
             return *i1++;
         } else {
@@ -425,4 +422,5 @@ public:
         }
     }
 };
+
 #endif
