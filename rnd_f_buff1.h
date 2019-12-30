@@ -35,13 +35,16 @@
 #pragma once
 
 #include "rnd.h"
+#include <MxCPP/mx_array.h>
 
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2>
 class RndFBuff1 {
 private:
+    using TBuff1 = MxArray<TMRND_FLOAT,SIZE1+SIZE2>;
+private:
     TRnd          &rnd;        // Pseudo random number generator.
     TMRND_FLOAT   min,max;     // Min-max range.
-    TMRND_FLOAT   *const buff; // N-Cyclic buffers to number generator.
+    TBuff1        buff;        // N-Cyclic buffers to number generator.
     TMRND_UINT    select;      // Select first or second buffer.
     CMRND_FLOAT   *i1, *i2;
     CMRND_FLOAT   *const end1, *const end2;
@@ -54,10 +57,10 @@ private:
     }
 
 public:
-    RndFBuff1(TRnd &rnd, CMRND_FLOAT  min=0, CMRND_FLOAT  max=0) : rnd(rnd), buff(new TMRND_FLOAT [SIZE1+SIZE2]), end1(buff+SIZE1), end2(end1+SIZE2) {
+    RndFBuff1(TRnd &rnd, CMRND_FLOAT  min=0, CMRND_FLOAT  max=0) : rnd(rnd), end1(&buff[0]+SIZE1), end2(end1+SIZE2) {
         setMinMax(min,max);
     }
-    RndFBuff1(const RndFBuff1& other) : rnd(other.rnd), buff(new TMRND_FLOAT [SIZE1+SIZE2]), end1(buff+SIZE1), end2(end1+SIZE2) {
+    RndFBuff1(const RndFBuff1& other) : rnd(other.rnd), end1(&buff[0]+SIZE1), end2(end1+SIZE2) {
         this->min = other.min;
         this->max = other.max;
         this->i1  = this->buff + (other.i1 - other.buff);
@@ -67,7 +70,6 @@ public:
         }
     }
     RndFBuff1& operator = (const RndFBuff1& other) {
-        delete[] buff;
         return *( new(this)RndFBuff1(other) );
     }
     ~RndFBuff1() {
@@ -86,7 +88,7 @@ public:
                 if( i2 == end2 ) {
                     reset();
                 }
-                i1 = buff;
+                i1 = &buff[0];
             }
             return *i1++;
         } else {

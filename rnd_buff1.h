@@ -35,10 +35,17 @@
 #pragma once
 #include <new>
 #include "rnd.h"
+#include <MxCPP/mx_array.h>
 
 //MM: Attention: It is opposite of the good random number generator ;-)
 //MM: It is pseudo random number generator with the double cyclic buffer. It work fast
 //MM: but numbers are worse(!!!) than with class TRnd.
+
+//#define TMRND_RND_BUFF_V1
+//#define TMRND_RND_BUFF_V2
+//#define TMRND_RND_BUFF_V3
+//#define TMRND_RND_BUFF_V4
+//#define TMRND_RND_BUFF_V5
 
 #ifdef TMRND_RND_BUFF_V1
 
