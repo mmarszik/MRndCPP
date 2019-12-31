@@ -37,4 +37,4 @@
 #include "rnd_xor2.h"
 #include "rnd_mlin.h"
 
-using TRnd = RndXor2<RndMLin,1181,1429>;
+using TRnd = RndXor2<RndMLin, 1181, 1429>;

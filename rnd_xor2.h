@@ -34,25 +34,29 @@
 
 #pragma once
 
-#include "defs.h"
 #include "rnd_base.h"
+#include <MxCPP/mx_array.h>
 
-template<typename TRND, TMRND_UINT SIZE1, TMRND_UINT SIZE2>
+//#define TMRND_RND_XOR2_V1
+//#define TMRND_RND_XOR2_V2
+//#define TMRND_RND_XOR2_V3
+
+
+#if defined( TMRND_RND_XOR2_V1 )
+
+template<typename TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2,CMRND_UINT RESET=0>
 class RndXor2 : public RndBase {
 private:
     TRND       rnd;
     TMRND_UINT *const buff;
     TMRND_UINT *i1,*i2;
     TMRND_UINT *const end1, *const end2;
-
+    TMRND_UINT i3;
 private:
     void reset() {
         for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
             buff[i] = rnd();
         }
-    }
-    static TMRND_RESULT rot( TMRND_RESULT *v ) {
-        return *v = (*v << 1) | ( *v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
     }
 public:
     RndXor2( CMRND_RESULT __sd ) : buff(new TMRND_UINT[SIZE1+SIZE2]), end1(buff+SIZE1),end2(buff+SIZE1+SIZE2) {
@@ -65,6 +69,7 @@ public:
         }
         i1 = other.i1;
         i2 = other.i2;
+        i3 = other.i3;
     }
     RndXor2& operator = (const RndXor2 &other) {
         delete[] buff;
@@ -77,48 +82,158 @@ public:
         rnd.seed( __sd );
         i1 = end1;
         i2 = end2;
+        i3 = RESET;
     }
     TMRND_RESULT operator()() {
-        if( i1 == end1 ) {
-            i1 = buff;
-            if( i2 == end2 ) {
-                reset();
+        if( RESET == 0 ) {
+            if( i1 == end1 ) {
+                i1 = &buff[0];
+                if( i2 == end2 ) {
+                    reset();
+                }
             }
+            if( i2 == end2 ) {
+                i2 = end1;
+            }
+            return *i1++ ^= *i2++;
+        } else {
+            if( i1 == end1 ) {
+                i1 = &buff[0];
+                if( (i3 += SIZE1) >= RESET ) {
+                    i3 = 0;
+                    reset();
+                }
+            }
+            if( i2 == end2 ) {
+                i2 = end1;
+            }
+            return *i1++ ^= *i2++;
         }
-        if( i2 == end2 ) {
-            i2 = end1;
-        }
-        return *i1++ ^ *i2++;
     }
 };
 
+#elif defined( TMRND_RND_XOR2_V2 )
 
-/*
-template<typename TRnd, TMRND_UINT SIZE1, TMRND_UINT SIZE2>
+template<typename TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2,CMRND_UINT RESET=0>
 class RndXor2 : public RndBase {
 private:
     using TBuff = MxArray<TMRND_ULONG,SIZE1+SIZE2>;
-    TBuff x;
-    TMRND_UINT i1,i2;
-
+private:
+    TRND  rnd;
+    TBuff buff;
+    TMRND_UINT i1,i2,i3;
+private:
+    void reset() {
+        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+            buff[i] = rnd();
+        }
+    }
 public:
     RndXor2( CMRND_ULONG __sd ) {
         seed( __sd );
     }
     void seed( CMRND_ULONG __sd ) {
-        TRnd rnd(__sd);
-        for( TMRND_UINT i=0 ; i<4 ; i++ ) {
-            for( TMRND_UINT j=0 ; j<SIZE1+SIZE2 ; j++ ) {
-                x[j] = (x[j]<<16) | (rnd() & 0xFFFF);
-            }
-        }
-        i1 = SIZE1 - 1;
-        i2 = SIZE1 + SIZE2 - 1;
+        rnd.seed( __sd );
+        i1 = SIZE1;
+        i2 = SIZE1 + SIZE2;
+        i3 = RESET;
     }
     TMRND_RESULT operator()() {
-        if( ++i1 >= SIZE1        ) i1 = 0;
-        if( ++i2 >= SIZE1 + SIZE2) i2 = SIZE1;
-        return x[i1] ^ x[i2];
+        if( RESET == 0 ) {
+            if( i1 == SIZE1 ) {
+                i1 = 0;
+                if( i2 == SIZE1 + SIZE2 ) {
+                    reset();
+                }
+            }
+            if( i2 == SIZE1 + SIZE2 ) {
+                i2 = SIZE1;
+            }
+            return buff[i1++] ^= buff[i2++];
+        } else {
+            if( i1 == SIZE1 ) {
+                i1 = 0;
+                if( (i3 += SIZE1) >= RESET ) {
+                    i3 = 0;
+                    reset();
+                }
+            }
+            if( i2 == SIZE1 + SIZE2 ) {
+                i2 = SIZE1;
+            }
+            return buff[i1++] ^= buff[i2++];
+        }
     }
 };
-*/
+
+#else
+
+template<typename TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=0 >
+class RndXor2 : public RndBase {
+private:
+    using TBUFF = MxArray<TMRND_RESULT, SIZE1+SIZE2>;
+private:
+    TRND       rnd;
+    TBUFF      buff;
+    TMRND_UINT *i1,*i2;
+    TMRND_UINT *const end1, *const end2;
+    TMRND_UINT i3;
+
+private:
+    void reset() {
+        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+            buff[i] = rnd();
+        }
+    }
+public:
+    RndXor2( CMRND_RESULT __sd ) : end1(&buff[0]+SIZE1),end2(end1+SIZE2) {
+        seed( __sd );
+    }
+    RndXor2( const RndXor2 &other ) : end1(&buff[0]+SIZE1),end2(end1+SIZE2) {
+        rnd = other.rnd;
+        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+            buff[i] = other.buff[i];
+        }
+        i1 = other.i1;
+        i2 = other.i2;
+        i3 = other.i3;
+    }
+    RndXor2& operator = (const RndXor2 &other) {
+        return *( new(this)RndXor2( other ) );
+    }
+    void seed( CMRND_RESULT __sd ) {
+        rnd.seed( __sd );
+        i1 = end1;
+        i2 = end2;
+        i3 = RESET;
+    }
+    TMRND_RESULT operator()() {
+        if( RESET == 0 ) {
+            if( i1 == end1 ) {
+                i1 = &buff[0];
+                if( i2 == end2 ) {
+                    reset();
+                }
+            }
+            if( i2 == end2 ) {
+                i2 = end1;
+            }
+            return *i1++ ^= *i2++;
+        } else {
+            if( i1 == end1 ) {
+                i1 = &buff[0];
+                if( (i3 += SIZE1) >= RESET ) {
+                    i3 = 0;
+                    reset();
+                }
+            }
+            if( i2 == end2 ) {
+                i2 = end1;
+            }
+            return *i1++ ^= *i2++;
+        }
+    }
+};
+
+
+#endif

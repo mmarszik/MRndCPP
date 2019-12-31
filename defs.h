@@ -36,6 +36,8 @@
 
 using TMRND_INT = int;
 using TMRND_UINT = unsigned int;
+using TMRND_LONG = long long;
+using CMRND_LONG = const TMRND_LONG;
 using TMRND_ULONG = unsigned long long;
 using CMRND_ULONG = const TMRND_ULONG;
 using TMRND_FLOAT = double;
