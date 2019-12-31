@@ -177,13 +177,13 @@ class RndBuff1 {
 private:
     using TBuff1 = MxArray<TMRND_IRESULT,SIZE1+SIZE2>;
 private:
-    TMRND_UINT     i3;
     TRnd           &rnd;        // Pseudo random number generator.
     TMRND_IRESULT  min, max;    // Min range.
     TBuff1         buff;        // N-Cyclic buffer to number generator.
     TMRND_UINT     select;      // Select first or second buffer.
     CMRND_IRESULT  *i1, *i2;
     CMRND_IRESULT  *const end1, *const end2;
+    TMRND_UINT     i3;
 
 private:
     void reset() {
