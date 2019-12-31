@@ -57,14 +57,12 @@ private:
     CMRND_IRESULT  *i1, *i2;
     CMRND_IRESULT  *const end1, *const end2;
     TMRND_UINT     i3;
-
 private:
     void reset() {
         for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
             buff[i] = rnd.range(min,max);
         }
     }
-
 public:
     RndBuff1(TRnd &rnd, CMRND_IRESULT min=0, CMRND_IRESULT max=0) : rnd(rnd), buff(new TMRND_IRESULT[SIZE1+SIZE2]), end1(buff+SIZE1), end2(end1+SIZE2) {
         setMinMax(min,max);
@@ -93,19 +91,34 @@ public:
         i1 = end1;
         i2 = end2;
         i3 = RESET;
-        select = 0;
+        select = 1;
     }
     TMRND_IRESULT operator()() {
-        if( i3++ >= RESET ) {
-            i3=1;
-            reset();
-        }
-        if( 1 & select++ ) {
-            if( i1 == end1 ) i1 = buff;
-            return *i1++;
+        if( RESET == SIZE1*SIZE2*2 ) {
+            if( 1 & select++ ) {
+                if( i1 == end1 ) {
+                    i1 = buff;
+                    if( i2 == end2 ) {
+                        reset();
+                    }
+                }
+                return *i1++;
+            } else {
+                if( i2 == end2 ) i2 = end1;
+                return *i2++;
+            }
         } else {
-            if( i2 == end2 ) i2 = end1;
-            return *i2++;
+            if( i3++ >= RESET ) {
+                i3=1;
+                reset();
+            }
+            if( 1 & select++ ) {
+                if( i1 == end1 ) i1 = buff;
+                return *i1++;
+            } else {
+                if( i2 == end2 ) i2 = end1;
+                return *i2++;
+            }
         }
     }
 
@@ -153,19 +166,34 @@ public:
         i1 = SIZE1;
         i2 = SIZE1+SIZE2;
         i3 = RESET;
-        select = 0;
+        select = 1;
     }
     TMRND_IRESULT operator()() {
-        if( i3++ >= RESET ) {
-            i3=1;
-            reset();
-        }
-        if( 1 & select++ ) {
-            if( i1 == SIZE1 ) i1 = 0;
-            return buff[i1++];
+        if( RESET == SIZE1*SIZE2*2 ) {
+            if( 1 & select++ ) {
+                if( i1 == SIZE1 ) {
+                    i1 = 0;
+                    if( i2 == SIZE1+SIZE2 ) {
+                        reset();
+                    }
+                }
+                return buff[i1++];
+            } else {
+                if( i2 == SIZE1+SIZE2 ) i2 = SIZE1;
+                return buff[i2++];
+            }
         } else {
-            if( i2 == SIZE1+SIZE2 ) i2 = SIZE1;
-            return buff[i2++];
+            if( i3++ >= RESET ) {
+                i3=1;
+                reset();
+            }
+            if( 1 & select++ ) {
+                if( i1 == SIZE1 ) i1 = 0;
+                return buff[i1++];
+            } else {
+                if( i2 == SIZE1+SIZE2 ) i2 = SIZE1;
+                return buff[i2++];
+            }
         }
     }
 };
@@ -177,13 +205,13 @@ class RndBuff1 {
 private:
     using TBuff1 = MxArray<TMRND_IRESULT,SIZE1+SIZE2>;
 private:
+    TMRND_UINT     i3;
     TRnd           &rnd;        // Pseudo random number generator.
     TMRND_IRESULT  min, max;    // Min range.
     TBuff1         buff;        // N-Cyclic buffer to number generator.
     TMRND_UINT     select;      // Select first or second buffer.
     CMRND_IRESULT  *i1, *i2;
     CMRND_IRESULT  *const end1, *const end2;
-    TMRND_UINT     i3;
 
 private:
     void reset() {
@@ -215,21 +243,37 @@ public:
         i1 = end1;
         i2 = end2;
         i3 = RESET;
-        select = 0;
+        select = 1;
     }
     TMRND_IRESULT operator()() {
-        if( i3++ >= RESET ) {
-            i3=1;
-            reset();
-        }
-        if( 1 & select++ ) {
-            if( i1 == end1 ) i1 = &buff[0];
-            return *i1++;
+        if( RESET == SIZE1*SIZE2*2 ) {
+            if( 1 & select++ ) {
+                if( i1 == end1 ) {
+                    i1 = &buff[0];
+                    if( i2 == end2 ) {
+                        reset();
+                    }
+                }
+                return *i1++;
+            } else {
+                if( i2 == end2 ) i2 = end1;
+                return *i2++;
+            }
         } else {
-            if( i2 == end2 ) i2 = end1;
-            return *i2++;
+            if( i3++ >= RESET ) {
+                i3=1;
+                reset();
+            }
+            if( 1 & select++ ) {
+                if( i1 == end1 ) i1 = &buff[0];
+                return *i1++;
+            } else {
+                if( i2 == end2 ) i2 = end1;
+                return *i2++;
+            }
         }
     }
 };
+
 
 #endif

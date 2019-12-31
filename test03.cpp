@@ -40,18 +40,22 @@
 #include "rnd.h"
 #include "buffs.h"
 
-int main() {
+int main( int argc , char *argv[] ) {
+    TMRND_ULONG loops = 1ull << 13;
+    if( argc == 2 ) {
+        loops = 1ull << atoi(argv[1]);
+    }
     CMRND_ULONG seed = 1234567890ull;
     TRnd rnd( seed );
     TRndBuff rndBuf(rnd,-23,23);
     TMRND_LONG x = 0;
-    for( TMRND_UINT i=0 ; i<5 ; i++ ) {
-        for( TMRND_UINT i=0 ; i<20000000 ; i++ ) {
+    for( TMRND_UINT i=0 ; i<10 ; i++ ) {
+        for( TMRND_UINT i=0 ; i<10000 ; i++ ) {
             rndBuf();
         }
         std::cout << rndBuf() << std::endl;
     }
-    for( TMRND_ULONG i=0 ; i<(1ull<<12u) ; i++ ) {
+    for( TMRND_ULONG i=0 ; i<loops ; i++ ) {
         for( TMRND_ULONG i=0 ; i<(1ull<<20u) ; i++ ) {
             x += rndBuf();
         }

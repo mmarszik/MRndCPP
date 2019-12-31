@@ -3,23 +3,25 @@ CONFIG += console c++14
 CONFIG -= app_bundle
 CONFIG -= qt
 
-#QMAKE_CXXFLAGS += -O3
-QMAKE_CXXFLAGS += -mtune=native
-#QMAKE_CXXFLAGS += -fprofile-use
-#QMAKE_LFLAGS += -fprofile-use
+QMAKE_CXXFLAGS  += -O3
+QMAKE_CXXFLAGS  += -mtune=native
+QMAKE_CXXFLAGS  += -fprofile-use
+QMAKE_LFLAGS    += -fprofile-use
+#QMAKE_CXXFLAGS += -fprofile-generate
+#QMAKE_LFLAGS   += -fprofile-generate
 
 #QMAKE_CXXFLAGS += -mavx
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_XOR2_0
+DEFINES += USE_RND_MT19937_64
 DEFINES += USE_RND_BUFF_1a
+DEFINES += TMRND_RND_BUFF_V3
 DEFINES += USE_RND_F_BUFF_1a
 DEFINES += USE_RND_PROB_0
 
-#DEFINES += MX_USING_ARRAY_2
+#DEFINES += MX_USING_ARRAY_4
 DEFINES += TEST03_PROGRAM
-
 
 SOURCES += \
     test01.cpp \
