@@ -1,93 +1,31 @@
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V1 ../*.cpp -o MRndCPP
-#./MRndCPP
-g++ -std=c++14 -O3 -march=native       -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V1 ../*.cpp -o MRndCPP
-echo "--------------- 1"
-time ./MRndCPP
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 ../*.cpp -o MRndCPP
-echo "--------------- 2"
-time ./MRndCPP
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 ../*.cpp -o MRndCPP
-echo "--------------- 3"
-time ./MRndCPP
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 -DMX_USING_ARRAY_1 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 -DMX_USING_ARRAY_1 ../*.cpp -o MRndCPP
-echo "--------------- 4"
-time ./MRndCPP
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 -DMX_USING_ARRAY_1 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 -DMX_USING_ARRAY_1 ../*.cpp -o MRndCPP
-echo "--------------- 5"
-time ./MRndCPP
-
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 -DMX_USING_ARRAY_2 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 -DMX_USING_ARRAY_2 ../*.cpp -o MRndCPP
-echo "--------------- 6"
-time ./MRndCPP
-
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 -DMX_USING_ARRAY_2 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 -DMX_USING_ARRAY_2 ../*.cpp -o MRndCPP
-echo "--------------- 7"
-time ./MRndCPP
-
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 -DMX_USING_ARRAY_3 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 -DMX_USING_ARRAY_3 ../*.cpp -o MRndCPP
-echo "--------------- 8"
-time ./MRndCPP
-
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 -DMX_USING_ARRAY_3 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 -DMX_USING_ARRAY_3 ../*.cpp -o MRndCPP
-echo "--------------- 9"
-time ./MRndCPP
-
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 -DMX_USING_ARRAY_4 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V2 -DMX_USING_ARRAY_4 ../*.cpp -o MRndCPP
-echo "--------------- 10"
-time ./MRndCPP
-
-
-
-#g++ -std=c++14 -O3 -march=native  -fprofile-generate -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 -DMX_USING_ARRAY_4 ../*.cpp -o MRndCPP
-#./MRndCPP 
-g++ -std=c++14 -O3 -march=native        -I../vendor/ -DTEST03_PROGRAM -DUSE_RND_XOR2_0 -DUSE_RND_BUFF_1a -DTMRND_RND_BUFF_V3 -DMX_USING_ARRAY_4 ../*.cpp -o MRndCPP
-echo "--------------- 11"
-time ./MRndCPP
-
 rm MRndCPP
+
+versions=(TMRND_RND_XOR2_V3 TMRND_RND_XOR2_V1 TMRND_RND_XOR2_V2)
+arrays=(MX_USING_ARRAY_1 MX_USING_ARRAY_2 MX_USING_ARRAY_3 MX_USING_ARRAY_4 MX_USING_ARRAY_5)
+
+
+for version in "${versions[@]}"
+do
+
+for array in "${arrays[@]}"
+do
+
+echo "----------------"
+echo $version
+echo $array
+
+g++ -std=c++14 -O3 -march=native -mtune=native -funroll-loops -I../vendor/ -DTEST00_PROGRAM -DUSE_RND_XOR2_0 -D$version -D$array ../*.cpp -o MRndCPP
+time ./MRndCPP 12
+rm MRndCPP
+
+g++ -std=c++14 -O3 -march=native -mtune=native  -funroll-loops -fprofile-generate -I../vendor/ -DTEST00_PROGRAM -DUSE_RND_XOR2_0 -D$version -D$array ../*.cpp -o MRndCPP
+./MRndCPP 1 >> tmp.txt
+rm MRndCPP
+
+g++ -std=c++14 -O3 -march=native -mtune=native  -funroll-loops -fprofile-use -I../vendor/ -DTEST00_PROGRAM -DUSE_RND_XOR2_0 -D$version -D$array ../*.cpp -o MRndCPP
+time ./MRndCPP 12
+rm MRndCPP
+
+done
+done
+

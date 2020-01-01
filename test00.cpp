@@ -40,7 +40,7 @@
 #include "rnd.h"
 
 int main( int argc , char *argv[] ) {
-    TMRND_ULONG loops = 1ull << 13;
+    TMRND_ULONG loops = 1ull << 15;
     if( argc == 2 ) {
         loops = 1ull << atoi(argv[1]);
     }

@@ -41,10 +41,9 @@
 //#define TMRND_RND_XOR2_V2
 //#define TMRND_RND_XOR2_V3
 
-
 #if defined( TMRND_RND_XOR2_V1 )
 
-template<typename TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2,CMRND_UINT RESET=0>
+template<typename TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE1*SIZE2 >
 class RndXor2 : public RndBase {
 private:
     TRND       rnd;
@@ -85,36 +84,32 @@ public:
         i3 = RESET;
     }
     TMRND_RESULT operator()() {
-        if( RESET == 0 ) {
+        if( RESET == SIZE1*SIZE2 ) {
             if( i1 == end1 ) {
-                i1 = &buff[0];
                 if( i2 == end2 ) {
                     reset();
                 }
+                i1 = buff;
             }
             if( i2 == end2 ) {
                 i2 = end1;
             }
-            return *i1++ ^= *i2++;
+            return *i1++ ^ *i2++;
         } else {
-            if( i1 == end1 ) {
-                i1 = &buff[0];
-                if( (i3 += SIZE1) >= RESET ) {
-                    i3 = 0;
-                    reset();
-                }
+            if( i3++ >= RESET ) {
+                i3 = 1;
+                reset();
             }
-            if( i2 == end2 ) {
-                i2 = end1;
-            }
-            return *i1++ ^= *i2++;
+            if( i1 == end1 ) i1 = buff;
+            if( i2 == end2 ) i2 = end1;
+            return *i1++ ^ *i2++;
         }
     }
 };
 
 #elif defined( TMRND_RND_XOR2_V2 )
 
-template<typename TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2,CMRND_UINT RESET=0>
+template<typename TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE1*SIZE2 >
 class RndXor2 : public RndBase {
 private:
     using TBuff = MxArray<TMRND_ULONG,SIZE1+SIZE2>;
@@ -139,7 +134,7 @@ public:
         i3 = RESET;
     }
     TMRND_RESULT operator()() {
-        if( RESET == 0 ) {
+        if( RESET == SIZE1*SIZE2 ) {
             if( i1 == SIZE1 ) {
                 i1 = 0;
                 if( i2 == SIZE1 + SIZE2 ) {
@@ -149,26 +144,22 @@ public:
             if( i2 == SIZE1 + SIZE2 ) {
                 i2 = SIZE1;
             }
-            return buff[i1++] ^= buff[i2++];
+            return buff[i1++] ^ buff[i2++];
         } else {
-            if( i1 == SIZE1 ) {
-                i1 = 0;
-                if( (i3 += SIZE1) >= RESET ) {
-                    i3 = 0;
-                    reset();
-                }
+            if( i3++ >= RESET ) {
+                i3 = 1;
+                reset();
             }
-            if( i2 == SIZE1 + SIZE2 ) {
-                i2 = SIZE1;
-            }
-            return buff[i1++] ^= buff[i2++];
+            if( i1 == SIZE1         ) i1 = 0;
+            if( i2 == SIZE1 + SIZE2 ) i2 = SIZE1;
+            return buff[i1++] ^ buff[i2++];
         }
     }
 };
 
 #else
 
-template<typename TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=0 >
+template<typename TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE1*SIZE2 >
 class RndXor2 : public RndBase {
 private:
     using TBUFF = MxArray<TMRND_RESULT, SIZE1+SIZE2>;
@@ -185,11 +176,14 @@ private:
             buff[i] = rnd();
         }
     }
+    inline static TMRND_RESULT rot( TMRND_RESULT *const v) {
+        return *v = (*v << 1) | ( *v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
+    }
 public:
-    RndXor2( CMRND_RESULT __sd ) : end1(&buff[0]+SIZE1),end2(end1+SIZE2) {
+    RndXor2( CMRND_RESULT __sd ) : end1(&buff[0]+SIZE1), end2(end1+SIZE2) {
         seed( __sd );
     }
-    RndXor2( const RndXor2 &other ) : end1(&buff[0]+SIZE1),end2(end1+SIZE2) {
+    RndXor2( const RndXor2 &other ) : end1(&buff[0]+SIZE1), end2(end1+SIZE2) {
         rnd = other.rnd;
         for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
             buff[i] = other.buff[i];
@@ -208,29 +202,25 @@ public:
         i3 = RESET;
     }
     TMRND_RESULT operator()() {
-        if( RESET == 0 ) {
+        if( RESET == SIZE1*SIZE2 ) {
             if( i1 == end1 ) {
-                i1 = &buff[0];
                 if( i2 == end2 ) {
                     reset();
                 }
-            }
-            if( i2 == end2 ) {
-                i2 = end1;
-            }
-            return *i1++ ^= *i2++;
-        } else {
-            if( i1 == end1 ) {
                 i1 = &buff[0];
-                if( (i3 += SIZE1) >= RESET ) {
-                    i3 = 0;
-                    reset();
-                }
             }
             if( i2 == end2 ) {
                 i2 = end1;
             }
-            return *i1++ ^= *i2++;
+            return *i1++ ^ *i2++;
+        } else {
+            if( i3++ >= RESET ) {
+                i3 = 1;
+                reset();
+            }
+            if( i1 == end1 ) i1 = &buff[0];
+            if( i2 == end2 ) i2 = end1;
+            return *i1++ ^ *i2++;
         }
     }
 };

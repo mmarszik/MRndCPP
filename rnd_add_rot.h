@@ -56,7 +56,7 @@
 
 #if defined( TMRND_RND_ADD_ROOT_V1 )
 
-template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE2>
+template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE1*SIZE2>
 class RndAddRot : public RndBase {
 private:
     TRND       rnd;
@@ -100,28 +100,24 @@ public:
         i3 = RESET;
     }
     TMRND_RESULT operator()() {
-        if( RESET == SIZE2 ) {
+        if( RESET == SIZE1 * SIZE2 ) {
             if( i1 == end1 ) {
                 if( i2 == end2 ) {
                     reset();
                 }
-                i1 = &buff[0];
+                i1 = buff;
             }
             if( i2 == end2 ) {
                 i2 = end1;
             }
             return rot(i1++) + rot(i2++);
         } else {
-            if( i1 == end1 ) {
-                i1 = &buff[0];
-                if( i3++ == RESET ) {
-                    i3 = 0;
-                    reset();
-                }
+            if( i3++ >= RESET ) {
+                i3 = 1;
+                reset();
             }
-            if( i2 == end2 ) {
-                i2 = end1;
-            }
+            if( i1 == end1 ) i1 = buff;
+            if( i2 == end2 ) i2 = end1;
             return rot(i1++) + rot(i2++);
         }
     }
@@ -129,7 +125,7 @@ public:
 
 #elif defined( TMRND_RND_ADD_ROOT_V2 )
 
-template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE2>
+template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE1*SIZE2>
 class RndAddRot : public RndBase {
 private:
     using TBUFF = MxArray<TMRND_RESULT, SIZE1+SIZE2>;
@@ -143,7 +139,7 @@ private:
             buff[i] = rnd();
     }
     inline static TMRND_RESULT rot( TMRND_RESULT &v ) {
-        v = (v << 1) | ( v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
+        return v = (v << 1) | ( v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
     }
 public:
     RndAddRot( CMRND_RESULT __sd ) {
@@ -156,7 +152,7 @@ public:
         i3 = RESET;
     }
     TMRND_UINT operator()() {
-        if( RESET == SIZE2 ) {
+        if( RESET == SIZE1*SIZE2 ) {
             if( i1 == SIZE1 ) {
                 i1 = 0;
                 if( i2 == SIZE1 + SIZE2 ) {
@@ -168,16 +164,12 @@ public:
             }
             return rot(buff[i1++]) + rot(buff[i2++]);
         } else {
-            if( i1 == SIZE1         ) {
-                i1 = 0;
-                if( i3++ == RESET ) {
-                    i3 = 0;
-                    reset();
-                }
+            if( i3++ >= RESET ) {
+                i3 = 1;
+                reset();
             }
-            if( i2 == SIZE1 + SIZE2 ) {
-                i2 = SIZE1;
-            }
+            if( i1 == SIZE1         ) i1 = 0;
+            if( i2 == SIZE1 + SIZE2 ) i2 = SIZE1;
             return rot(buff[i1++]) + rot(buff[i2++]);
         }
     }
@@ -186,7 +178,7 @@ public:
 
 #else
 
-template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE2>
+template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE1*SIZE2>
 class RndAddRot : public RndBase {
 private:
     using TBUFF = MxArray<TMRND_RESULT, SIZE1+SIZE2>;
@@ -229,7 +221,7 @@ public:
         i3 = RESET;
     }
     TMRND_RESULT operator()() {
-        if( RESET == SIZE2 ) {
+        if( RESET == SIZE1*SIZE2 ) {
             if( i1 == end1 ) {
                 if( i2 == end2 ) {
                     reset();
@@ -241,16 +233,12 @@ public:
             }
             return rot(i1++) + rot(i2++);
         } else {
-            if( i1 == end1 ) {
-                i1 = &buff[0];
-                if( i3++ == RESET ) {
-                    i3 = 0;
-                    reset();
-                }
+            if( i3++ >= RESET ) {
+                i3 = 1;
+                reset();
             }
-            if( i2 == end2 ) {
-                i2 = end1;
-            }
+            if( i1 == end1 ) i1 = &buff[0];
+            if( i2 == end2 ) i2 = end1;
             return rot(i1++) + rot(i2++);
         }
     }
