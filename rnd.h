@@ -207,5 +207,7 @@
 
 #elif  defined( USE_RND_WYHASH64_0 )
     #include "use_rnd_wyhash64_0.h"
+#elif  defined( USE_RND_WYHASH64M_0 )
+    #include "use_rnd_wyhash64m_0.h"
 
 #endif

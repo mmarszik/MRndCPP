@@ -82,8 +82,8 @@ public:
         for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
             buff[i] = other.buff[i];
         }
-        i1 = other.i1;
-        i2 = other.i2;
+        this->i1  = this->buff + (other.i1 - other.buff);
+        this->i2  = this->buff + (other.i2 - other.buff);
         i3 = other.i3;
     }
     RndAddRot& operator = (const RndAddRot &other) {
@@ -207,8 +207,8 @@ public:
         for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
             buff[i] = other.buff[i];
         }
-        i1 = other.i1;
-        i2 = other.i2;
+        this->i1  = this->buff + (other.i1 - &other.buff[0]);
+        this->i2  = this->buff + (other.i2 - &other.buff[0]);
         i3 = other.i3;
     }
     RndAddRot& operator = (const RndAddRot &other) {

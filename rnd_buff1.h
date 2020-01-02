@@ -226,8 +226,8 @@ public:
     RndBuff1(const RndBuff1& other) : rnd(other.rnd), end1(other.end1), end2(other.end2) {
         this->min = other.min;
         this->max = other.max;
-        this->i1  = this->buff + (other.i1 - other.buff);
-        this->i2  = this->buff + (other.i2 - other.buff);
+        this->i1  = this->buff + (other.i1 - &other.buff[0]);
+        this->i2  = this->buff + (other.i2 - &other.buff[0]);
         this->i3  = other.i3;
         this->select = other.select;
         for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {

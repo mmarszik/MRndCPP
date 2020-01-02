@@ -36,7 +36,6 @@
 
 #include <MxCPP/mx_array.h>
 
-#include "defs.h"
 #include "rnd_base.h"
 
 //MM: Multilinear psuedo random numbers generator.

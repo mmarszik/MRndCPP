@@ -39,7 +39,7 @@
 
 class RndBuff0  {
 private:
-    TRnd                 &rnd; // Pseudo random number generator.
+    TRnd          &rnd; // Pseudo random number generator.
     TMRND_IRESULT min;  // Min range.
     TMRND_IRESULT max;  // Max range.
 
