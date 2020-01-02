@@ -174,7 +174,7 @@ using RndWyhash64m_0 = RndWyhash64m<2549,3041>;
 //        CMRND_UINT i1 = ( (v = v * AL + BL) >> (64 - SIZE0) );
 //        CMRND_UINT i2 = ( (v = v * AL + BL) >> (64 - SIZE0) );
 //        buff[i1] += AW1;
-////        buff[i2] += AW2;
+//        buff[i2] += AW2;
 //        TMRND_ULONG x = buff[i1] + buff[i2];
 //        TMRND_ULONGLONG t = (TMRND_ULONGLONG)x * BW;
 //        CMRND_ULONG m = (t >> 64) ^ t;
