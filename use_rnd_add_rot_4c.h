@@ -35,3 +35,17 @@
 #include "rnd_add_rot.h"
 
 using TRnd = RndAddRot4c;
+/* TEST00
+time ./MRndCPP 
+2991450795
+2003815457
+368306210
+1908171071
+3946798123
+3961671832
+378564856961576486
+
+real	0m33.988s
+user	0m33.896s
+sys	0m0.008s
+*/
