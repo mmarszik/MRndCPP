@@ -23,17 +23,46 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:58:42 CET                               //
+/// @created on 2020-01-03 10:57:33 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token c07c75d9-db05-492c-84fb-b06ccecfbe9b                       //
+/// @token e1ed4ee9-7c32-4224-a4b9-e323fb554feb                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#include "rnd_fib.h"
+#include <random>
+#include <MiscCPP/m_limits.h>
+#include "defs.h"
 
-using TRnd = RndFib3;
+class RndMt19937_64 : public std::mt19937_64 {
+public:
+    RndMt19937_64( std::mt19937_64::result_type __sd) : std::mt19937_64(__sd) {
+    }
+    static TMRND_RESULT max() {
+        return MLimits<TMRND_RESULT>::max();
+    }
+    TMRND_RESULT operator()() {
+        return static_cast<TMRND_RESULT>( std::mt19937_64::operator ()() );
+    }
+    TMRND_RESULT range(CMRND_RESULT _min, CMRND_RESULT _max) {
+        return (*this)() % (_max - _min + 1) + _min;
+    }
+    TMRND_RESULT range(CMRND_RESULT _max) {
+        return range(0,_max);
+    }
+
+    //Get float between <_min,_max>
+    TMRND_FLOAT getFloat(CMRND_FLOAT _min, CMRND_FLOAT _max) {
+        return ( _max - _min ) * (*this)() / max() + _min;
+    }
+
+    //Get float between <0,_max>
+    TMRND_FLOAT getFloat(CMRND_FLOAT _max=1) {
+        return getFloat(0,_max);
+    }
+
+};

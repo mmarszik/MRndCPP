@@ -33,40 +33,45 @@
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include <climits>
-
-#include "defs.h"
-#include "rnd_sim_lin.h"
 #include "rnd_base.h"
 
-template<typename T, T A, T B, T M=0, TMRND_UINT BITS=32, TMRND_UINT SHIFT=0>
+template<typename T, const T A, const T B, const T M=0, CMRND_UINT BITS=32, CMRND_UINT SHIFT=0, CMRND_UINT SKIP=0>
 class RndLin : public RndBase {
 private:
-    RndSimLin<T,A,B,M,SHIFT> rnd;
+    T v;
 public:
-    RndLin() {
-    }
-    RndLin(const T __sd) : rnd(__sd) {
+    RndLin(const T __sd=0x59941428651521D6ull) {
+        seed(__sd);
     }
     void seed(const T __sd) {
-        rnd.seed(__sd);
+        v = __sd;
     }
+
     TMRND_RESULT operator()() {
-        TMRND_UINT r=0;
-        for( TMRND_UINT i=0 ; i<MLimits<decltype(r)>::digits() ; i+=BITS ) {
+        TMRND_RESULT r=0;
+        for( TMRND_UINT i=0 ; i<MLimits<TMRND_RESULT>::digits() ; i+=BITS ) {
 #pragma GCC diagnostic ignored "-Wshift-count-overflow"
             r <<= BITS;
 #pragma GCC diagnostic warning "-Wshift-count-overflow"
-            r |= rnd() & ((1ull<<BITS)-1);
+            for( TMRND_UINT i=0 ; i<SKIP ; i++ ) {
+                v = v * A + B;
+            }
+            if( M == 0 ) {
+                r |= ( (v = (v * A + B)    ) >> SHIFT) & ( (1ull << BITS) - 1 );
+            } else {
+                r |= ( (v = (v * A + B) % M) >> SHIFT) & ( (1ull << BITS) - 1 );
+            }
         }
         return r;
     }
+
+
 };
 
-using RndLin1  = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 32u, 31u>;
-using RndLin1a = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull,             0ull, 16u, 31u>;
-using RndLin2  = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 32u,  0u>;
-using RndLin2a = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 16u, 31u>;
-using RndLin2b = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull, 11u, 12u>;
-using RndLin2c = RndLin<TMRND_ULONG, 1645253ull, 1327634909599ull, 7129848157699ull,  8u,  0u>;
+using RndLin1 = RndLin<TMRND_ULONG,  172281238618939ull,   758001465003151ull, 0ull, 16u, 47u>;
+using RndLin2 = RndLin<TMRND_ULONG,  178627919555669ull,  1420217663636021ull, 0ull, 16u, 47u>;
+using RndLin3 = RndLin<TMRND_ULONG, 3456967426737059ull,  3232060479518623ull, 0ull, 32u, 31u>;
+using RndLin4 = RndLin<TMRND_ULONG, 2018814029453857ull,  2082947326556573ull, 0ull, 16u, 47u>;
+using RndLin5 = RndLin<TMRND_ULONG,  965572862617007ull,   661186099983727ull, 0ull, 11u, 52u>;
+using RndLin6 = RndLin<TMRND_ULONG,  661186099983727ull,  3390980202202013ull, 0ull,  8u, 55u>;
 

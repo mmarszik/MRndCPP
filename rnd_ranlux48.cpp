@@ -23,17 +23,14 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:58:42 CET                               //
+/// @created on 2020-01-03 11:00:56 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token c07c75d9-db05-492c-84fb-b06ccecfbe9b                       //
+/// @token 96037cdd-edd8-433c-b285-8a48ca681c74                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#include "rnd_ranlux48.h"
 
-#include "rnd_fib.h"
-
-using TRnd = RndFib3;

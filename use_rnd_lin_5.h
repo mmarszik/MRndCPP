@@ -23,17 +23,17 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:58:42 CET                               //
+/// @created on 2019-12-08 03:00:04 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token c07c75d9-db05-492c-84fb-b06ccecfbe9b                       //
+/// @token 313a58a6-94ed-47d2-9194-ccfa066f2f73                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#include "rnd_fib.h"
+#include "rnd_lin.h"
 
-using TRnd = RndFib3;
+using TRnd = RndLin5;

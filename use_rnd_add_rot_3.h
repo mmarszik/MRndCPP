@@ -23,17 +23,15 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:58:42 CET                               //
+/// @created on 2019-12-18 20:18:19 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token c07c75d9-db05-492c-84fb-b06ccecfbe9b                       //
+/// @token 9c9234e7-409b-45a8-8779-d4aefda23f09                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#include "rnd_add_rot.h"
 
-#include "rnd_fib.h"
-
-using TRnd = RndFib3;
+using TRnd = RndAddRot3;
