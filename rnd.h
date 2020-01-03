@@ -198,5 +198,16 @@
     #include "use_rnd_add_rot_7b.h"
 #elif  defined( USE_RND_ADD_ROT_7c )
     #include "use_rnd_add_rot_7c.h"
+#elif  defined( USE_RND_ADD_ROT_8a )
+    #include "use_rnd_add_rot_8a.h"
+#elif  defined( USE_RND_ADD_ROT_8b )
+    #include "use_rnd_add_rot_8b.h"
+#elif  defined( USE_RND_ADD_ROT_8c )
+    #include "use_rnd_add_rot_8c.h"
+
+#elif  defined( USE_RND_WYHASH64_0 )
+    #include "use_rnd_wyhash64_0.h"
+#elif  defined( USE_RND_WYHASH64M_0 )
+    #include "use_rnd_wyhash64m_0.h"
 
 #endif

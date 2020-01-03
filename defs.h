@@ -34,15 +34,24 @@
 
 #pragma once
 
+using TMRND_INT = int;
 using TMRND_UINT = unsigned int;
+using TMRND_LONG = long long;
+using CMRND_LONG = const TMRND_LONG;
 using TMRND_ULONG = unsigned long long;
 using CMRND_ULONG = const TMRND_ULONG;
+using TMRND_FLOAT = double;
 using TMRND_LONGLONG = __int128_t;
 using TMRND_ULONGLONG = __uint128_t;
-using CMRND_UINT = const TMRND_UINT;
-using TMRND_FLOAT = double;
-using CMRND_FLOAT = const TMRND_FLOAT;
-using TMRND_RESULT = TMRND_UINT;
-using CMRND_RESULT = const TMRND_RESULT;
 
+using CMRND_UINT = const TMRND_UINT;
+using CMRND_FLOAT = const TMRND_FLOAT;
+using CMRND_LONGLONG = const TMRND_LONGLONG;
+using CMRND_ULONGLONG = const TMRND_ULONGLONG;
+
+using TMRND_RESULT  = TMRND_UINT;
+using CMRND_RESULT  = const TMRND_RESULT;
+
+using TMRND_IRESULT = TMRND_INT;
+using CMRND_IRESULT = const TMRND_IRESULT;
 

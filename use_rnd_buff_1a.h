@@ -36,6 +36,6 @@
 
 #include "rnd_buff1.h"
 
-using TRndBuff = RndBuff1<4159, 3137>;
+using TRndBuff = RndBuff1<967, 1277>;
 
 

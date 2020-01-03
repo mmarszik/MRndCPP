@@ -59,7 +59,7 @@ public:
     void seed(const T __sd) {
         RndLin2b rnd( __sd );
         CMRND_UINT INIT_BITS = 16;
-        for( TMRND_UINT i=0 ; i<sizeof(T)*CHAR_BIT/INIT_BITS ; i++ ) {
+        for( TMRND_UINT i=0 ; i< MLimits<T>::digits() / INIT_BITS ; i++ ) {
             for( TMRND_UINT j=0 ; j<SIZE ; j++ ) {
                 buff[j] <<= INIT_BITS;
                 buff[j] ^= rnd();

@@ -38,8 +38,6 @@
     #include "use_rnd_buff_0.h"
 #elif defined( USE_RND_BUFF_1a )
     #include "use_rnd_buff_1a.h"
-#elif defined( USE_RND_BUFF_2a )
-    #include "use_rnd_buff_2a.h"
 #endif
 
 

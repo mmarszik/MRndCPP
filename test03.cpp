@@ -40,17 +40,27 @@
 #include "rnd.h"
 #include "buffs.h"
 
-int main() {
+int main( int argc , char *argv[] ) {
+    TMRND_ULONG loops = 1ull << 15;
+    if( argc == 2 ) {
+        loops = 1ull << atoi(argv[1]);
+    }
     CMRND_ULONG seed = 1234567890ull;
     TRnd rnd( seed );
-    TRndBuff rndBuf(rnd,0,23);
-    TMRND_ULONG x = 0;
-    for( TMRND_UINT i=0 ; i<100 ; i++ ) {
-        std::cout << rndBuf() << ", ";
+    TRndBuff rndBuf(rnd,-23,23);
+    TMRND_LONG x = 0;
+    for( TMRND_UINT i=0 ; i<10 ; i++ ) {
+        for( TMRND_UINT i=0 ; i<10000 ; i++ ) {
+            rndBuf();
+        }
+        std::cout << rndBuf() << std::endl;
     }
-    std::cout << std::endl;
-    for( TMRND_ULONG i=0 ; i<(1ull<<35u) ; i++ ) {
-        x += rndBuf();
+    for( TMRND_ULONG i=0 ; i<loops ; i++ ) {
+        for( TMRND_ULONG i=0 ; i<(1ull<<20u) ; i++ ) {
+            x += rndBuf();
+        }
+        // simply hash/crc
+        x = ((x>>32)^x) * (0xDE76057C215ED528ull+i);
     }
     std::cout << x << std::endl;
     return 0;

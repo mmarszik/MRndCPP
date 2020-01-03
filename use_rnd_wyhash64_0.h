@@ -23,17 +23,17 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-24 21:11:33 CET                               //
+/// @created on 2019-12-27 07:48:33 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 4b9011f5-4d60-4149-b434-557ac6237d02                       //
+/// @token a745e2db-c712-4240-98d9-3261ec0aa803                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#include "rnd_buff2.h"
+#include "rnd_wyhash64.h"
 
-using TRndBuff = RndBuff2<79,97,127,157>;
+using TRnd = RndWyhash64_0;

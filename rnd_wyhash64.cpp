@@ -23,15 +23,14 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-24 21:09:01 CET                               //
+/// @created on 2019-12-27 07:45:46 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 19bccaa1-558f-4579-ad7f-7314f71f3f35                       //
+/// @token 86ea97f8-6a2d-4b49-987d-48aa268a97a8                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#include "rnd_buff2.h"
-
+#include "rnd_wyhash64.h"
 

@@ -36,7 +36,9 @@
 
 #include "rnd_xor2.h"
 #include "rnd_mlin.h"
+#include <random>
 
+<<<<<<< HEAD
 using TRnd = RndXor2<RndMLin,1181,1429>;
 /* TEST00
 time ./MRndCPP 
@@ -269,3 +271,6 @@ real	0m2.802s
 user	0m2.708s
 sys	0m0.088s
 */
+=======
+using TRnd = RndXor2<std::mt19937_64, 3677 , 2843 >;
+>>>>>>> 0f8e350e76eb98fdc915b3fcaaad557a3650024b
