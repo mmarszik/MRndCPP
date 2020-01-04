@@ -377,3 +377,94 @@ real	60m3.122s
 user	59m41.289s
 sys	1m58.381s
 */
+/* TEST00
+time ./MRndCPP 10 
+1416706837
+821792151
+2361587558
+1528556559
+3833712100
+715044904
+1017855922
+3129848477
+2598390350
+1956898729
+15608108282219081667
+
+real	0m2.440s
+user	0m2.436s
+sys	0m0.000s
+*/
+/* TEST01
+time ./MRndCPP | dieharder -g200 -d2 -k2 
+#=============================================================================#
+#            dieharder version 3.31.1 Copyright 2003 Robert G. Brown          #
+#=============================================================================#
+   rng_name    |rands/second|   Seed   |
+stdin_input_raw|  3.16e+07  |2629326654|
+#=============================================================================#
+        test_name   |ntup| tsamples |psamples|  p-value |Assessment
+#=============================================================================#
+  diehard_rank_32x32|   0|     40000|     100|0.20021831|  PASSED  
+
+real	0m24.926s
+user	0m24.404s
+sys	0m0.508s
+*/
+/* TEST01
+time ./MRndCPP | RNG_test stdin -tlmax 1000s 
+RNG_test using PractRand version 0.93
+RNG = RNG_stdin, seed = 0x203216c3
+test set = normal, folding = standard(unknown format)
+
+rng=RNG_stdin, seed=0x203216c3
+length= 128 megabytes (2^27 bytes), time= 2.7 seconds
+  no anomalies in 151 test result(s)
+
+rng=RNG_stdin, seed=0x203216c3
+length= 256 megabytes (2^28 bytes), time= 6.2 seconds
+  no anomalies in 162 test result(s)
+
+rng=RNG_stdin, seed=0x203216c3
+length= 512 megabytes (2^29 bytes), time= 12.1 seconds
+  no anomalies in 171 test result(s)
+
+rng=RNG_stdin, seed=0x203216c3
+length= 1 gigabyte (2^30 bytes), time= 23.6 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low1/32]FPF-14+6/16:all          R=  -4.3  p =1-8.5e-4   unusual          
+  ...and 182 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x203216c3
+length= 2 gigabytes (2^31 bytes), time= 45.6 seconds
+  Test Name                         Raw       Processed     Evaluation
+  FPF-14+6/16:all                   R=  -4.7  p =1-3.8e-4   unusual          
+  ...and 193 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x203216c3
+length= 4 gigabytes (2^32 bytes), time= 88.2 seconds
+  no anomalies in 203 test result(s)
+
+rng=RNG_stdin, seed=0x203216c3
+length= 8 gigabytes (2^33 bytes), time= 182 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low1/8]FPF-14+6/16:cross         R=  +4.7  p =  2.6e-4   unusual          
+  ...and 214 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x203216c3
+length= 16 gigabytes (2^34 bytes), time= 367 seconds
+  no anomalies in 226 test result(s)
+
+rng=RNG_stdin, seed=0x203216c3
+length= 32 gigabytes (2^35 bytes), time= 729 seconds
+  no anomalies in 235 test result(s)
+
+rng=RNG_stdin, seed=0x203216c3
+length= 43.500 gigabytes (2^35.443 bytes), time= 1004 seconds
+  no anomalies in 242 test result(s)
+
+
+real	16m44.823s
+user	16m25.896s
+sys	0m18.020s
+*/

@@ -183,3 +183,94 @@ real	5m3.539s
 user	5m1.617s
 sys	0m10.802s
 */
+/* TEST00
+time ./MRndCPP 10 
+417133933
+298875420
+1429991859
+1486762918
+1627035597
+2636890823
+3528866156
+2129589405
+619324217
+3309737665
+8776077208823918333
+
+real	0m6.619s
+user	0m6.612s
+sys	0m0.000s
+*/
+/* TEST01
+time ./MRndCPP | dieharder -g200 -d2 -k2 
+#=============================================================================#
+#            dieharder version 3.31.1 Copyright 2003 Robert G. Brown          #
+#=============================================================================#
+   rng_name    |rands/second|   Seed   |
+stdin_input_raw|  3.08e+07  |3196915960|
+#=============================================================================#
+        test_name   |ntup| tsamples |psamples|  p-value |Assessment
+#=============================================================================#
+  diehard_rank_32x32|   0|     40000|     100|0.43251219|  PASSED  
+
+real	0m25.190s
+user	0m24.632s
+sys	0m0.532s
+*/
+/* TEST01
+time ./MRndCPP | RNG_test stdin -tlmax 1000s 
+RNG_test using PractRand version 0.93
+RNG = RNG_stdin, seed = 0x41e950d1
+test set = normal, folding = standard(unknown format)
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 128 megabytes (2^27 bytes), time= 2.8 seconds
+  no anomalies in 151 test result(s)
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 256 megabytes (2^28 bytes), time= 6.3 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low1/32]BCFN(2+0,13-5,T)         R=  -6.4  p =1-6.6e-4   unusual          
+  ...and 161 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 512 megabytes (2^29 bytes), time= 12.3 seconds
+  Test Name                         Raw       Processed     Evaluation
+  DC6-9x1Bytes-1                    R=  -4.1  p =1-5.6e-3   unusual          
+  ...and 170 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 1 gigabyte (2^30 bytes), time= 24.0 seconds
+  no anomalies in 183 test result(s)
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 2 gigabytes (2^31 bytes), time= 46.5 seconds
+  no anomalies in 194 test result(s)
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 4 gigabytes (2^32 bytes), time= 89.4 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low4/32]BCFN(2+0,13-1,T)         R=  +7.3  p =  2.2e-3   unusual          
+  ...and 202 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 8 gigabytes (2^33 bytes), time= 184 seconds
+  no anomalies in 215 test result(s)
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 16 gigabytes (2^34 bytes), time= 373 seconds
+  no anomalies in 226 test result(s)
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 32 gigabytes (2^35 bytes), time= 744 seconds
+  no anomalies in 235 test result(s)
+
+rng=RNG_stdin, seed=0x41e950d1
+length= 42.500 gigabytes (2^35.409 bytes), time= 1000 seconds
+  no anomalies in 242 test result(s)
+
+
+real	16m41.286s
+user	16m23.476s
+sys	0m16.620s
+*/

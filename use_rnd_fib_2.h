@@ -521,3 +521,93 @@ real	60m3.862s
 user	59m41.778s
 sys	1m58.748s
 */
+/* TEST00
+time ./MRndCPP 10 
+1062339175
+1857199017
+2295839526
+2809988542
+22956491
+3565999184
+4216451073
+4209978137
+3776636362
+2242267147
+6633772557753845308
+
+real	0m2.450s
+user	0m2.436s
+sys	0m0.000s
+*/
+/* TEST01
+time ./MRndCPP | dieharder -g200 -d2 -k2 
+#=============================================================================#
+#            dieharder version 3.31.1 Copyright 2003 Robert G. Brown          #
+#=============================================================================#
+   rng_name    |rands/second|   Seed   |
+stdin_input_raw|  3.17e+07  |1836976826|
+#=============================================================================#
+        test_name   |ntup| tsamples |psamples|  p-value |Assessment
+#=============================================================================#
+  diehard_rank_32x32|   0|     40000|     100|0.83991239|  PASSED  
+
+real	0m24.904s
+user	0m24.300s
+sys	0m0.584s
+*/
+/* TEST01
+time ./MRndCPP | RNG_test stdin -tlmax 1000s 
+RNG_test using PractRand version 0.93
+RNG = RNG_stdin, seed = 0x485155de
+test set = normal, folding = standard(unknown format)
+
+rng=RNG_stdin, seed=0x485155de
+length= 128 megabytes (2^27 bytes), time= 2.7 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low1/32]FPF-14+6/16:all2         R=  -1.5  p =1-1.4e-4   unusual          
+  ...and 150 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x485155de
+length= 256 megabytes (2^28 bytes), time= 6.2 seconds
+  no anomalies in 162 test result(s)
+
+rng=RNG_stdin, seed=0x485155de
+length= 512 megabytes (2^29 bytes), time= 12.1 seconds
+  no anomalies in 171 test result(s)
+
+rng=RNG_stdin, seed=0x485155de
+length= 1 gigabyte (2^30 bytes), time= 23.5 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low4/32]BCFN(2+0,13-3,T)         R=  -7.1  p =1-7.0e-4   unusual          
+  [Low4/32]BCFN(2+4,13-4,T)         R=  -7.3  p =1-2.7e-4   unusual          
+  ...and 181 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x485155de
+length= 2 gigabytes (2^31 bytes), time= 45.5 seconds
+  no anomalies in 194 test result(s)
+
+rng=RNG_stdin, seed=0x485155de
+length= 4 gigabytes (2^32 bytes), time= 87.8 seconds
+  no anomalies in 203 test result(s)
+
+rng=RNG_stdin, seed=0x485155de
+length= 8 gigabytes (2^33 bytes), time= 178 seconds
+  no anomalies in 215 test result(s)
+
+rng=RNG_stdin, seed=0x485155de
+length= 16 gigabytes (2^34 bytes), time= 364 seconds
+  no anomalies in 226 test result(s)
+
+rng=RNG_stdin, seed=0x485155de
+length= 32 gigabytes (2^35 bytes), time= 724 seconds
+  no anomalies in 235 test result(s)
+
+rng=RNG_stdin, seed=0x485155de
+length= 43.750 gigabytes (2^35.451 bytes), time= 1002 seconds
+  no anomalies in 242 test result(s)
+
+
+real	16m43.167s
+user	16m23.748s
+sys	0m18.364s
+*/
