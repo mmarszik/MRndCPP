@@ -37,7 +37,7 @@
 #include "defs.h"
 #include <MiscCPP/m_limits.h>
 
-constexpr CMRND_UINT CMRND_INIT_CHAOS_SIZE = 12U;
+constexpr CMRND_UINT CMRND_INIT_CHAOS_SIZE = 14U;
 extern CMRND_ULONG CMRND_INIT_CHAOS[ 1u << CMRND_INIT_CHAOS_SIZE ];
 
 template<typename TARRAY>

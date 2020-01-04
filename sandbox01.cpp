@@ -41,7 +41,7 @@
 #include <MiscCPP/m_limits.h>
 
 int main( int argc , char *argv[] ) {
-    TMRND_UINT loops = 1ull << 14;
+    TMRND_UINT loops = ( 1ull << 14 );
     if( argc == 2 ) {
         loops = 1ull << atoi(argv[1]);
     }
@@ -49,7 +49,7 @@ int main( int argc , char *argv[] ) {
     for( TMRND_ULONG loop=0 ; loop<loops ; loop++ ) {
         CMRND_UINT BITS  = 1;
         CMRND_UINT SHIFT = 6;
-        CMRND_UINT SKIP  = 6000;
+        CMRND_UINT SKIP  = 1000;
         TMRND_ULONG v = 0;
         for( TMRND_UINT i=0 ; i<MLimits<TMRND_ULONG>::digits() ; i += BITS ) {
             for( TMRND_UINT i=0 ; i<SKIP ; i++ ) {
@@ -57,16 +57,14 @@ int main( int argc , char *argv[] ) {
             }
             v = ( v << BITS ) | ( ( rd() >> SHIFT ) & ((1u<<BITS)-1) );
         }
-        std::cout << "0x" <<  std::hex << v;
-        if( ((loop + 1) & 31) == 0 ) {
-            std::cout << "#";
-        } else {
-            std::cout << ",";
+        std::cout << "0x" <<  std::hex << v << ", ";
+        if( ((loop + 1) & 63) == 0 ) {
+            std::cout << "\n";
         }
 //        std::cout.flush();
     }
     std::cout << std::endl;
-    std::cout <<  "generated " << loops << " numbers" << std::endl;
+    std::cout <<  "generated " << std::dec << loops << " numbers" << std::endl;
     return 0;
 }
 
