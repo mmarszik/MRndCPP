@@ -23,43 +23,50 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-23 11:43:38 CET                               //
+/// @created on 2020-01-04 12:21:36 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token db4cce19-5499-4b7d-a317-db6927ddd55e                       //
-/// @brief:                                                           //
+/// @token e6373efc-b018-4ff3-99d6-f0bccfcd9219                       //
+/// @brief: generate the really random numbers                        //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#ifdef SANDBOX00
+
+#ifdef SANDBOX01
 
 #include "defs.h"
 #include <iostream>
+#include <random>
+#include <MiscCPP/m_limits.h>
 
-class A {
-public:
-    void x() {
-        std::cout << "x" << std::endl;
+int main( int argc , char *argv[] ) {
+    TMRND_UINT loops = 1ull << 14;
+    if( argc == 2 ) {
+        loops = 1ull << atoi(argv[1]);
     }
-    void operator()(int x,int y) {
-        std::cout << "(x,y)" << std::endl;
+    std::random_device rd;
+    for( TMRND_ULONG loop=0 ; loop<loops ; loop++ ) {
+        CMRND_UINT BITS  = 1;
+        CMRND_UINT SHIFT = 6;
+        CMRND_UINT SKIP  = 6000;
+        TMRND_ULONG v = 0;
+        for( TMRND_UINT i=0 ; i<MLimits<TMRND_ULONG>::digits() ; i += BITS ) {
+            for( TMRND_UINT i=0 ; i<SKIP ; i++ ) {
+                rd();
+            }
+            v = ( v << BITS ) | ( ( rd() >> SHIFT ) & ((1u<<BITS)-1) );
+        }
+        std::cout << "0x" <<  std::hex << v;
+        if( ((loop + 1) & 31) == 0 ) {
+            std::cout << "#";
+        } else {
+            std::cout << ",";
+        }
+//        std::cout.flush();
     }
-};
-
-class B : public A {
-public:
-    void y() {
-        std::cout << "y" << std::endl;
-    }
-    void operator()() {
-        std::cout << "()" << std::endl;
-    }
-};
-
-int main() {
-    B b;
-    b(1,2);
+    std::cout << std::endl;
+    std::cout <<  "generated " << loops << " numbers" << std::endl;
     return 0;
 }
 

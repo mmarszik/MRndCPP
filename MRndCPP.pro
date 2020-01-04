@@ -21,7 +21,7 @@ DEFINES += USE_RND_F_BUFF_1a
 DEFINES += USE_RND_PROB_0
 
 DEFINES += MX_USING_ARRAY_2
-DEFINES += TEST01_PROGRAM
+DEFINES += SANDBOX01
 
 SOURCES += \
     rnd_base.cpp \
@@ -48,7 +48,8 @@ SOURCES += \
     init_chaos.cpp \
     rnd_mt1993764.cpp \
     rnd_ranlux48.cpp \
-    rnd_knuthb.cpp
+    rnd_knuthb.cpp \
+    sandbox01.cpp
 
 HEADERS += \
     buffs.h \
