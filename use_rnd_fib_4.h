@@ -524,3 +524,88 @@ real	60m2.789s
 user	59m39.149s
 sys	2m3.915s
 */
+/* TEST00
+time ./MRndCPP 10 
+3727113059
+2244116651
+2487557517
+454283634
+2075784682
+2642176750
+2014012913
+2236011917
+2635671722
+3284104138
+17288421246639911574
+
+real	0m3.229s
+user	0m3.224s
+sys	0m0.000s
+*/
+/* TEST01
+time ./MRndCPP | dieharder -g200 -d2 -k2 
+#=============================================================================#
+#            dieharder version 3.31.1 Copyright 2003 Robert G. Brown          #
+#=============================================================================#
+   rng_name    |rands/second|   Seed   |
+stdin_input_raw|  3.07e+07  |2093520170|
+#=============================================================================#
+        test_name   |ntup| tsamples |psamples|  p-value |Assessment
+#=============================================================================#
+  diehard_rank_32x32|   0|     40000|     100|0.25967976|  PASSED  
+
+real	0m25.324s
+user	0m24.672s
+sys	0m0.592s
+*/
+/* TEST01
+time ./MRndCPP | RNG_test stdin -tlmax 1000s 
+RNG_test using PractRand version 0.93
+RNG = RNG_stdin, seed = 0x54bc13be
+test set = normal, folding = standard(unknown format)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 128 megabytes (2^27 bytes), time= 2.8 seconds
+  no anomalies in 151 test result(s)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 256 megabytes (2^28 bytes), time= 6.3 seconds
+  no anomalies in 162 test result(s)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 512 megabytes (2^29 bytes), time= 12.3 seconds
+  no anomalies in 171 test result(s)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 1 gigabyte (2^30 bytes), time= 23.8 seconds
+  no anomalies in 183 test result(s)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 2 gigabytes (2^31 bytes), time= 45.9 seconds
+  no anomalies in 194 test result(s)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 4 gigabytes (2^32 bytes), time= 88.2 seconds
+  no anomalies in 203 test result(s)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 8 gigabytes (2^33 bytes), time= 181 seconds
+  no anomalies in 215 test result(s)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 16 gigabytes (2^34 bytes), time= 367 seconds
+  no anomalies in 226 test result(s)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 32 gigabytes (2^35 bytes), time= 732 seconds
+  no anomalies in 235 test result(s)
+
+rng=RNG_stdin, seed=0x54bc13be
+length= 43.250 gigabytes (2^35.435 bytes), time= 1001 seconds
+  no anomalies in 242 test result(s)
+
+
+real	16m42.130s
+user	16m21.676s
+sys	0m19.328s
+*/
