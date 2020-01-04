@@ -2,8 +2,8 @@ rm MRndCPP
 rm time.txt
 rm test.txt
 
-#TESTS=(USE_RND_WYHASH64_0 USE_RND_WYHASH64M_0 USE_RND_FIB_1 USE_RND_FIB_2 USE_RND_FIB_3 USE_RND_FIB_4 USE_RND_FIB_5 USE_RND_FIB_6 USE_RND_MLIN_0 USE_RND_RANLUX_48 USE_RND_MT19937_64 USE_RND_LIN_1 USE_RND_LIN_2 USE_RND_LIN_3 USE_RND_LIN_4 USE_RND_LIN_5 USE_RND_LIN_6)
-TESTS=(USE_RND_LIN_1 USE_RND_LIN_2 USE_RND_LIN_3 USE_RND_LIN_4 USE_RND_LIN_5 USE_RND_LIN_6)
+TESTS=(USE_RND_WYHASH64_0 USE_RND_WYHASH64M_0 USE_RND_FIB_1 USE_RND_FIB_2 USE_RND_FIB_3 USE_RND_FIB_4 USE_RND_FIB_5 USE_RND_FIB_6 USE_RND_MLIN_0 USE_RND_RANLUX_48 USE_RND_MT19937_64 USE_RND_LIN_1 USE_RND_LIN_2 USE_RND_LIN_3 USE_RND_LIN_4 USE_RND_LIN_5 USE_RND_LIN_6)
+#TESTS=(USE_RND_LIN_1 USE_RND_LIN_2 USE_RND_LIN_3 USE_RND_LIN_4 USE_RND_LIN_5 USE_RND_LIN_6)
 
 for def in "${TESTS[@]}"
 do
@@ -28,9 +28,9 @@ do
    cat time.txt                                                          >> $header
    echo "*/"                                                             >> $header
 
-   { time ./MRndCPP | ./../../PractRand/RNG_test stdin -tlmax 300s > test.txt; } 2> time.txt
+   { time ./MRndCPP | ./../../PractRand/RNG_test stdin -tlmax 1000s > test.txt; } 2> time.txt
    echo "/* TEST01"                                                      >> $header
-   echo "time ./MRndCPP | RNG_test stdin -tlmax 300s "                   >> $header
+   echo "time ./MRndCPP | RNG_test stdin -tlmax 1000s "                   >> $header
    cat test.txt                                                          >> $header
    cat time.txt                                                          >> $header
    echo "*/"                                                             >> $header
