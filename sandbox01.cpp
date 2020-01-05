@@ -32,7 +32,6 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-
 #ifdef SANDBOX01
 
 #include "defs.h"
@@ -49,15 +48,15 @@ int main( int argc , char *argv[] ) {
     for( TMRND_ULONG loop=0 ; loop<loops ; loop++ ) {
         CMRND_UINT BITS  = 1;
         CMRND_UINT SHIFT = 6;
-        CMRND_UINT SKIP  = 1000;
-        TMRND_ULONG v = 0;
+        CMRND_UINT SKIP  = 30000*4;
+        TMRND_ULONG v    = 0;
         for( TMRND_UINT i=0 ; i<MLimits<TMRND_ULONG>::digits() ; i += BITS ) {
             for( TMRND_UINT i=0 ; i<SKIP ; i++ ) {
                 rd();
             }
             v = ( v << BITS ) | ( ( rd() >> SHIFT ) & ((1u<<BITS)-1) );
         }
-        std::cout << "0x" <<  std::hex << v << ", ";
+        std::cout << "0x" <<  std::hex << v << "ull, ";
         if( ((loop + 1) & 63) == 0 ) {
             std::cout << "\n";
         }
