@@ -878,3 +878,68 @@ real	300m5.224s
 user	294m32.356s
 sys	5m4.472s
 */
+/* TEST00
+time ./MRndCPP 12 
+1371554712
+1725976859
+2059674324
+3068496199
+1121289917
+2763103988
+3220689998
+3307308312
+785231875
+2664775828
+13652461054919381533
+
+real	0m7.156s
+user	0m7.137s
+sys	0m0.004s
+*/
+/* TEST01
+time ./MRndCPP | dieharder -g200 -a -k2 
+test.sh: line 23: dieharder: command not found
+
+real	0m0.002s
+user	0m0.001s
+sys	0m0.002s
+*/
+/* TEST01
+time ./MRndCPP | RNG_test stdin -tlmax 100s 
+RNG_test using PractRand version 0.93
+RNG = RNG_stdin, seed = 0x69b45e3a
+test set = normal, folding = standard(unknown format)
+
+rng=RNG_stdin, seed=0x69b45e3a
+length= 64 megabytes (2^26 bytes), time= 2.2 seconds
+  no anomalies in 139 test result(s)
+
+rng=RNG_stdin, seed=0x69b45e3a
+length= 128 megabytes (2^27 bytes), time= 5.2 seconds
+  no anomalies in 151 test result(s)
+
+rng=RNG_stdin, seed=0x69b45e3a
+length= 256 megabytes (2^28 bytes), time= 9.6 seconds
+  no anomalies in 162 test result(s)
+
+rng=RNG_stdin, seed=0x69b45e3a
+length= 512 megabytes (2^29 bytes), time= 17.8 seconds
+  no anomalies in 171 test result(s)
+
+rng=RNG_stdin, seed=0x69b45e3a
+length= 1 gigabyte (2^30 bytes), time= 32.4 seconds
+  no anomalies in 183 test result(s)
+
+rng=RNG_stdin, seed=0x69b45e3a
+length= 2 gigabytes (2^31 bytes), time= 63.4 seconds
+  no anomalies in 194 test result(s)
+
+rng=RNG_stdin, seed=0x69b45e3a
+length= 3.500 gigabytes (2^31.807 bytes), time= 107 seconds
+  no anomalies in 199 test result(s)
+
+
+real	1m47.823s
+user	1m46.083s
+sys	0m5.155s
+*/
