@@ -35,3 +35,12 @@ USE_RND_LIN_5
 ../use_rnd_lin_5.h
 USE_RND_LIN_6
 ../use_rnd_lin_6.h
+rm: cannot remove 'MRndCPP': No such file or directory
+rm: cannot remove 'time.txt': No such file or directory
+rm: cannot remove 'test.txt': No such file or directory
+USE_RND_WYHASH64_0
+../use_rnd_wyhash64_0.h
+USE_RND_WYHASH64M_0
+../use_rnd_wyhash64m_0.h
+USE_RND_FIB_1
+../use_rnd_fib_1.h
