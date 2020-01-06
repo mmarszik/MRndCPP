@@ -116,5 +116,6 @@ HEADERS += \
 DISTFILES += \
     createAtC++.sh \
     tests/test.sh \
-    tests/small_test.sh
+    tests/small_test.sh \
+    tests/efficiency.sh
 

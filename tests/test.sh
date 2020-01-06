@@ -42,3 +42,9 @@ done
 rm $prog
 rm $time
 rm $test
+
+
+#nohup bash test.sh USE_RND_WYHASH64_0 USE_RND_FIB_1 USE_RND_FIB_2 USE_RND_FIB_3 &
+#nohup bash test.sh USE_RND_WYHASH64M_0 USE_RND_FIB_4 USE_RND_FIB_5 USE_RND_FIB_6  &
+#nohup bash test.sh USE_RND_MLIN_0 USE_RND_LIN_1 USE_RND_LIN_2 USE_RND_LIN_3  &
+#nohup bash test.sh USE_RND_MT19937_64 USE_RND_LIN_4 USE_RND_LIN_5 USE_RND_LIN_6 USE_RND_RANLUX_48 &
