@@ -38,6 +38,11 @@
 #include <MxCPP/mx_array.h>
 #include "init_chaos.h"
 
+//#define TMRND_WYHASH64M_V1
+//#define TMRND_WYHASH64M_V2
+
+#if defined(TMRND_WYHASH64M_V1)
+
 template<
     CMRND_UINT SIZE1,
     CMRND_UINT SIZE2,
@@ -89,54 +94,54 @@ public:
 };
 
 
+#else
+
+
+template<
+    CMRND_UINT SIZE1,
+    CMRND_UINT SIZE2,
+    CMRND_ULONG AW1 = 0x60bee2bee120fc15ull,
+    CMRND_ULONG AW2 = 0x2957674240375189ull,
+    CMRND_ULONG BW  = 0xa3b195354a39b70dull,
+    CMRND_ULONG CW  = 0x1b03738712fad5c9ull
+>
+class RndWyhash64m : public RndBase {
+private:
+    using TBUFF = MxArray<TMRND_ULONG, SIZE1+SIZE2>;
+private:
+    TBUFF buff;
+    TMRND_UINT i1, i2;
+    constexpr static CMRND_UINT SIZE_CHAOS = 12u;
+    static const MxArray<TMRND_ULONG, 1u<<SIZE_CHAOS> CHAOS;
+
+public:
+    RndWyhash64m(CMRND_ULONG __sd=0xCD8533B4B9ED944Cull) {
+        seed( __sd );
+    }
+    RndWyhash64m& operator = (const RndWyhash64m& other) {
+        return *( new(this)RndWyhash64m(other) );
+    }
+    void seed(CMRND_ULONG __sd) {
+        initByChaos<TBUFF>(buff,SIZE1+SIZE2,__sd);
+        i1 = 0;
+        i2 = SIZE1;
+    }
+    TMRND_RESULT operator()() {
+        if( i1 >= SIZE1         ) i1 = 0;
+        if( i2 >= SIZE1 + SIZE2 ) i2 = SIZE1;
+        buff[i1] += AW1;
+        buff[i2] += AW2;
+        TMRND_ULONG x = buff[i1++] + buff[i2++];
+        TMRND_ULONGLONG t = (TMRND_ULONGLONG)x * BW;
+        CMRND_ULONG m = (t >> 64) ^ t;
+        t = (TMRND_ULONGLONG)m * CW;
+        return (t >> 64) ^ t;
+    }
+};
+
+
+#endif
+
+
 using RndWyhash64m_0 = RndWyhash64m<2549,3041>;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Below is slower version
-//class RndWyhash64m : public RndBase {
-//private:
-//    static constexpr CMRND_UINT SIZE0 = 10;
-//    static constexpr CMRND_UINT SIZE1 = 1 << SIZE0;
-//    static constexpr CMRND_ULONG AL  = 543657589ull;
-//    static constexpr CMRND_ULONG BL  = 4253133281ull;
-//    static constexpr CMRND_ULONG AW1 = 0x60bee2bee120fc15ull;
-//    static constexpr CMRND_ULONG AW2 = 0x2957674240375189ull;
-//    static constexpr CMRND_ULONG BW  = 0xa3b195354a39b70dull;
-//    static constexpr CMRND_ULONG CW  = 0x1b03738712fad5c9ull;
-//    static const  MxArray<TMRND_ULONG, SIZE1> init;
-//    MxArray<TMRND_ULONGLONG, SIZE1> buff;
-//    TMRND_ULONG v;
-//public:
-//    RndWyhash64m(CMRND_ULONG __sd) {
-//        seed( __sd );
-//    }
-//    void seed(CMRND_ULONG __sd) {
-//        v = __sd;
-//        for( TMRND_UINT i=0 ; i<SIZE1 ; i++ ) {
-//            buff[i] = init[i] ^ __sd;
-//        }
-//    }
-//    TMRND_RESULT operator()() {
-//        CMRND_UINT i1 = ( (v = v * AL + BL) >> (64 - SIZE0) );
-//        CMRND_UINT i2 = ( (v = v * AL + BL) >> (64 - SIZE0) );
-//        buff[i1] += AW1;
-//        buff[i2] += AW2;
-//        TMRND_ULONG x = buff[i1] + buff[i2];
-//        TMRND_ULONGLONG t = (TMRND_ULONGLONG)x * BW;
-//        CMRND_ULONG m = (t >> 64) ^ t;
-//        t = (TMRND_ULONGLONG)m * CW;
-//        return (t >> 64) ^ t;
-//    }
-//};
