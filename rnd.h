@@ -49,58 +49,14 @@
 #elif  defined( USE_RND_SIM_LIN_06 )
     #include "use_rnd_sim_lin_06.h"
 
-#elif  defined( USE_RND_FIB_0 )
-    #include "use_rnd_fib_0.h"
-#elif  defined( USE_RND_FIB_0a )
-    #include "use_rnd_fib_0a.h"
 #elif  defined( USE_RND_FIB_1 )
     #include "use_rnd_fib_1.h"
-#elif  defined( USE_RND_FIB_1a )
-    #include "use_rnd_fib_1a.h"
 #elif  defined( USE_RND_FIB_2 )
     #include "use_rnd_fib_2.h"
 #elif  defined( USE_RND_FIB_3 )
     #include "use_rnd_fib_3.h"
-#elif  defined( USE_RND_FIB_2a )
-    #include "use_rnd_fib_2a.h"
-#elif  defined( USE_RND_FIB_3a )
-    #include "use_rnd_fib_3a.h"
 #elif  defined( USE_RND_FIB_4 )
     #include "use_rnd_fib_4.h"
-#elif  defined( USE_RND_FIB_5 )
-    #include "use_rnd_fib_5.h"
-#elif  defined( USE_RND_FIB_6 )
-    #include "use_rnd_fib_6.h"
-#elif  defined( USE_RND_FIB_7 )
-    #include "use_rnd_fib_7.h"
-#elif  defined( USE_RND_FIB_8 )
-    #include "use_rnd_fib_8.h"
-#elif  defined( USE_RND_FIB_9 )
-    #include "use_rnd_fib_9.h"
-#elif  defined( USE_RND_FIB_10 )
-    #include "use_rnd_fib_10.h"
-#elif  defined( USE_RND_FIB_11 )
-    #include "use_rnd_fib_11.h"
-#elif  defined( USE_RND_FIB_12 )
-    #include "use_rnd_fib_12.h"
-#elif  defined( USE_RND_FIB_13 )
-    #include "use_rnd_fib_13.h"
-#elif  defined( USE_RND_FIB_14 )
-    #include "use_rnd_fib_14.h"
-#elif  defined( USE_RND_FIB_15 )
-    #include "use_rnd_fib_15.h"
-#elif  defined( USE_RND_FIB_16 )
-    #include "use_rnd_fib_16.h"
-#elif  defined( USE_RND_FIB_17 )
-    #include "use_rnd_fib_17.h"
-#elif  defined( USE_RND_FIB_18 )
-    #include "use_rnd_fib_18.h"
-#elif  defined( USE_RND_FIB_19 )
-    #include "use_rnd_fib_19.h"
-#elif  defined( USE_RND_FIB_20 )
-    #include "use_rnd_fib_20.h"
-#elif  defined( USE_RND_SFIB_0 )
-    #include "use_rnd_sfib_0.h"
 
 #elif  defined( USE_RND_COMP_0 )
     #include "use_rnd_comp_0.h"
