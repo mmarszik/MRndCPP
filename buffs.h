@@ -36,13 +36,13 @@
 
 #if defined( USE_RND_BUFF_0 )
     #include "use_rnd_buff_0.h"
-#elif defined( USE_RND_BUFF_1a )
-    #include "use_rnd_buff_1a.h"
+#elif defined( USE_RND_BUFF_1 )
+    #include "use_rnd_buff_1.h"
 #endif
 
 
 #if defined( USE_RND_F_BUFF_0 )
     #include "use_rnd_f_buff_0.h"
-#elif defined( USE_RND_F_BUFF_1a )
-    #include "use_rnd_f_buff_1a.h"
+#elif defined( USE_RND_F_BUFF_1 )
+    #include "use_rnd_f_buff_1.h"
 #endif
