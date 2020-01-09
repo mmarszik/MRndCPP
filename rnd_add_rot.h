@@ -41,6 +41,7 @@
 #include "rnd_mlin.h"
 #include "rnd_fib.h"
 #include "rnd_wyhash64.h"
+#include "rnd_wyhash64m.h"
 
 //#define TMRND_RND_ADD_ROOT_V1
 //#define TMRND_RND_ADD_ROOT_V2
@@ -247,31 +248,9 @@ public:
 #endif
 
 
-using RndAddRot0a  = RndAddRot<std::mt19937_64 ,   3061,  2711 >;
-using RndAddRot0b  = RndAddRot<std::mt19937_64 ,   3019,  2957 >;
-using RndAddRot0c  = RndAddRot<std::mt19937_64 ,   3011,  1973 >;
-using RndAddRot1a  = RndAddRot<std::ranlux48   ,   3011,  1973 >;
-using RndAddRot1b  = RndAddRot<std::ranlux48   ,   3019,  2957 >;
-using RndAddRot1c  = RndAddRot<std::ranlux48   ,   3011,  1973 >;
-using RndAddRot2a  = RndAddRot<RndLin2b        ,   3061,  2711 >;
-using RndAddRot2b  = RndAddRot<RndLin2b        ,   3019,  2957 >;
-using RndAddRot2c  = RndAddRot<RndLin2b        ,   3011,  1973 >;
-using RndAddRot3a  = RndAddRot<RndMLin         ,   3061,  2711 >;
-using RndAddRot3b  = RndAddRot<RndMLin         ,   3019,  2957 >;
-using RndAddRot3c  = RndAddRot<RndMLin         ,   3011,  1973 >;
-using RndAddRot4a  = RndAddRot<RndFib0         ,   3061,  2711 >;
-using RndAddRot4b  = RndAddRot<RndFib0         ,   3019,  2957 >;
-using RndAddRot4c  = RndAddRot<RndFib0         ,   3011,  1973 >;
-using RndAddRot5a  = RndAddRot<RndFib0a        ,   3061,  2711 >;
-using RndAddRot5b  = RndAddRot<RndFib0a        ,   3019,  2957 >;
-using RndAddRot5c  = RndAddRot<RndFib0a        ,   3011,  1973 >;
-using RndAddRot6a  = RndAddRot<RndFib3         ,   3061,  2711 >;
-using RndAddRot6b  = RndAddRot<RndFib3         ,   3019,  2957 >;
-using RndAddRot6c  = RndAddRot<RndFib3         ,   3011,  1973 >;
-using RndAddRot7a  = RndAddRot<RndFib3a        ,   3061,  2711 >;
-using RndAddRot7b  = RndAddRot<RndFib3a        ,   3019,  2957 >;
-using RndAddRot7c  = RndAddRot<RndFib3a        ,   3011,  1973 >;
-using RndAddRot8a  = RndAddRot<RndWyhash64_0   ,   3061,  2711 >;
-using RndAddRot8b  = RndAddRot<RndWyhash64_0   ,   3019,  2957 >;
-using RndAddRot8c  = RndAddRot<RndWyhash64_0   ,   3011,  1973 >;
-
+using RndAddRot1   = RndAddRot<std::mt19937_64 ,   3061,  2711 >;
+using RndAddRot2   = RndAddRot<std::ranlux48   ,   3061,  2711 >;
+using RndAddRot3   = RndAddRot<RndFib1         ,   3061,  2711 >;
+using RndAddRot4   = RndAddRot<RndMLin         ,   3061,  2711 >;
+using RndAddRot5   = RndAddRot<RndWyhash64_0   ,   3061,  2711 >;
+using RndAddRot6   = RndAddRot<RndWyhash64m_0  ,   3061,  2711 >;

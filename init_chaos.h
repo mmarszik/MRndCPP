@@ -23,17 +23,45 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:56:07 CET                               //
+/// @created on 2020-01-03 08:13:20 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 0b0fbb96-789c-4fd8-802d-50b3d0f3757f                       //
+/// @token 5151998e-0810-4c33-9a44-b6dad31de424                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#include "rnd_comp.h"
+#include "defs.h"
+#include <MiscCPP/m_limits.h>
 
+constexpr CMRND_UINT CMRND_INIT_CHAOS_SIZE = 14U;
+extern CMRND_ULONG CMRND_INIT_CHAOS[ 1u << CMRND_INIT_CHAOS_SIZE ];
+
+template<typename TARRAY>
+static void initByChaos(
+    TARRAY       &buff,
+    CMRND_UINT   SIZE,
+    TMRND_ULONG  seed,
+    CMRND_UINT   XORS  =   5,
+    CMRND_UINT   SKIPS = 100
+) {
+    static CMRND_ULONG A =  543657589ull;
+    static CMRND_ULONG B = 4253133281ull;
+    for( TMRND_UINT i=0 ; i<XORS ; i++ ) {
+        for( TMRND_UINT j=0 ; j<SIZE ; j++ ) {
+            if( i== 0 ) {
+                buff[j] = 0;
+            }
+            for( TMRND_UINT k=0 ; k<SKIPS ; k++ ) {
+                seed = seed * A + B;
+            }
+            CMRND_UINT v1 = (seed = seed * A + B) >> (MLimits<decltype(seed)>::digits() - CMRND_INIT_CHAOS_SIZE);
+            buff[j] ^= CMRND_INIT_CHAOS[v1] + seed;
+        }
+    }
+
+}
 

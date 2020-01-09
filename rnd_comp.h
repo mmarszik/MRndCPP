@@ -35,18 +35,15 @@
 #pragma once
 
 #include <MxCPP/mx_array.h>
-
-#include "defs.h"
 #include "rnd_base.h"
 
-//MM: The composition of two pseudo random number generators with lagged.
-template<class TRnd1, class TRnd2, TMRND_UINT SIZE>
+//MM: The composition of two pseudo random number generators.
+template<class TRnd1, class TRnd2>
 class RndComp : public RndBase {
 private:
-    using TBuff = MxArray< TMRND_UINT , 1u<<SIZE >;
-    TBuff buff;
     TRnd1 rnd1;
     TRnd2 rnd2;
+    TMRND_UINT i1;
 public:
     RndComp( CMRND_ULONG __sd ) {
         seed( __sd );
@@ -54,23 +51,14 @@ public:
     void seed( CMRND_ULONG __sd ) {
         rnd1.seed( __sd ^ 0x4B3B2985634D008 );
         rnd2.seed( __sd ^ 0x73CD8A180586D6A );
-        for( TMRND_UINT i=0 ; i < (1u<<SIZE) ; i++ ) {
-            buff[i] = rnd1();
-        }
+        i1 = 0;
     }
     TMRND_RESULT operator()() {
-        CMRND_UINT r = rnd2() & ((1u<<SIZE)-1);
-        CMRND_ULONG v = buff[r];
-        buff[r] = rnd1();
-        return v;
+        if( ++i1 & 1 ) {
+            return rnd1();
+        } else {
+            return rnd2();
+        }
     }
-//    utyp operator()() {
-//        buff[ rnd2() & ((1u<<SIZE)-1) ] = rnd1();
-//        return buff[ rnd2() & ((1u<<SIZE)-1) ];
-//    }
-//    utyp operator()() {
-//        return rnd1() ^ rnd2();
-//    }
-
 };
 

@@ -32,10 +32,9 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#include "defs.h"
-
 #ifdef SANDBOX00
 
+#include "defs.h"
 #include <iostream>
 
 class A {

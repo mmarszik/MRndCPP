@@ -23,17 +23,13 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:56:07 CET                               //
+/// @created on 2020-01-03 10:57:25 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 0b0fbb96-789c-4fd8-802d-50b3d0f3757f                       //
+/// @token 175b10d9-e0af-4981-9c9e-43ccac1adcb3                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
-
-#include "rnd_comp.h"
-
-
+#include "rnd_mt1993764.h"

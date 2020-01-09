@@ -23,17 +23,44 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:56:07 CET                               //
+/// @created on 2020-01-03 10:59:48 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 0b0fbb96-789c-4fd8-802d-50b3d0f3757f                       //
+/// @token b228f206-22da-494d-b50f-36a942b63a1b                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#include "rnd_comp.h"
+#include <random>
+#include <MiscCPP/m_limits.h>
+#include "defs.h"
 
+class RndRanlux48 : public std::ranlux48 {
+public:
+    RndRanlux48( std::ranlux48::result_type __sd) : std::ranlux48(__sd) {
+    }
+    static TMRND_RESULT max() {
+        return MLimits<TMRND_RESULT>::max();
+    }
+    TMRND_RESULT operator()() {
+        return static_cast<TMRND_RESULT>( std::ranlux48::operator ()() );
+    }
+    TMRND_RESULT range(CMRND_RESULT _min, CMRND_RESULT _max) {
+        return (*this)() % (_max - _min + 1) + _min;
+    }
+    TMRND_RESULT range(CMRND_RESULT _max) {
+        return range(0,_max);
+    }
+    //Get float between <_min,_max>
+    TMRND_FLOAT getFloat(CMRND_FLOAT _min, CMRND_FLOAT _max) {
+        return ( _max - _min ) * (*this)() / max() + _min;
+    }
+    //Get float between <0,_max>
+    TMRND_FLOAT getFloat(CMRND_FLOAT _max=1) {
+        return getFloat(0,_max);
+    }
 
+};

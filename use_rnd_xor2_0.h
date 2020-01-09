@@ -35,7 +35,4 @@
 #pragma once
 
 #include "rnd_xor2.h"
-#include "rnd_mlin.h"
-#include <random>
 
-using TRnd = RndXor2<std::mt19937_64, 3677 , 2843 >;

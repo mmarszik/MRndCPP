@@ -35,6 +35,5 @@
 #pragma once
 
 #include "rnd_comp.h"
-#include "rnd_lin.h"
 
-using TRnd = RndComp< RndLin1, RndLin1, 10 >;
+

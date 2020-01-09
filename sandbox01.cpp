@@ -23,17 +23,48 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:56:07 CET                               //
+/// @created on 2020-01-04 12:21:36 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 0b0fbb96-789c-4fd8-802d-50b3d0f3757f                       //
-/// @brief:                                                           //
+/// @token e6373efc-b018-4ff3-99d6-f0bccfcd9219                       //
+/// @brief: generate the really random numbers                        //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#ifdef SANDBOX01
 
-#include "rnd_comp.h"
+#include "defs.h"
+#include <iostream>
+#include <random>
+#include <MiscCPP/m_limits.h>
 
+int main( int argc , char *argv[] ) {
+    TMRND_UINT loops = ( 1ull << 14 );
+    if( argc == 2 ) {
+        loops = 1ull << atoi(argv[1]);
+    }
+    std::random_device rd;
+    for( TMRND_ULONG loop=0 ; loop<loops ; loop++ ) {
+        CMRND_UINT BITS  = 1;
+        CMRND_UINT SHIFT = 6;
+        CMRND_UINT SKIP  = 30000*4;
+        TMRND_ULONG v    = 0;
+        for( TMRND_UINT i=0 ; i<MLimits<TMRND_ULONG>::digits() ; i += BITS ) {
+            for( TMRND_UINT i=0 ; i<SKIP ; i++ ) {
+                rd();
+            }
+            v = ( v << BITS ) | ( ( rd() >> SHIFT ) & ((1u<<BITS)-1) );
+        }
+        std::cout << "0x" <<  std::hex << v << "ull, ";
+        if( ((loop + 1) & 63) == 0 ) {
+            std::cout << "\n";
+        }
+//        std::cout.flush();
+    }
+    std::cout << std::endl;
+    std::cout <<  "generated " << std::dec << loops << " numbers" << std::endl;
+    return 0;
+}
 
+#endif

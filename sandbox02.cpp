@@ -23,17 +23,91 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-08 02:56:07 CET                               //
+/// @created on 2020-01-08 17:09:03 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 0b0fbb96-789c-4fd8-802d-50b3d0f3757f                       //
+/// @token 6c40e537-b017-4b16-ac6c-d93f81b29af9                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
 
-#include "rnd_comp.h"
+#ifdef SANDBOX02
+
+#include "rnd.h"
+#include <iostream>
+#include <MxCPP/mx_array.h>
 
 
+constexpr TMRND_UINT SIZE1 = 3;
+constexpr TMRND_UINT SIZE2 = 2;
+constexpr TMRND_UINT SIZE = SIZE1 + SIZE2;
+//constexpr TMRND_UINT BITS =  5;
+//constexpr TMRND_UINT MASK = ((1u<<BITS)-1);
+constexpr TMRND_UINT P1 = 9;
+constexpr TMRND_UINT P2 = 7;
+
+using TBuff = MxArray<TMRND_UINT,SIZE1+SIZE2>;
+
+
+int main( int argc , char *argv[] ) {
+    (void)argc;
+    (void)argv;
+    TRnd rnd(1233);
+    TBuff buff, copy, max;
+    max[0] =  61;
+    for( TMRND_UINT i=1 ; i<SIZE ; i++ ) {
+        max[i] = max[i-1] - 2;
+    }
+
+    for( TMRND_UINT i=0 ; i<SIZE ; i++ ) {
+        buff[i] = rnd() % (max[i]+1);
+    }
+    TMRND_UINT copy_crc=0,crc=0;
+    TMRND_UINT i1 = 0;
+    TMRND_UINT i2 = SIZE1;
+    TMRND_ULONG loop=0;
+    TMRND_UINT found = 0;
+    bool init = false;
+    while( found < 15 ) {
+        if( i1 >= SIZE1 ) i1 = 0;
+        if( i2 >= SIZE  ) i2 = SIZE1;
+        crc -= buff[i1] + buff[i2];
+        buff[i1] = buff[i1] + P1;
+        buff[i2] = buff[i2] + P2;
+        if( buff[i1] > max[i1] ) buff[i1] -= max[i1];
+        if( buff[i2] > max[i2] ) buff[i2] -= max[i2];
+        crc += buff[i1] + buff[i2];
+        loop ++ ;
+        if( init ) {
+            if( crc == copy_crc ) {
+                TMRND_UINT i=0;
+                while( i<SIZE && buff[i] == copy[i] ) {
+                    i++;
+                }
+                if( i == SIZE ) {
+                    std::cout << "found: " << loop << " " << i1 << " " << i2 << std::endl;
+                    loop = 0;
+                    found ++ ;
+                }
+            }
+        } else {
+            if( loop == 3000000 ) {
+                crc = 0;
+                for( TMRND_UINT i=0 ; i<SIZE ; i++ ) {
+                    crc += copy[i] = buff[i];
+                }
+                loop = 0;
+                copy_crc = crc;
+                init = true;
+            }
+        }
+        i1++;
+        i2++;
+    }
+    return 0;
+}
+
+
+#endif
