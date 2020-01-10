@@ -14,14 +14,15 @@ QMAKE_CXXFLAGS  += -mtune=native
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_LIN_1
+DEFINES += USE_RND_WYHASH64M_0
 DEFINES += USE_RND_BUFF_1a
 DEFINES += TMRND_RND_BUFF_V3
 DEFINES += USE_RND_F_BUFF_1a
 DEFINES += USE_RND_PROB_0
 
-DEFINES += MX_USING_ARRAY_2
-DEFINES += TEST01_PROGRAM
+#DEFINES += MX_USING_ARRAY_2
+DEFINES += TEST00_PROGRAM
+#DEFINES += SANDBOX02
 
 SOURCES += \
     rnd_base.cpp \
@@ -49,7 +50,8 @@ SOURCES += \
     rnd_mt1993764.cpp \
     rnd_ranlux48.cpp \
     rnd_knuthb.cpp \
-    sandbox01.cpp
+    sandbox01.cpp \
+    sandbox02.cpp
 
 HEADERS += \
     buffs.h \
