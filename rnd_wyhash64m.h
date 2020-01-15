@@ -58,7 +58,6 @@ private:
     TBUFF buff;
     TMRND_ULONG *i1, *i2;
     TMRND_ULONG *const end1, *const end2;
-    constexpr static CMRND_UINT SIZE_CHAOS = 12u;
 
 public:
     RndWyhash64m(CMRND_ULONG __sd=0xCD8533B4B9ED944Cull) : end1(&buff[0]+SIZE1), end2(end1+SIZE2) {
@@ -110,7 +109,6 @@ private:
 private:
     TBUFF buff;
     TMRND_UINT i1, i2;
-    constexpr static CMRND_UINT SIZE_CHAOS = 12u;
 
 public:
     RndWyhash64m(CMRND_ULONG __sd=0xCD8533B4B9ED944Cull) {
@@ -120,7 +118,7 @@ public:
         return *( new(this)RndWyhash64m(other) );
     }
     void seed(CMRND_ULONG __sd) {
-        initByChaos<TBUFF>(buff,SIZE1+SIZE2,__sd);
+        initByChaos<TBUFF>(buff, SIZE1+SIZE2, __sd );
         i1 = 0;
         i2 = SIZE1;
     }
@@ -135,34 +133,6 @@ public:
         t = (TMRND_ULONGLONG)m * CW;
         return (t >> 64) ^ t;
     }
-
-//    TMRND_RESULT operator()() {
-//        if( i1 >= SIZE1         ) i1 = 0;
-//        if( i2 >= SIZE1 + SIZE2 ) i2 = SIZE1;
-//        {
-//            CMRND_ULONG tmp = buff[i1];
-//            buff[i1] += AW1;
-//            if( buff[i1] < tmp ) {
-//                buff[i1] += i1 * 2;
-//            } else if( buff[i1] > 0xFFFFFFFFFFFFFFFFull - i1*2 ) {
-//                buff[i1] -= 0xFFFFFFFFFFFFFFFFull - i1*2;
-//            }
-//        }
-//        {
-//            CMRND_ULONG tmp = buff[i2];
-//            buff[i2] += AW2;
-//            if( buff[i2] < tmp ) {
-//                buff[i2] += i2 * 2;
-//            } else if( buff[i2] > 0xFFFFFFFFFFFFFFFFull - i2*2 ) {
-//                buff[i2] -= 0xFFFFFFFFFFFFFFFFull - i2*2;
-//            }
-//        }
-//        TMRND_ULONG x = buff[i1++] + buff[i2++];
-//        TMRND_ULONGLONG t = (TMRND_ULONGLONG)x * BW;
-//        CMRND_ULONG m = (t >> 64) ^ t;
-//        t = (TMRND_ULONGLONG)m * CW;
-//        return (t >> 64) ^ t;
-//    }
 
 };
 

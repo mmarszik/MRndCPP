@@ -39,12 +39,17 @@
 #include <iostream>
 #include <MxCPP/mx_array.h>
 
+template<typename T>
+inline static void rot( T &v , CMRND_UINT bits ) {
+    v = ( (v << 1) | ( ( v >> ( bits - 1 ) ) & 1 ) ) & ((1u<<bits)-1);
+}
 
-constexpr TMRND_UINT SIZE1 = 3;
-constexpr TMRND_UINT SIZE2 = 2;
+
+constexpr TMRND_UINT SIZE1 = 13;
+constexpr TMRND_UINT SIZE2 = 15;
 constexpr TMRND_UINT SIZE = SIZE1 + SIZE2;
-//constexpr TMRND_UINT BITS =  5;
-//constexpr TMRND_UINT MASK = ((1u<<BITS)-1);
+constexpr TMRND_UINT BITS =  12;
+constexpr TMRND_UINT MASK = ((1u<<BITS)-1);
 constexpr TMRND_UINT P1 = 9;
 constexpr TMRND_UINT P2 = 7;
 
@@ -54,15 +59,12 @@ using TBuff = MxArray<TMRND_UINT,SIZE1+SIZE2>;
 int main( int argc , char *argv[] ) {
     (void)argc;
     (void)argv;
-    TRnd rnd(1233);
-    TBuff buff, copy, max;
-    max[0] =  61;
-    for( TMRND_UINT i=1 ; i<SIZE ; i++ ) {
-        max[i] = max[i-1] - 2;
-    }
-
+    TRnd rnd(1250);
+    TBuff buff, copy, mask;
     for( TMRND_UINT i=0 ; i<SIZE ; i++ ) {
-        buff[i] = rnd() % (max[i]+1);
+        mask[i] = MASK ^ ( 1u << ( rnd() % (BITS-1) ) );
+        buff[i] = rnd() & mask[i];
+
     }
     TMRND_UINT copy_crc=0,crc=0;
     TMRND_UINT i1 = 0;
@@ -74,10 +76,10 @@ int main( int argc , char *argv[] ) {
         if( i1 >= SIZE1 ) i1 = 0;
         if( i2 >= SIZE  ) i2 = SIZE1;
         crc -= buff[i1] + buff[i2];
-        buff[i1] = buff[i1] + P1;
-        buff[i2] = buff[i2] + P2;
-        if( buff[i1] > max[i1] ) buff[i1] -= max[i1];
-        if( buff[i2] > max[i2] ) buff[i2] -= max[i2];
+        buff[i1] = (buff[i1] + P1) & MASK;
+        buff[i2] = (buff[i2] + P2) & MASK;
+        rot(buff[i1],BITS);
+        rot(buff[i2],BITS);
         crc += buff[i1] + buff[i2];
         loop ++ ;
         if( init ) {
