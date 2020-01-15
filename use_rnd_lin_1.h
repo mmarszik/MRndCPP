@@ -565,3 +565,92 @@ real	67m21.145s
 user	59m34.043s
 sys	7m44.978s
 */
+/* TEST01
+time ./MRndCPP | RNG_test stdin -singlethreaded -tlmax 345600s 
+RNG_test using PractRand version 0.93
+RNG = RNG_stdin, seed = 0x6146174f
+test set = normal, folding = standard(unknown format)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 64 megabytes (2^26 bytes), time= 2.3 seconds
+  no anomalies in 139 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 128 megabytes (2^27 bytes), time= 5.3 seconds
+  no anomalies in 151 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 256 megabytes (2^28 bytes), time= 10.4 seconds
+  no anomalies in 162 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 512 megabytes (2^29 bytes), time= 18.3 seconds
+  no anomalies in 171 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 1 gigabyte (2^30 bytes), time= 32.9 seconds
+  no anomalies in 183 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 2 gigabytes (2^31 bytes), time= 62.8 seconds
+  no anomalies in 194 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 4 gigabytes (2^32 bytes), time= 121 seconds
+  no anomalies in 203 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 8 gigabytes (2^33 bytes), time= 234 seconds
+  no anomalies in 215 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 16 gigabytes (2^34 bytes), time= 462 seconds
+  no anomalies in 226 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 32 gigabytes (2^35 bytes), time= 906 seconds
+  no anomalies in 235 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 64 gigabytes (2^36 bytes), time= 1816 seconds
+  no anomalies in 247 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 128 gigabytes (2^37 bytes), time= 3616 seconds
+  no anomalies in 258 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 256 gigabytes (2^38 bytes), time= 7314 seconds
+  Test Name                         Raw       Processed     Evaluation
+  [Low1/32]DC6-9x1Bytes-1           R=  -4.2  p =1-8.5e-3   unusual          
+  ...and 266 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x6146174f
+length= 512 gigabytes (2^39 bytes), time= 15862 seconds
+  no anomalies in 279 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 1 terabyte (2^40 bytes), time= 33266 seconds
+  no anomalies in 290 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 2 terabytes (2^41 bytes), time= 64213 seconds
+  no anomalies in 299 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 4 terabytes (2^42 bytes), time= 129447 seconds
+  no anomalies in 311 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 8 terabytes (2^43 bytes), time= 252718 seconds
+  no anomalies in 322 test result(s)
+
+rng=RNG_stdin, seed=0x6146174f
+length= 11.086 terabytes (2^43.471 bytes), time= 345607 seconds
+  no anomalies in 327 test result(s)
+
+
+real	5760m9.669s
+user	5633m47.849s
+sys	120m57.730s
+*/

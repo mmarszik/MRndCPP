@@ -46,3 +46,9 @@ USE_RND_LIN_1
 ../use_rnd_lin_1.h
 USE_RND_FIB_4
 ../use_rnd_fib_4.h
+USE_RND_FIB_2
+../use_rnd_fib_2.h
+USE_RND_LIN_2
+../use_rnd_lin_2.h
+USE_RND_FIB_5
+../use_rnd_fib_5.h
