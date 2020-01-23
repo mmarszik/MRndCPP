@@ -834,3 +834,100 @@ real	99m2.022s
 user	87m27.827s
 sys	11m30.003s
 */
+/* TEST01
+time ./MRndCPP | RNG_test stdin -singlethreaded -tlmax 345600s 
+RNG_test using PractRand version 0.93
+RNG = RNG_stdin, seed = 0x157e811f
+test set = normal, folding = standard(unknown format)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 32 megabytes (2^25 bytes), time= 2.0 seconds
+  no anomalies in 130 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 64 megabytes (2^26 bytes), time= 5.1 seconds
+  Test Name                         Raw       Processed     Evaluation
+  DC6-9x1Bytes-1                    R=  +5.4  p =  8.6e-3   unusual          
+  [Low4/32]BCFN(2+2,13-6,T)         R= +11.0  p =  3.3e-4   unusual          
+  [Low1/32]DC6-9x1Bytes-1           R=  +6.2  p =  2.6e-3   unusual          
+  ...and 136 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x157e811f
+length= 128 megabytes (2^27 bytes), time= 9.2 seconds
+  no anomalies in 151 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 256 megabytes (2^28 bytes), time= 16.1 seconds
+  no anomalies in 162 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 512 megabytes (2^29 bytes), time= 27.9 seconds
+  no anomalies in 171 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 1 gigabyte (2^30 bytes), time= 51.1 seconds
+  no anomalies in 183 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 2 gigabytes (2^31 bytes), time= 94.0 seconds
+  no anomalies in 194 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 4 gigabytes (2^32 bytes), time= 180 seconds
+  no anomalies in 203 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 8 gigabytes (2^33 bytes), time= 350 seconds
+  no anomalies in 215 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 16 gigabytes (2^34 bytes), time= 691 seconds
+  Test Name                         Raw       Processed     Evaluation
+  DC6-9x1Bytes-1                    R=  +4.6  p =  8.6e-3   unusual          
+  ...and 225 test result(s) without anomalies
+
+rng=RNG_stdin, seed=0x157e811f
+length= 32 gigabytes (2^35 bytes), time= 1369 seconds
+  no anomalies in 235 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 64 gigabytes (2^36 bytes), time= 2778 seconds
+  no anomalies in 247 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 128 gigabytes (2^37 bytes), time= 5647 seconds
+  no anomalies in 258 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 256 gigabytes (2^38 bytes), time= 11551 seconds
+  no anomalies in 267 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 512 gigabytes (2^39 bytes), time= 23610 seconds
+  no anomalies in 279 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 1 terabyte (2^40 bytes), time= 45996 seconds
+  no anomalies in 290 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 2 terabytes (2^41 bytes), time= 89350 seconds
+  no anomalies in 299 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 4 terabytes (2^42 bytes), time= 165869 seconds
+  no anomalies in 311 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 8 terabytes (2^43 bytes), time= 300109 seconds
+  no anomalies in 322 test result(s)
+
+rng=RNG_stdin, seed=0x157e811f
+length= 9.415 terabytes (2^43.235 bytes), time= 345604 seconds
+  no anomalies in 326 test result(s)
+
+
+real	5760m5.817s
+user	5650m40.514s
+sys	198m59.497s
+*/
