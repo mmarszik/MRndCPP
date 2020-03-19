@@ -15,9 +15,9 @@ do
    echo  $header
 
    c++ -std=c++14 -O3 -mtune=native -march=native -D$GENERATOR -DTEST00_PROGRAM -I../vendor/ ../*.cpp  -o $prog
-   { time ./$prog 12 > $test; } 2> $time
+   { time ./$prog 14 > $test; } 2> $time
    echo "/* TEST00"                                                      >> $header
-   echo "time ./MRndCPP 12 "                                             >> $header
+   echo "time ./MRndCPP 14 "                                             >> $header
    cat $test                                                             >> $header
    cat $time                                                             >> $header
    echo "*/"                                                             >> $header
@@ -30,12 +30,22 @@ do
    cat $time                                                             >> $header
    echo "*/"                                                             >> $header
 
+   for i in {1..24}
+      do
+      { time ./$prog | ./../../PractRand/RNG_test stdin -singlethreaded -tlmax 3600s > $test; } 2> $time
+      echo "/* TEST01"                                                      >> $header
+      echo "time ./MRndCPP | RNG_test stdin -singlethreaded -tlmax 3600s "  >> $header
+      cat $test                                                             >> $header
+      cat $time                                                             >> $header
+      echo "*/"                                                             >> $header   
+      done
+   
    { time ./$prog | ./../../PractRand/RNG_test stdin -singlethreaded -tlmax 345600s > $test; } 2> $time
-   echo "/* TEST01"                                                      >> $header
+   echo "/* TEST01"                                                       >> $header
    echo "time ./MRndCPP | RNG_test stdin -singlethreaded -tlmax 345600s " >> $header
-   cat $test                                                             >> $header
-   cat $time                                                             >> $header
-   echo "*/"                                                             >> $header
+   cat $test                                                              >> $header
+   cat $time                                                              >> $header
+   echo "*/"                                                              >> $header
    
 done
 
