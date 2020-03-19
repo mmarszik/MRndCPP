@@ -23,37 +23,14 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-09 20:57:15 CET                               //
+/// @created on 2020-03-18 19:00:42 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token e04feeea-148b-4df8-b67f-a50d6d1762b1                       //
+/// @token 92a2bd8e-3656-46bb-b83e-8c7d99addde6                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#pragma once
-
-using TMRND_INT = int;
-using TMRND_UINT = unsigned int;
-using TMRND_UBYTE = unsigned char;
-using TMRND_LONG = long long;
-using CMRND_LONG = const TMRND_LONG;
-using TMRND_ULONG = unsigned long long;
-using CMRND_ULONG = const TMRND_ULONG;
-using TMRND_FLOAT = double;
-using TMRND_LONGLONG = __int128_t;
-using TMRND_ULONGLONG = __uint128_t;
-
-using CMRND_UINT = const TMRND_UINT;
-using CMRND_FLOAT = const TMRND_FLOAT;
-using CMRND_LONGLONG = const TMRND_LONGLONG;
-using CMRND_ULONGLONG = const TMRND_ULONGLONG;
-using CMRND_UBYTE = const TMRND_UBYTE;
-
-using TMRND_RESULT  = TMRND_UINT;
-using CMRND_RESULT  = const TMRND_RESULT;
-
-using TMRND_IRESULT = TMRND_INT;
-using CMRND_IRESULT = const TMRND_IRESULT;
+#include "rnd_blin.h"
 

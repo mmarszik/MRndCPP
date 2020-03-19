@@ -45,20 +45,23 @@ static void initByChaos(
     TARRAY       &buff,
     CMRND_UINT   SIZE,
     TMRND_ULONG  seed,
-    CMRND_UINT   XORS  =   5,
-    CMRND_UINT   SKIPS = 100
+    CMRND_UINT   XORS  = 17,
+    CMRND_UINT   SKIPS = 71
 ) {
     static CMRND_ULONG A =  543657589ull;
     static CMRND_ULONG B = 4253133281ull;
     for( TMRND_UINT i=0 ; i<XORS ; i++ ) {
         for( TMRND_UINT j=0 ; j<SIZE ; j++ ) {
-            if( i== 0 ) {
+            if( i == 0 ) {
                 buff[j] = 0;
             }
             for( TMRND_UINT k=0 ; k<SKIPS ; k++ ) {
                 seed = seed * A + B;
             }
-            CMRND_UINT v1 = (seed = seed * A + B) >> (MLimits<decltype(seed)>::digits() - CMRND_INIT_CHAOS_SIZE);
+            CMRND_UINT v1 = seed >> (MLimits<decltype(seed)>::digits() - CMRND_INIT_CHAOS_SIZE);
+            for( TMRND_UINT k=0 ; k<SKIPS ; k++ ) {
+                seed = seed * A + B;
+            }
             buff[j] ^= CMRND_INIT_CHAOS[v1] + seed;
         }
     }
