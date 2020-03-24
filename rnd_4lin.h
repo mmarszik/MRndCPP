@@ -23,61 +23,72 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-11-30, 09:14:33 CET                              //
+/// @created on 2020-03-24 13:26:04 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token becb9f33-4018-48b1-b41d-6147f9dedb2c                       //
+/// @token 069ac6b3-98e6-4728-89d1-505e72039423                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#include "defs.h"
+#include "rnd_base.h"
 
-#if defined( USE_RND_WYHASH64_0 )
-    #include "use_rnd_wyhash64_0.h"
-#elif  defined( USE_RND_WYHASH64M_0 )
-    #include "use_rnd_wyhash64m_0.h"
+class Rnd4Lin : public RndBase {
+private:
+    TMRND_ULONG a,b,c,d,e;
+    TMRND_UINT s1,s2,s3,s4,s5;
+private:
+    static TMRND_UINT perm( CMRND_ULONG a, CMRND_ULONG b, CMRND_ULONG c) {
+        return (TMRND_UINT) ( (a >> (64-11)) | ((b >> (64-11)) << 11) | ((c >> (64-10))<<22) );
+    }
+    static bool test( TMRND_UINT &s , CMRND_UINT max) {
+        if( s++ < max ) {
+            return false;
+        }
+        s = 0;
+        return true;
+    }
+    static void next( TMRND_ULONG &v, CMRND_ULONG A, CMRND_ULONG B ) {
+        v = v * A + B;
+    }
+    static void next( TMRND_ULONG &v, TMRND_UINT &s, CMRND_UINT max, CMRND_ULONG A, CMRND_ULONG B ) {
+        next( v , A , B );
+        if( test( s , max ) ) {
+            next( v , A , B );
+        }
+    }
+public:
+    Rnd4Lin( CMRND_ULONG __sd) {
+        seed( __sd );
+    }
+    void seed( CMRND_ULONG __sd ) {
+        a = __sd ^ 0x140CA25429E95B21ull;
+        b = __sd ^ 0x4A37D2E9E5D5C6A3ull;
+        c = __sd ^ 0xD76C0A509DACE77Dull;
+        d = __sd ^ 0x2C5A00D35721B705ull;
+        e = __sd ^ 0x944AC881D66E20A3ull;
+        s1 = s2 = s3 = s4 = s5 = 0;
+    }
+    TMRND_RESULT operator ()() {
+        next( a , s1 ,  6 , 195366727ull,  3788059271ull );
+        next( b , s2 , 10 , 201733549ull,  6004841807ull );
+        next( c , s3 , 12 ,  87604849ull, 11409409549ull );
+        next( d , s4 , 16 , 219699203ull, 16379749871ull );
+        next( e , s5 , 18 , 186217943ull, 36457959557ull );
+        switch( a >> 61 ) {
+            case 0:  return perm(b,c,d) ^ (e>>31);
+            case 1:  return perm(b,c,d) ^ (e>>32);
+            case 2:  return perm(b,d,c) ^ (e>>31);
+            case 3:  return perm(b,d,c) ^ (e>>32);
+            case 4:  return perm(c,b,d) ^ (e>>32);
+            case 5:  return perm(c,d,b) ^ (e>>32);
+            case 6:  return perm(d,b,c) ^ (e>>32);
+            default: return perm(d,c,b) ^ (e>>32);
+        }
+    }
 
-#elif  defined( USE_RND_FIB_1 )
-    #include "use_rnd_fib_1.h"
-#elif  defined( USE_RND_FIB_2 )
-    #include "use_rnd_fib_2.h"
-#elif  defined( USE_RND_FIB_3 )
-    #include "use_rnd_fib_3.h"
-#elif  defined( USE_RND_FIB_4 )
-    #include "use_rnd_fib_4.h"
-#elif  defined( USE_RND_FIB_5 )
-    #include "use_rnd_fib_5.h"
-#elif  defined( USE_RND_FIB_6 )
-    #include "use_rnd_fib_6.h"
+};
 
-#elif  defined( USE_RND_RANLUX_48 )
-    #include "use_rnd_ranlux_48.h"
-#elif  defined( USE_RND_MT19937_64 )
-    #include "use_rnd_mt19937_64.h"
-
-#elif  defined( USE_RND_MLIN_0 )
-    #include "use_rnd_mlin_0.h"
-#elif  defined( USE_RND_BLIN_0 )
-    #include "use_rnd_blin_0.h"
-#elif  defined( USE_RND_4LIN_0 )
-    #include "use_rnd_4lin_0.h"
-
-#elif  defined( USE_RND_LIN_1 )
-    #include "use_rnd_lin_1.h"
-#elif  defined( USE_RND_LIN_2 )
-    #include "use_rnd_lin_2.h"
-#elif  defined( USE_RND_LIN_3 )
-    #include "use_rnd_lin_3.h"
-#elif  defined( USE_RND_LIN_4 )
-    #include "use_rnd_lin_4.h"
-#elif  defined( USE_RND_LIN_5 )
-    #include "use_rnd_lin_5.h"
-#elif  defined( USE_RND_LIN_6 )
-    #include "use_rnd_lin_6.h"
-
-
-#endif
