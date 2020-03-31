@@ -23,37 +23,17 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-09 20:57:15 CET                               //
+/// @created on 2020-03-24 13:30:14 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token e04feeea-148b-4df8-b67f-a50d6d1762b1                       //
+/// @token 2fcd0eed-5c70-4065-9c3a-edeae10818ef                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-using TMRND_U8   = unsigned char;
-using TMRND_I32  = int;
-using TMRND_U32  = unsigned int;
-using TMRND_I64  = long long;
-using TMRND_U64  = unsigned long long;
-using TMRND_F64  = double;
-using TMRND_I128 = __int128_t;
-using TMRND_U128 = __uint128_t;
+#include "rnd_4lin.h"
 
-using CMRND_U8   = const TMRND_U8;
-using CMRND_U32  = const TMRND_U32;
-using CMRND_I64  = const TMRND_I64;
-using CMRND_U64  = const TMRND_U64;
-using CMRND_F64  = const TMRND_F64;
-using CMRND_I128 = const TMRND_I128;
-using CMRND_U128 = const TMRND_U128;
-
-using TMRND_RESULT  = TMRND_U32;
-using CMRND_RESULT  = const TMRND_RESULT;
-
-using TMRND_IRESULT = TMRND_I32;
-using CMRND_IRESULT = const TMRND_IRESULT;
-
+using TRnd = Rnd4Lin;

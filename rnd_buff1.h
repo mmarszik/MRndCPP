@@ -200,22 +200,22 @@ public:
 
 #else
 
-template<CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE1*SIZE2*2>
+template<CMRND_U32 SIZE1, CMRND_U32 SIZE2, CMRND_U32 RESET=SIZE1*SIZE2*2>
 class RndBuff1 {
 private:
     using TBuff1 = MxArray<TMRND_IRESULT,SIZE1+SIZE2>;
 private:
-    TMRND_UINT     i3;
+    TMRND_U32     i3;
     TRnd           &rnd;        // Pseudo random number generator.
     TMRND_IRESULT  min, max;    // Min range.
     TBuff1         buff;        // N-Cyclic buffer to number generator.
-    TMRND_UINT     select;      // Select first or second buffer.
+    TMRND_U32     select;      // Select first or second buffer.
     CMRND_IRESULT  *i1, *i2;
     CMRND_IRESULT  *const end1, *const end2;
 
 private:
     void reset() {
-        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+        for( TMRND_U32 i=0 ; i<SIZE1+SIZE2 ; i++ ) {
             buff[i] = rnd.range(min,max);
         }
     }
@@ -230,7 +230,7 @@ public:
         this->i2  = this->buff + (other.i2 - &other.buff[0]);
         this->i3  = other.i3;
         this->select = other.select;
-        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+        for( TMRND_U32 i=0 ; i<SIZE1+SIZE2 ; i++ ) {
             buff[i] = other.buff[i];
         }
     }

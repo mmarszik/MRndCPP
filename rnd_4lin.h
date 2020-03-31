@@ -23,37 +23,72 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-09 20:57:15 CET                               //
+/// @created on 2020-03-24 13:26:04 CET                               //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token e04feeea-148b-4df8-b67f-a50d6d1762b1                       //
+/// @token 069ac6b3-98e6-4728-89d1-505e72039423                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-using TMRND_U8   = unsigned char;
-using TMRND_I32  = int;
-using TMRND_U32  = unsigned int;
-using TMRND_I64  = long long;
-using TMRND_U64  = unsigned long long;
-using TMRND_F64  = double;
-using TMRND_I128 = __int128_t;
-using TMRND_U128 = __uint128_t;
+#include "rnd_base.h"
 
-using CMRND_U8   = const TMRND_U8;
-using CMRND_U32  = const TMRND_U32;
-using CMRND_I64  = const TMRND_I64;
-using CMRND_U64  = const TMRND_U64;
-using CMRND_F64  = const TMRND_F64;
-using CMRND_I128 = const TMRND_I128;
-using CMRND_U128 = const TMRND_U128;
+class Rnd4Lin : public RndBase {
+private:
+    TMRND_U64 a,b,c,d,e;
+    TMRND_U32 s1,s2,s3,s4,s5;
+private:
+    static TMRND_U32 perm( CMRND_U64 a, CMRND_U64 b, CMRND_U64 c) {
+        return (TMRND_U32) ( (a >> (64-11)) | ((b >> (64-11)) << 11) | ((c >> (64-10))<<22) );
+    }
+    static bool test( TMRND_U32 &s , CMRND_U32 max) {
+        if( s++ < max ) {
+            return false;
+        }
+        s = 0;
+        return true;
+    }
+    static void next( TMRND_U64 &v, CMRND_U64 A, CMRND_U64 B ) {
+        v = v * A + B;
+    }
+    static void next( TMRND_U64 &v, TMRND_U32 &s, CMRND_U32 max, CMRND_U64 A, CMRND_U64 B ) {
+        next( v , A , B );
+        if( test( s , max ) ) {
+            next( v , A , B );
+        }
+    }
+public:
+    Rnd4Lin( CMRND_U64 __sd) {
+        seed( __sd );
+    }
+    void seed( CMRND_U64 __sd ) {
+        a = __sd ^ 0x140CA25429E95B21ull;
+        b = __sd ^ 0x4A37D2E9E5D5C6A3ull;
+        c = __sd ^ 0xD76C0A509DACE77Dull;
+        d = __sd ^ 0x2C5A00D35721B705ull;
+        e = __sd ^ 0x944AC881D66E20A3ull;
+        s1 = s2 = s3 = s4 = s5 = 0;
+    }
+    TMRND_RESULT operator ()() {
+        next( a , s1 ,  6 , 195366727ull,  3788059271ull );
+        next( b , s2 , 10 , 201733549ull,  6004841807ull );
+        next( c , s3 , 12 ,  87604849ull, 11409409549ull );
+        next( d , s4 , 16 , 219699203ull, 16379749871ull );
+        next( e , s5 , 18 , 186217943ull, 36457959557ull );
+        switch( a >> 61 ) {
+            case 0:  return perm(b,c,d) ^ (e>>31);
+            case 1:  return perm(b,c,d) ^ (e>>32);
+            case 2:  return perm(b,d,c) ^ (e>>31);
+            case 3:  return perm(b,d,c) ^ (e>>32);
+            case 4:  return perm(c,b,d) ^ (e>>32);
+            case 5:  return perm(c,d,b) ^ (e>>32);
+            case 6:  return perm(d,b,c) ^ (e>>32);
+            default: return perm(d,c,b) ^ (e>>32);
+        }
+    }
 
-using TMRND_RESULT  = TMRND_U32;
-using CMRND_RESULT  = const TMRND_RESULT;
-
-using TMRND_IRESULT = TMRND_I32;
-using CMRND_IRESULT = const TMRND_IRESULT;
+};
 

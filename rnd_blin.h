@@ -40,25 +40,25 @@
 
 class RndBLin : public RndBase {
 private:
-    static constexpr TMRND_UINT SIZE0 = 8;
-    static constexpr TMRND_UINT SIZE1 = (1 << SIZE0) + sizeof(TMRND_ULONG) - 1;
+    static constexpr TMRND_U32 SIZE0 = 8;
+    static constexpr TMRND_U32 SIZE1 = (1 << SIZE0) + sizeof(TMRND_U64) - 1;
 private:
-    using TBUFF = MxArray<TMRND_UBYTE, SIZE1>;
+    using TBUFF = MxArray<TMRND_U8, SIZE1>;
 private:
     TBUFF buff;
-    TMRND_ULONG v;
+    TMRND_U64 v;
 
 public:
-    RndBLin(CMRND_ULONG __sd=0xC9EC74DDDA2D1E1Aull) {
+    RndBLin(CMRND_U64 __sd=0xC9EC74DDDA2D1E1Aull) {
         seed(__sd);
     }
-    void seed(CMRND_ULONG __sd) {
+    void seed(CMRND_U64 __sd) {
         initByChaos<TBUFF>(buff, SIZE1, __sd );
     }
     TMRND_RESULT operator()() {
         v = v * 543657589ull + 4253133281ull;
-        CMRND_ULONG x = v >> ( MLimits<TMRND_ULONG>::digits() - SIZE0 );
-        TMRND_ULONG *const i = (TMRND_ULONG*)( &buff[0] + x );
+        CMRND_U64 x = v >> ( MLimits<TMRND_U64>::digits() - SIZE0 );
+        TMRND_U64 *const i = (TMRND_U64*)( &buff[0] + x );
         return ( *i = *i * 12102661ull + 15425444914155312697ull ) >> 32;
     }
 };

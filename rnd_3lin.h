@@ -23,37 +23,56 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-09 20:57:15 CET                               //
+/// @created on 2020-03-31 16:40:30 CEST                              //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token e04feeea-148b-4df8-b67f-a50d6d1762b1                       //
+/// @token b9bd7b39-f7a3-4e09-baa4-f4d6bc6e8b20                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-using TMRND_U8   = unsigned char;
-using TMRND_I32  = int;
-using TMRND_U32  = unsigned int;
-using TMRND_I64  = long long;
-using TMRND_U64  = unsigned long long;
-using TMRND_F64  = double;
-using TMRND_I128 = __int128_t;
-using TMRND_U128 = __uint128_t;
+#include "rnd_base.h"
 
-using CMRND_U8   = const TMRND_U8;
-using CMRND_U32  = const TMRND_U32;
-using CMRND_I64  = const TMRND_I64;
-using CMRND_U64  = const TMRND_U64;
-using CMRND_F64  = const TMRND_F64;
-using CMRND_I128 = const TMRND_I128;
-using CMRND_U128 = const TMRND_U128;
+class Rnd3Lin : public RndBase {
+private:
+    TMRND_U64 a,b,c;
+    TMRND_U32 sa,sb,sc;
+private:
+    static bool test( TMRND_U32 &s , CMRND_U32 max) {
+        if( s++ < max ) {
+            return false;
+        }
+        s = 0;
+        return true;
+    }
+    static void next( TMRND_U64 &v, CMRND_U64 A, CMRND_U64 B ) {
+        v = v * A + B;
+    }
+    static void next( TMRND_U64 &v, TMRND_U32 &s, CMRND_U32 max, CMRND_U64 A, CMRND_U64 B ) {
+        next( v , A , B );
+        if( test( s , max ) ) {
+            next( v , A , B );
+        }
+    }
+public:
+    Rnd3Lin( CMRND_U64 __sd) {
+        seed( __sd );
+    }
+    void seed( CMRND_U64 __sd ) {
+        a = __sd ^ 0x140CA25429E95B21ull;
+        b = __sd ^ 0x4A37D2E9E5D5C6A3ull;
+        c = __sd ^ 0xD76C0A509DACE77Dull;
+        sa = sb = sc = 0;
+    }
+    TMRND_RESULT operator ()() {
+        next( a , sa ,  6 , 195366727ull,  3788059271ull );
+        next( b , sb , 10 , 201733549ull,  6004841807ull );
+        next( c , sc , 12 ,  87604849ull, 11409409549ull );
+        return (TMRND_RESULT) ( ( ( a >> 48 ) | ( ( b >> 48 ) << 16 ) ) ^ ( c >> 32 ) );
+    }
 
-using TMRND_RESULT  = TMRND_U32;
-using CMRND_RESULT  = const TMRND_RESULT;
-
-using TMRND_IRESULT = TMRND_I32;
-using CMRND_IRESULT = const TMRND_IRESULT;
+};
 

@@ -37,29 +37,29 @@
 #include "defs.h"
 #include <MiscCPP/m_limits.h>
 
-constexpr CMRND_UINT CMRND_INIT_CHAOS_SIZE = 14U;
-extern CMRND_ULONG CMRND_INIT_CHAOS[ 1u << CMRND_INIT_CHAOS_SIZE ];
+constexpr CMRND_U32 CMRND_INIT_CHAOS_SIZE = 14U;
+extern CMRND_U64 CMRND_INIT_CHAOS[ 1u << CMRND_INIT_CHAOS_SIZE ];
 
 template<typename TARRAY>
 static void initByChaos(
     TARRAY       &buff,
-    CMRND_UINT   SIZE,
-    TMRND_ULONG  seed,
-    CMRND_UINT   XORS  = 17,
-    CMRND_UINT   SKIPS = 71
+    CMRND_U32   SIZE,
+    TMRND_U64  seed,
+    CMRND_U32   XORS  = 17,
+    CMRND_U32   SKIPS = 71
 ) {
-    static CMRND_ULONG A =  543657589ull;
-    static CMRND_ULONG B = 4253133281ull;
-    for( TMRND_UINT i=0 ; i<XORS ; i++ ) {
-        for( TMRND_UINT j=0 ; j<SIZE ; j++ ) {
+    static CMRND_U64 A =  543657589ull;
+    static CMRND_U64 B = 4253133281ull;
+    for( TMRND_U32 i=0 ; i<XORS ; i++ ) {
+        for( TMRND_U32 j=0 ; j<SIZE ; j++ ) {
             if( i == 0 ) {
                 buff[j] = 0;
             }
-            for( TMRND_UINT k=0 ; k<SKIPS ; k++ ) {
+            for( TMRND_U32 k=0 ; k<SKIPS ; k++ ) {
                 seed = seed * A + B;
             }
-            CMRND_UINT v1 = seed >> (MLimits<decltype(seed)>::digits() - CMRND_INIT_CHAOS_SIZE);
-            for( TMRND_UINT k=0 ; k<SKIPS ; k++ ) {
+            CMRND_U32 v1 = seed >> (MLimits<decltype(seed)>::digits() - CMRND_INIT_CHAOS_SIZE);
+            for( TMRND_U32 k=0 ; k<SKIPS ; k++ ) {
                 seed = seed * A + B;
             }
             buff[j] ^= CMRND_INIT_CHAOS[v1] + seed;

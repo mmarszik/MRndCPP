@@ -43,12 +43,12 @@ class RndComp : public RndBase {
 private:
     TRnd1 rnd1;
     TRnd2 rnd2;
-    TMRND_UINT i1;
+    TMRND_U32 i1;
 public:
-    RndComp( CMRND_ULONG __sd ) {
+    RndComp( CMRND_U64 __sd ) {
         seed( __sd );
     }
-    void seed( CMRND_ULONG __sd ) {
+    void seed( CMRND_U64 __sd ) {
         rnd1.seed( __sd ^ 0x4B3B2985634D008 );
         rnd2.seed( __sd ^ 0x73CD8A180586D6A );
         i1 = 0;
