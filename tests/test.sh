@@ -30,7 +30,7 @@ do
    cat $time                                                             >> $header
    echo "*/"                                                             >> $header
 
-   for i in {1..24}
+   for i in {1..2}
       do
       { time ./$prog | ./../../PractRand/RNG_test stdin -singlethreaded -tlmax 3600s > $test; } 2> $time
       echo "/* TEST01"                                                      >> $header
@@ -39,14 +39,7 @@ do
       cat $time                                                             >> $header
       echo "*/"                                                             >> $header   
       done
-   
-   { time ./$prog | ./../../PractRand/RNG_test stdin -singlethreaded -tlmax 345600s > $test; } 2> $time
-   echo "/* TEST01"                                                       >> $header
-   echo "time ./MRndCPP | RNG_test stdin -singlethreaded -tlmax 345600s " >> $header
-   cat $test                                                              >> $header
-   cat $time                                                              >> $header
-   echo "*/"                                                              >> $header
-   
+      
 done
 
 rm $prog

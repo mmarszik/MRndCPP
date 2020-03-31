@@ -179,20 +179,20 @@ public:
 
 #else
 
-template<class TRND, CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE1*SIZE2>
+template<class TRND, CMRND_U32 SIZE1, CMRND_U32 SIZE2, CMRND_U32 RESET=SIZE1*SIZE2>
 class RndAddRot : public RndBase {
 private:
     using TBUFF = MxArray<TMRND_RESULT, SIZE1+SIZE2>;
 private:
     TRND       rnd;
     TBUFF      buff;
-    TMRND_UINT *i1,*i2;
-    TMRND_UINT *const end1, *const end2;
-    TMRND_UINT i3;
+    TMRND_U32 *i1,*i2;
+    TMRND_U32 *const end1, *const end2;
+    TMRND_U32 i3;
 
 private:
     void reset() {
-        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+        for( TMRND_U32 i=0 ; i<SIZE1+SIZE2 ; i++ ) {
             buff[i] = rnd();
         }
     }
@@ -205,7 +205,7 @@ public:
     }
     RndAddRot( const RndAddRot &other ) : end1(&buff[0]+SIZE1),end2(end1+SIZE2) {
         rnd = other.rnd;
-        for( TMRND_UINT i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+        for( TMRND_U32 i=0 ; i<SIZE1+SIZE2 ; i++ ) {
             buff[i] = other.buff[i];
         }
         this->i1  = this->buff + (other.i1 - &other.buff[0]);

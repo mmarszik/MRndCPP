@@ -40,21 +40,21 @@
 #include "rnd.h"
 
 int main( int argc , char *argv[] ) {
-    TMRND_ULONG loops = 1ull << 15;
+    TMRND_U64 loops = 1ull << 15;
     if( argc == 2 ) {
         loops = 1ull << atoi(argv[1]);
     }
-    CMRND_ULONG seed = 1234567890ull;
+    CMRND_U64 seed = 1234567890ull;
     TRnd rnd( seed );
-    TMRND_ULONG x = 0;
-    for( TMRND_UINT i=0 ; i<10 ; i++ ) {
-        for( TMRND_UINT i=0 ; i<10000 ; i++ ) {
+    TMRND_U64 x = 0;
+    for( TMRND_U32 i=0 ; i<10 ; i++ ) {
+        for( TMRND_U32 i=0 ; i<10000 ; i++ ) {
             rnd();
         }
         std::cout << rnd() << std::endl;
     }
-    for( TMRND_ULONG i=0 ; i<loops ; i++ ) {
-        for( TMRND_ULONG i=0 ; i<(1ull<<20u) ; i++ ) {
+    for( TMRND_U64 i=0 ; i<loops ; i++ ) {
+        for( TMRND_U64 i=0 ; i<(1ull<<20u) ; i++ ) {
             x += rnd();
         }
         // simply hash/crc

@@ -14,7 +14,7 @@ QMAKE_CXXFLAGS  += -mtune=native
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_4LIN_0
+DEFINES += USE_RND_3LIN_0
 DEFINES += USE_RND_BUFF_1a
 DEFINES += TMRND_RND_BUFF_V3
 DEFINES += USE_RND_F_BUFF_1a
@@ -22,6 +22,7 @@ DEFINES += USE_RND_PROB_0
 
 DEFINES += MX_USING_ARRAY_2
 DEFINES += TEST01_PROGRAM
+
 #DEFINES += SANDBOX02
 
 SOURCES += \
@@ -53,7 +54,8 @@ SOURCES += \
     sandbox01.cpp \
     sandbox02.cpp \
     rnd_blin.cpp \
-    rnd_4lin.cpp
+    rnd_4lin.cpp \
+    rnd_3lin.cpp
 
 HEADERS += \
     buffs.h \
@@ -119,7 +121,9 @@ HEADERS += \
     rnd_blin.h \
     use_rnd_blin_0.h \
     rnd_4lin.h \
-    use_rnd_4lin_0.h
+    use_rnd_4lin_0.h \
+    rnd_3lin.h \
+    use_rnd_3lin_0.h
 
 DISTFILES += \
     createAtC++.sh \

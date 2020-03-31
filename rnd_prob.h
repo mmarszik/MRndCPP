@@ -45,11 +45,11 @@ template<class TRND>
 class RndProb {
 private:
     TRND &rnd;
-    TMRND_ULONG p;
+    TMRND_U64 p;
     static_assert( sizeof(p) > sizeof(TMRND_RESULT) , "sizeof(p) > sizeof(TMRND_RESULT)" );
 
 public:
-    RndProb(TRND &rnd, CMRND_FLOAT p=1) : rnd(rnd) {
+    RndProb(TRND &rnd, CMRND_F64 p=1) : rnd(rnd) {
         setP( p );
     }
     RndProb(const RndProb& other) : rnd(other.rnd) {
@@ -58,8 +58,8 @@ public:
     RndProb& operator = (const RndProb& other) {
         return *( new(this)RndProb(other) );
     }
-    void setP( CMRND_FLOAT p ) {
-        this->p = static_cast<TMRND_ULONG>(p * ( TRND::max() + 1.0 ) );
+    void setP( CMRND_F64 p ) {
+        this->p = static_cast<TMRND_U64>(p * ( TRND::max() + 1.0 ) );
     }
     bool operator()() {
         return rnd() < p;

@@ -41,27 +41,27 @@
 //MM: Multi-linear psuedo random numbers generator.
 class RndMLin : public RndBase {
 private:
-    static constexpr TMRND_UINT SIZE0 = 4;
-    static constexpr TMRND_UINT SIZE1 = 1 << SIZE0;
+    static constexpr TMRND_U32 SIZE0 = 4;
+    static constexpr TMRND_U32 SIZE1 = 1 << SIZE0;
 private:
-    using TBUFF = MxArray<TMRND_ULONGLONG, SIZE1>;
+    using TBUFF = MxArray<TMRND_U128, SIZE1>;
 private:
-    const static MxArray<TMRND_ULONG, SIZE1> A;
-    const static MxArray<TMRND_ULONG, SIZE1> B;
+    const static MxArray<TMRND_U64, SIZE1> A;
+    const static MxArray<TMRND_U64, SIZE1> B;
     TBUFF buff;
-    TMRND_ULONG v;
-    TMRND_UINT  x;
+    TMRND_U64 v;
+    TMRND_U32  x;
 
 public:
-    RndMLin(CMRND_ULONG __sd=0xC9EC74DDDA2D1E1Aull) {
+    RndMLin(CMRND_U64 __sd=0xC9EC74DDDA2D1E1Aull) {
         seed(__sd);
     }
-    void seed(CMRND_ULONG __sd) {
+    void seed(CMRND_U64 __sd) {
         initByChaos<TBUFF>(buff, SIZE1, __sd );
     }
     TMRND_RESULT operator()() {
         v = v * 543657589ull + 4253133281ull;
-        CMRND_UINT i = v >> ( MLimits<decltype(v)>::digits() - SIZE0 );
+        CMRND_U32 i = v >> ( MLimits<decltype(v)>::digits() - SIZE0 );
         return ( buff[i] = buff[i] * A[i] + B[i] ) >> 95;
     }
 };

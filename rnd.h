@@ -65,6 +65,8 @@
     #include "use_rnd_blin_0.h"
 #elif  defined( USE_RND_4LIN_0 )
     #include "use_rnd_4lin_0.h"
+#elif  defined( USE_RND_3LIN_0 )
+    #include "use_rnd_3lin_0.h"
 
 #elif  defined( USE_RND_LIN_1 )
     #include "use_rnd_lin_1.h"

@@ -19,11 +19,11 @@ public:
         return range(0,_max);
     }
     //Get float between <_min,_max>
-    TMRND_FLOAT getFloat(CMRND_FLOAT _min, CMRND_FLOAT _max) {
+    TMRND_F64 getFloat(CMRND_F64 _min, CMRND_F64 _max) {
         return ( _max - _min ) * (*this)() / max() + _min;
     }
     //Get float between <0,_max>
-    TMRND_FLOAT getFloat(CMRND_FLOAT _max=1) {
+    TMRND_F64 getFloat(CMRND_F64 _max=1) {
         return getFloat(0,_max);
     }
 

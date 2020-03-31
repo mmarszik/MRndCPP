@@ -41,18 +41,18 @@
 #include <climits>
 #include "rnd.h"
 
-constexpr TMRND_UINT BUFFSIZE = ( 1 << 12 );
+constexpr TMRND_U32 BUFFSIZE = ( 1 << 12 );
 
 int main() {
     std::random_device rd;
-    TMRND_ULONG seed = 0;
-    for( TMRND_UINT i=0 ; i<8 ; i++ ) {
+    TMRND_U64 seed = 0;
+    for( TMRND_U32 i=0 ; i<8 ; i++ ) {
         seed = ( seed << 8 ) | ( rd() & 0xFF );
     }
     TRnd rnd( seed );
-    for( TMRND_ULONG loop=0 ;true ; loop++ ) {
-        TMRND_UINT buf[ BUFFSIZE ];
-        for( TMRND_UINT i=0 ; i<BUFFSIZE ; i++) {
+    for( TMRND_U64 loop=0 ;true ; loop++ ) {
+        TMRND_U32 buf[ BUFFSIZE ];
+        for( TMRND_U32 i=0 ; i<BUFFSIZE ; i++) {
             buf[i] = rnd() ;
         }
         fwrite( buf, 1, sizeof(buf), stdout );

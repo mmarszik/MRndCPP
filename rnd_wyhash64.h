@@ -36,25 +36,25 @@
 
 #include "rnd_base.h"
 
-template<CMRND_ULONG A=0x60bee2bee120fc15ull, CMRND_ULONG B=0xa3b195354a39b70dull, CMRND_ULONG C=0x1b03738712fad5c9ull>
+template<CMRND_U64 A=0x60bee2bee120fc15ull, CMRND_U64 B=0xa3b195354a39b70dull, CMRND_U64 C=0x1b03738712fad5c9ull>
 class RndWyhash64 : public RndBase {
-    static_assert( sizeof(TMRND_UINT)      ==  4 , "sizeof(TMRND_UINT)      ==  4" );
-    static_assert( sizeof(TMRND_ULONG)     ==  8 , "sizeof(TMRND_ULONG)     ==  8" );
-    static_assert( sizeof(TMRND_ULONGLONG) == 16 , "sizeof(TMRND_ULONGLONG) == 16" );
+    static_assert( sizeof(TMRND_U32)      ==  4 , "sizeof(TMRND_UINT)      ==  4" );
+    static_assert( sizeof(TMRND_U64)     ==  8 , "sizeof(TMRND_ULONG)     ==  8" );
+    static_assert( sizeof(TMRND_U128) == 16 , "sizeof(TMRND_ULONGLONG) == 16" );
 private:
-    TMRND_ULONG x;
+    TMRND_U64 x;
 public:
-    RndWyhash64(CMRND_ULONG __sd = 0x25EC1CDA937545ECull) {
+    RndWyhash64(CMRND_U64 __sd = 0x25EC1CDA937545ECull) {
         seed( __sd );
     }
-    void seed(CMRND_ULONG __sd) {
+    void seed(CMRND_U64 __sd) {
         x = __sd;
     }
     TMRND_RESULT operator()() {
         x += A;
-        TMRND_ULONGLONG t = (TMRND_ULONGLONG)x * B;
-        CMRND_ULONG m = (t >> 64) ^ t;
-        t = (TMRND_ULONGLONG)m * C;
+        TMRND_U128 t = (TMRND_U128)x * B;
+        CMRND_U64 m = (t >> 64) ^ t;
+        t = (TMRND_U128)m * C;
         return (t >> 64) ^ t;
     }
 };

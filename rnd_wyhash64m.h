@@ -96,28 +96,28 @@ public:
 
 
 template<
-    CMRND_UINT SIZE1,
-    CMRND_UINT SIZE2,
-    CMRND_ULONG AW1 = 0x60bee2bee120fc15ull,
-    CMRND_ULONG AW2 = 0x2957674240375189ull,
-    CMRND_ULONG BW  = 0xa3b195354a39b70dull,
-    CMRND_ULONG CW  = 0x1b03738712fad5c9ull
+    CMRND_U32 SIZE1,
+    CMRND_U32 SIZE2,
+    CMRND_U64 AW1 = 0x60bee2bee120fc15ull,
+    CMRND_U64 AW2 = 0x2957674240375189ull,
+    CMRND_U64 BW  = 0xa3b195354a39b70dull,
+    CMRND_U64 CW  = 0x1b03738712fad5c9ull
 >
 class RndWyhash64m : public RndBase {
 private:
-    using TBUFF = MxArray<TMRND_ULONG, SIZE1+SIZE2>;
+    using TBUFF = MxArray<TMRND_U64, SIZE1+SIZE2>;
 private:
     TBUFF buff;
-    TMRND_UINT i1, i2;
+    TMRND_U32 i1, i2;
 
 public:
-    RndWyhash64m(CMRND_ULONG __sd=0xCD8533B4B9ED944Cull) {
+    RndWyhash64m(CMRND_U64 __sd=0xCD8533B4B9ED944Cull) {
         seed( __sd );
     }
     RndWyhash64m& operator = (const RndWyhash64m& other) {
         return *( new(this)RndWyhash64m(other) );
     }
-    void seed(CMRND_ULONG __sd) {
+    void seed(CMRND_U64 __sd) {
         initByChaos<TBUFF>(buff, SIZE1+SIZE2, __sd );
         i1 = 0;
         i2 = SIZE1;
@@ -127,10 +127,10 @@ public:
         if( i2 >= SIZE1 + SIZE2 ) i2 = SIZE1;
         buff[i1] += AW1;
         buff[i2] += AW2;
-        TMRND_ULONG x = buff[i1++] + buff[i2++];
-        TMRND_ULONGLONG t = (TMRND_ULONGLONG)x * BW;
-        CMRND_ULONG m = (t >> 64) ^ t;
-        t = (TMRND_ULONGLONG)m * CW;
+        TMRND_U64 x = buff[i1++] + buff[i2++];
+        TMRND_U128 t = (TMRND_U128)x * BW;
+        CMRND_U64 m = (t >> 64) ^ t;
+        t = (TMRND_U128)m * CW;
         return (t >> 64) ^ t;
     }
 

@@ -38,33 +38,33 @@
 
 class Rnd4Lin : public RndBase {
 private:
-    TMRND_ULONG a,b,c,d,e;
-    TMRND_UINT s1,s2,s3,s4,s5;
+    TMRND_U64 a,b,c,d,e;
+    TMRND_U32 s1,s2,s3,s4,s5;
 private:
-    static TMRND_UINT perm( CMRND_ULONG a, CMRND_ULONG b, CMRND_ULONG c) {
-        return (TMRND_UINT) ( (a >> (64-11)) | ((b >> (64-11)) << 11) | ((c >> (64-10))<<22) );
+    static TMRND_U32 perm( CMRND_U64 a, CMRND_U64 b, CMRND_U64 c) {
+        return (TMRND_U32) ( (a >> (64-11)) | ((b >> (64-11)) << 11) | ((c >> (64-10))<<22) );
     }
-    static bool test( TMRND_UINT &s , CMRND_UINT max) {
+    static bool test( TMRND_U32 &s , CMRND_U32 max) {
         if( s++ < max ) {
             return false;
         }
         s = 0;
         return true;
     }
-    static void next( TMRND_ULONG &v, CMRND_ULONG A, CMRND_ULONG B ) {
+    static void next( TMRND_U64 &v, CMRND_U64 A, CMRND_U64 B ) {
         v = v * A + B;
     }
-    static void next( TMRND_ULONG &v, TMRND_UINT &s, CMRND_UINT max, CMRND_ULONG A, CMRND_ULONG B ) {
+    static void next( TMRND_U64 &v, TMRND_U32 &s, CMRND_U32 max, CMRND_U64 A, CMRND_U64 B ) {
         next( v , A , B );
         if( test( s , max ) ) {
             next( v , A , B );
         }
     }
 public:
-    Rnd4Lin( CMRND_ULONG __sd) {
+    Rnd4Lin( CMRND_U64 __sd) {
         seed( __sd );
     }
-    void seed( CMRND_ULONG __sd ) {
+    void seed( CMRND_U64 __sd ) {
         a = __sd ^ 0x140CA25429E95B21ull;
         b = __sd ^ 0x4A37D2E9E5D5C6A3ull;
         c = __sd ^ 0xD76C0A509DACE77Dull;
