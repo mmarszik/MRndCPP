@@ -3,6 +3,7 @@ CONFIG += console c++14
 CONFIG -= app_bundle
 CONFIG -= qt
 
+QMAKE_CXXFLAGS  -= -O2
 QMAKE_CXXFLAGS  += -O3
 QMAKE_CXXFLAGS  += -mtune=native
 #QMAKE_CXXFLAGS  += -fprofile-use
@@ -11,6 +12,9 @@ QMAKE_CXXFLAGS  += -mtune=native
 #QMAKE_LFLAGS   += -fprofile-generate
 
 #QMAKE_CXXFLAGS += -mavx
+#QMAKE_CXXFLAGS += -mavx2
+#QMAKE_CXXFLAGS += -msse4
+
 
 INCLUDEPATH += "vendor"
 

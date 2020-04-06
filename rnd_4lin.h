@@ -36,10 +36,6 @@
 
 #include "rnd_base.h"
 
-//#define TMRND_RND_4_LIN_V1
-#define TMRND_RND_4_LIN_V2
-
-#if defined( TMRND_RND_4_LIN_V1 )
 
 class Rnd4Lin  : public RndBase {
 private:
@@ -89,64 +85,3 @@ public:
 
 };
 
-#elif defined( TMRND_RND_4_LIN_V2 )
-
-#include <immintrin.h>
-
-class Rnd4Lin  : public RndBase {
-private:
-    __m256i_u A;
-    __m256i_u B;
-    __m256i_u r;
-    __m128i_u s;
-//    TMRND_U64 a,b,c,d;
-//    TMRND_U32 sa,sb,sc,sd;
-private:
-    static bool test( TMRND_U32 &s , CMRND_U32 max) {
-        if( s++ < max ) {
-            return false;
-        }
-        s = 0;
-        return true;
-    }
-    static void next( TMRND_U64 &v, CMRND_U64 A, CMRND_U64 B ) {
-        v = v * A + B;
-    }
-    static void next( TMRND_U64 &v, TMRND_U32 &s, CMRND_U32 max, CMRND_U64 A, CMRND_U64 B ) {
-        next( v , A , B );
-        if( test( s , max ) ) {
-            next( v , A , B );
-        }
-    }
-public:
-    Rnd4Lin( CMRND_U64 __sd) : A() {
-        seed( __sd );
-    }
-    void seed( CMRND_U64 __sd ) {
-        static CMRND_U64 tmp[4] = {__sd ^ 0x055910041214AED9ULL, __sd ^ 0xAC1144C2DA18253EULL, __sd ^ 0xD775B26A5E40A18AULL, __sd ^ 0xC22556BCAAB6EC12ULL};
-        static CMRND_U64 tmpA[4] = {119821673ull,174990143ull,139917857ull,11744023ull};
-        static CMRND_U64 tmpB[4] = {53695357673ull,67869171119ull,18819389437ull,65463955637ull};
-        static CMRND_U32 tmpS[4] = {11,13,17,19};
-        r = _mm256_loadu_si256( (const __m256i_u*)tmp );
-        s = _mm_loadu_si128((const __m128i_u*)tmpS );
-        A = _mm256_loadu_si256( (const __m256i_u*)tmpA );
-        B = _mm256_loadu_si256( (const __m256i_u*)tmpB );
-    }
-    TMRND_RESULT operator ()() {
-        _mm256_maskz_mullo_epi64(
-//        next( a , sa , 10 , 119821673ull,  53695357673ull );
-//        next( b , sb , 12 , 174990143ull,  67869171119ull );
-//        next( c , sc , 16 , 139917857ull,  18819389437ull );
-//        next( d , sd , 18 ,  11744023ull,  65463955637ull );
-//        return (TMRND_RESULT) (
-//            (
-//              ( ( a >> (64-11) ) <<  0 ) |
-//              ( ( b >> (64-11) ) << 11 ) |
-//              ( ( c >> (64-10) ) << 22 )
-//            ) ^ ( d >> 32 )
-//        );
-    }
-
-};
-
-#endif
