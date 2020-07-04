@@ -34,6 +34,8 @@
 
 #pragma once
 
+namespace MRnd {
+
 using TMRND_U8   = unsigned char;
 using TMRND_I32  = int;
 using TMRND_U32  = unsigned int;
@@ -57,3 +59,4 @@ using CMRND_RESULT  = const TMRND_RESULT;
 using TMRND_IRESULT = TMRND_I32;
 using CMRND_IRESULT = const TMRND_IRESULT;
 
+}

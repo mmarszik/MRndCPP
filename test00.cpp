@@ -37,7 +37,9 @@
 #include "defs.h"
 #include <iostream>
 #include <random>
-#include "rnd.h"
+#include "include_rnd.h"
+
+using namespace MRnd;
 
 int main( int argc , char *argv[] ) {
     TMRND_U64 loops = 1ull << 15;

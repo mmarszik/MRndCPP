@@ -36,7 +36,11 @@
 
 #include "rnd_mt1993764.h"
 
+namespace MRnd {
+
 using TRnd = RndMt19937_64;
+
+}
 /* TEST00
 time ./MRndCPP 10 
 417133933

@@ -34,9 +34,14 @@
 
 #pragma once
 
+
 #include "rnd_fib.h"
 
+namespace MRnd {
+
 using TRnd = RndFib6;
+
+}
 /* TEST00
 time ./MRndCPP 10 
 2081380970

@@ -35,6 +35,8 @@
 #pragma once
 #include "rnd_base.h"
 
+namespace MRnd {
+
 template<typename T, const T A, const T B, const T M=0, CMRND_U32 BITS=32, CMRND_U32 SHIFT=0, CMRND_U32 SKIP=0>
 class RndLin : public RndBase {
     static_assert( sizeof(T) >= sizeof(TMRND_RESULT), "sizeof(T) >= sizeof(TMRND_RESULT)" );
@@ -82,3 +84,4 @@ using RndLin4 = RndLin<TMRND_U64,       965572862617007ull,    661186099983727ul
 using RndLin5 = RndLin<TMRND_U64,       661186099983727ull,   3390980202202013ull, 0ull,  8u, 56u, 1>;
 using RndLin6 = RndLin<TMRND_U128,  2018814029453857ull,   2082947326556573ull, 0ull, 32u, 96u, 0>;
 
+}

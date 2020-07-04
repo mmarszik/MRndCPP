@@ -40,6 +40,8 @@
 #include "rnd.h"
 #include "buffs.h"
 
+using namespace MRnd;
+
 int main( int argc , char *argv[] ) {
     TMRND_ULONG loops = 1ull << 15;
     if( argc == 2 ) {

@@ -39,6 +39,8 @@
 #include <random>
 #include <MiscCPP/m_limits.h>
 
+using namespace MRnd;
+
 int main( int argc , char *argv[] ) {
     TMRND_UINT loops = ( 1ull << 14 );
     if( argc == 2 ) {

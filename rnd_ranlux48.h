@@ -38,6 +38,8 @@
 #include <MiscCPP/m_limits.h>
 #include "defs.h"
 
+namespace MRnd {
+
 class RndRanlux48 : public std::ranlux48 {
 public:
     RndRanlux48( std::ranlux48::result_type __sd) : std::ranlux48(__sd) {
@@ -64,3 +66,4 @@ public:
     }
 
 };
+}

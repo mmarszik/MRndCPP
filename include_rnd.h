@@ -23,26 +23,76 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 ///                                                                   //
-/// @created on 2019-12-23 12:39:07 CET                               //
+/// @created on 2019-11-30, 09:14:33 CET                              //
 /// @author MMarszik (Mariusz Marszalkowski sqnett.com)               //
 /// @email mmarszik@gmail.com                                         //
 /// @package MRndCPP                                                  //
-/// @token 17fa7dd3-fcef-4ba6-829f-a24dad9e144b                       //
+/// @token becb9f33-4018-48b1-b41d-6147f9dedb2c                       //
 /// @brief:                                                           //
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#if defined( USE_RND_BUFF_0 )
-    #include "use_rnd_buff_0.h"
-#elif defined( USE_RND_BUFF_1 )
-    #include "use_rnd_buff_1.h"
-#endif
+#include "defs.h"
+
+#if defined( USE_MRND_WYHASH64_0 )
+    #include "use_rnd_wyhash64_0.h"
+#elif  defined( USE_MRND_WYHASH64M_0 )
+    #include "use_rnd_wyhash64m_0.h"
+
+#elif  defined( USE_MRND_FIB_1 )
+    #include "use_rnd_fib_1.h"
+#elif  defined( USE_MRND_FIB_2 )
+    #include "use_rnd_fib_2.h"
+#elif  defined( USE_MRND_FIB_3 )
+    #include "use_rnd_fib_3.h"
+#elif  defined( USE_MRND_FIB_4 )
+    #include "use_rnd_fib_4.h"
+#elif  defined( USE_MRND_FIB_5 )
+    #include "use_rnd_fib_5.h"
+#elif  defined( USE_MRND_FIB_6 )
+    #include "use_rnd_fib_6.h"
+
+#elif  defined( USE_MRND_RANLUX_48 )
+    #include "use_rnd_ranlux_48.h"
+#elif  defined( USE_MRND_MT19937_64 )
+    #include "use_rnd_mt19937_64.h"
+
+#elif  defined( USE_MRND_MLIN_0 )
+    #include "use_rnd_mlin_0.h"
+#elif  defined( USE_MRND_BLIN_0 )
+    #include "use_rnd_blin_0.h"
+#elif  defined( USE_MRND_4LIN_0 )
+    #include "use_rnd_4lin_0.h"
+#elif  defined( USE_MRND_3LIN_0 )
+    #include "use_rnd_3lin_0.h"
+
+#elif  defined( USE_MRND_LIN_1 )
+    #include "use_rnd_lin_1.h"
+#elif  defined( USE_MRND_LIN_2 )
+    #include "use_rnd_lin_2.h"
+#elif  defined( USE_MRND_LIN_3 )
+    #include "use_rnd_lin_3.h"
+#elif  defined( USE_MRND_LIN_4 )
+    #include "use_rnd_lin_4.h"
+#elif  defined( USE_MRND_LIN_5 )
+    #include "use_rnd_lin_5.h"
+#elif  defined( USE_MRND_LIN_6 )
+    #include "use_rnd_lin_6.h"
+
+#elif  defined( USE_MRND_ADD_ROT_1 )
+    #include "use_rnd_add_rot_1.h"
+#elif  defined( USE_MRND_ADD_ROT_2 )
+    #include "use_rnd_add_rot_2.h"
+#elif  defined( USE_MRND_ADD_ROT_3 )
+    #include "use_rnd_add_rot_3.h"
+#elif  defined( USE_MRND_ADD_ROT_4 )
+    #include "use_rnd_add_rot_4.h"
+#elif  defined( USE_MRND_ADD_ROT_5 )
+    #include "use_rnd_add_rot_5.h"
+#elif  defined( USE_MRND_ADD_ROT_6 )
+    #include "use_rnd_add_rot_6.h"
 
 
-#if defined( USE_RND_F_BUFF_0 )
-    #include "use_rnd_f_buff_0.h"
-#elif defined( USE_RND_F_BUFF_1 )
-    #include "use_rnd_f_buff_1.h"
 #endif

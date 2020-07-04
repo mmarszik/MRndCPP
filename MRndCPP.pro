@@ -18,12 +18,8 @@ QMAKE_CXXFLAGS  += -mtune=native
 
 INCLUDEPATH += "vendor"
 
-DEFINES += USE_RND_4LIN_0
-DEFINES += USE_RND_BUFF_1a
-DEFINES += TMRND_RND_BUFF_V3
-DEFINES += USE_RND_F_BUFF_1a
-DEFINES += USE_RND_PROB_0
-
+#select main random number generator
+DEFINES += USE_MRND_WYHASH64_0
 DEFINES += MX_USING_ARRAY_2
 DEFINES += TEST00_PROGRAM
 
@@ -62,7 +58,6 @@ SOURCES += \
     rnd_3lin.cpp
 
 HEADERS += \
-    buffs.h \
     defs.h \
     prob.h \
     rnd_add_rot.h \
@@ -79,7 +74,6 @@ HEADERS += \
     rnd_wyhash64.h \
     rnd_wyhash64m.h \
     rnd_xor2.h \
-    rnd.h \
     use_rnd_add_rot_1.h \
     use_rnd_add_rot_2.h \
     use_rnd_add_rot_3.h \
@@ -127,7 +121,9 @@ HEADERS += \
     rnd_4lin.h \
     use_rnd_4lin_0.h \
     rnd_3lin.h \
-    use_rnd_3lin_0.h
+    use_rnd_3lin_0.h \
+    include_buffs.h \
+    include_rnd.h
 
 DISTFILES += \
     createAtC++.sh \

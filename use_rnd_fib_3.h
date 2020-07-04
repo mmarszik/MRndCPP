@@ -36,7 +36,11 @@
 
 #include "rnd_fib.h"
 
+namespace MRnd {
+
 using TRnd = RndFib3;
+
+}
 /* TEST00
 time ./MRndCPP 12 
 1416706837

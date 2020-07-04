@@ -34,8 +34,10 @@
 
 #pragma once
 
-#include "rnd.h"
+#include "include_rnd.h"
 #include <new>
+
+namespace MRnd {
 
 class RndFBuff0 {
 private:
@@ -62,3 +64,4 @@ public:
     }
 };
 
+}

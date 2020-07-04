@@ -34,21 +34,23 @@
 
 #pragma once
 
-#include "rnd.h"
+#include "include_rnd.h"
 #include <MxCPP/mx_array.h>
+
+namespace MRnd {
 
 template<CMRND_U32 SIZE1, CMRND_U32 SIZE2, CMRND_U32 RESET=SIZE1*SIZE2*2>
 class RndFBuff1 {
 private:
     using TBuff1 = MxArray<TMRND_F64,SIZE1+SIZE2>;
 private:
-    TRnd          &rnd;        // Pseudo random number generator.
+    TRnd       &rnd;         // Pseudo random number generator.
     TMRND_F64   min,max;     // Min-max range.
-    TBuff1        buff;        // N-Cyclic buffers to number generator.
-    TMRND_U32    select;      // Select first or second buffer.
-    CMRND_F64   *i1, *i2;
-    CMRND_F64   *const end1, *const end2;
-    TMRND_U32    i3;
+    TBuff1      buff;        // N-Cyclic buffers to number generator.
+    TMRND_U32   select;      // Select first or second buffer.
+    CMRND_F64  *i1, *i2;
+    CMRND_F64  *const end1, *const end2;
+    TMRND_U32   i3;
 
 private:
     void reset() {
@@ -113,3 +115,4 @@ public:
     }
 };
 
+}

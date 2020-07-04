@@ -37,6 +37,8 @@
 #include <MxCPP/mx_array.h>
 #include "rnd_base.h"
 
+namespace MRnd {
+
 //MM: The composition of two pseudo random number generators.
 template<class TRnd1, class TRnd2>
 class RndComp : public RndBase {
@@ -62,3 +64,4 @@ public:
     }
 };
 
+}

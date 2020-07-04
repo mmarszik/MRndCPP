@@ -37,6 +37,8 @@
 #include "defs.h"
 #include <MiscCPP/m_limits.h>
 
+namespace MRnd {
+
 constexpr CMRND_U32 CMRND_INIT_CHAOS_SIZE = 14U;
 extern CMRND_U64 CMRND_INIT_CHAOS[ 1u << CMRND_INIT_CHAOS_SIZE ];
 
@@ -68,3 +70,4 @@ static void initByChaos(
 
 }
 
+}

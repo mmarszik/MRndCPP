@@ -36,6 +36,8 @@
 
 #include "rnd_buff0.h"
 
+namespace MRnd {
+
 using TRndBuff = RndBuff0;
 
-
+}

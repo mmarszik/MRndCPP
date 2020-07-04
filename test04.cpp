@@ -43,6 +43,8 @@ using utyp  = unsigned int;
 using cultyp = const ultyp;
 using cutyp  = const utyp;
 
+using namespace MRnd;
+
 template<class TRND,cutyp SIZE1, cutyp SIZE2>
 class RndBuff1 {
 private:
@@ -63,7 +65,7 @@ public:
     RndBuff1( TRND &rnd, cutyp min=0, cutyp max=0 ) : rnd(rnd) {
         setMinMax(min,max);
     }
-    void setMinMax(cutyp min, cutyp max   ) {
+    void setMinMax(cutyp min, cutyp max) {
         this->min = min;
         this->max = max;
         i1 = SIZE1;

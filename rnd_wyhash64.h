@@ -36,6 +36,8 @@
 
 #include "rnd_base.h"
 
+namespace MRnd {
+
 template<CMRND_U64 A=0x60bee2bee120fc15ull, CMRND_U64 B=0xa3b195354a39b70dull, CMRND_U64 C=0x1b03738712fad5c9ull>
 class RndWyhash64 : public RndBase {
     static_assert( sizeof(TMRND_U32)      ==  4 , "sizeof(TMRND_UINT)      ==  4" );
@@ -62,3 +64,4 @@ public:
 
 using RndWyhash64_0 = RndWyhash64<>;
 
+}

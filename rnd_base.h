@@ -38,6 +38,8 @@
 #include "defs.h"
 #include <MiscCPP/m_limits.h>
 
+namespace MRnd {
+
 class RndBase {
 public:
     using result_type = TMRND_RESULT;
@@ -72,3 +74,4 @@ public:
 
 };
 
+}

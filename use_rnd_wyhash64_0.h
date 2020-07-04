@@ -36,7 +36,11 @@
 
 #include "rnd_wyhash64.h"
 
+namespace MRnd {
+
 using TRnd = RndWyhash64_0;
+
+}
 /* TEST00
 time ./MRndCPP 10 
 1371554712

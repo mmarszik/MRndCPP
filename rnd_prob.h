@@ -36,27 +36,29 @@
 
 #include <new>
 
-#include "rnd.h"
+#include "include_rnd.h"
 #include "rnd_base.h"
+
+namespace MRnd {
 
 //The optimizer of the random number generator on the
 //probability between <0,p>
 template<class TRND>
-class RndProb {
+class MRndProb {
 private:
     TRND &rnd;
     TMRND_U64 p;
     static_assert( sizeof(p) > sizeof(TMRND_RESULT) , "sizeof(p) > sizeof(TMRND_RESULT)" );
 
 public:
-    RndProb(TRND &rnd, CMRND_F64 p=1) : rnd(rnd) {
+    MRndProb(TRND &rnd, CMRND_F64 p=1) : rnd(rnd) {
         setP( p );
     }
-    RndProb(const RndProb& other) : rnd(other.rnd) {
+    MRndProb(const MRndProb& other) : rnd(other.rnd) {
         setP( other.p );
     }
-    RndProb& operator = (const RndProb& other) {
-        return *( new(this)RndProb(other) );
+    MRndProb& operator = (const MRndProb& other) {
+        return *( new(this)MRndProb(other) );
     }
     void setP( CMRND_F64 p ) {
         this->p = static_cast<TMRND_U64>(p * ( TRND::max() + 1.0 ) );
@@ -67,7 +69,7 @@ public:
 };
 
 
-using TRndProb0 = RndProb<TRnd>;
+using TRndProb0 = MRndProb<TRnd>;
 
 
 /*
@@ -96,3 +98,5 @@ public:
     }
 };
 */
+
+}

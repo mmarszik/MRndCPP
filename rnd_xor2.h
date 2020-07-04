@@ -37,6 +37,8 @@
 #include "rnd_base.h"
 #include <MxCPP/mx_array.h>
 
+namespace MRnd {
+
 //#define TMRND_RND_XOR2_V1
 //#define TMRND_RND_XOR2_V2
 //#define TMRND_RND_XOR2_V3
@@ -227,3 +229,4 @@ public:
 
 
 #endif
+}

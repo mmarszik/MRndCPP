@@ -38,6 +38,8 @@
 #include "rnd_base.h"
 #include "init_chaos.h"
 
+namespace MRnd {
+
 //MM: Multi-linear psuedo random numbers generator.
 class RndMLin : public RndBase {
 private:
@@ -67,3 +69,4 @@ public:
 };
 
 
+}

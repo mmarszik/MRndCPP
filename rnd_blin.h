@@ -38,6 +38,8 @@
 #include "rnd_base.h"
 #include "init_chaos.h"
 
+namespace MRnd {
+
 class RndBLin : public RndBase {
 private:
     static constexpr TMRND_U32 SIZE0 = 8;
@@ -63,3 +65,4 @@ public:
     }
 };
 
+}

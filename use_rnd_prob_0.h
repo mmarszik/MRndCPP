@@ -36,6 +36,10 @@
 
 #include "rnd_prob.h"
 
+namespace MRnd {
+
 using TRndProb = TRndProb0;
+
+}
 
 

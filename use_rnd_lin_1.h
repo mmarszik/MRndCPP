@@ -36,7 +36,12 @@
 
 #include "rnd_lin.h"
 
+namespace MRnd {
+
 using TRnd = RndLin1;
+
+}
+
 /* TEST00
 time ./MRndCPP 10 
 3232027252

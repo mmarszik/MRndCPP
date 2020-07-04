@@ -41,6 +41,8 @@
 #include <climits>
 #include "rnd.h"
 
+using namespace MRnd;
+
 constexpr TMRND_U32 BUFFSIZE = ( 1 << 12 );
 
 int main() {

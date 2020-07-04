@@ -36,7 +36,11 @@
 
 #include "rnd_ranlux48.h"
 
+namespace MRnd {
+
 using TRnd = RndRanlux48;
+
+}
 /* TEST00
 time ./MRndCPP 10 
 4198816209

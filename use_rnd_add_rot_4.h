@@ -34,4 +34,8 @@
 
 #include "rnd_add_rot.h"
 
+namespace MRnd {
+
 using TRnd = RndAddRot4;
+
+}

@@ -34,8 +34,10 @@
 
 #pragma once
 #include <new>
-#include "rnd.h"
+#include "include_rnd.h"
 #include <MxCPP/mx_array.h>
+
+namespace MRnd {
 
 //MM: Attention: It is opposite of the good random number generator ;-)
 //MM: It is pseudo random number generator with the double cyclic buffer. It work fast
@@ -205,18 +207,24 @@ class RndBuff1 {
 private:
     using TBuff1 = MxArray<TMRND_IRESULT,SIZE1+SIZE2>;
 private:
-    TMRND_U32     i3;
+    TMRND_U32      i3;
     TRnd           &rnd;        // Pseudo random number generator.
     TMRND_IRESULT  min, max;    // Min range.
     TBuff1         buff;        // N-Cyclic buffer to number generator.
-    TMRND_U32     select;      // Select first or second buffer.
+    TMRND_U32      select;      // Select first or second buffer.
     CMRND_IRESULT  *i1, *i2;
     CMRND_IRESULT  *const end1, *const end2;
 
 private:
     void reset() {
-        for( TMRND_U32 i=0 ; i<SIZE1+SIZE2 ; i++ ) {
-            buff[i] = rnd.range(min,max);
+        if( min != max ) {
+            for( TMRND_U32 i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+                buff[i] = rnd.range(min,max);
+            }
+        } else {
+            for( TMRND_U32 i=0 ; i<SIZE1+SIZE2 ; i++ ) {
+                buff[i] = rnd();
+            }
         }
     }
 public:
@@ -277,3 +285,4 @@ public:
 
 
 #endif
+}

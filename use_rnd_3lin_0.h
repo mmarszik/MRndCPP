@@ -36,6 +36,8 @@
 
 #include "rnd_3lin.h"
 
+namespace MRnd {
+
 using TRnd = Rnd3Lin;
 /* TEST00
 time ./MRndCPP 14 
@@ -2574,3 +2576,5 @@ real	6000m4.410s
 user	6002m32.184s
 sys	310m34.150s
 */
+
+}

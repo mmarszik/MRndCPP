@@ -36,5 +36,8 @@
 
 #include "rnd_f_buff1.h"
 
+namespace MRnd {
+
 using TRndFBuff = RndFBuff1<4159, 3137>;
 
+}

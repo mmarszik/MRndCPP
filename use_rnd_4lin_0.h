@@ -36,4 +36,8 @@
 
 #include "rnd_4lin.h"
 
+namespace MRnd {
+
 using TRnd = Rnd4Lin;
+
+}

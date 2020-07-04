@@ -39,6 +39,8 @@
 #include "rnd_base.h"
 #include "init_chaos.h"
 
+namespace MRnd {
+
 template<typename T, TMRND_U32 SIZE, TMRND_U32 R, T M1, T M2, T A, T MOD=0, TMRND_U32 INIT=4, TMRND_U32 SHIFT=0>
 class RndFib : public RndBase {
 private:
@@ -87,3 +89,5 @@ using RndFib3   =  RndFib< TMRND_U64, 8128,	7239, 1,                       1,   
 using RndFib4   =  RndFib< TMRND_U64, 8315,	8198, 0xE71E374A05887C31ull,   0x7ADC0B7E8AA29A35ull,  0x1D88C251C16E9D76ull,  0,    4u, 25u >;
 using RndFib5   =  RndFib< TMRND_U64, 7629,	6510, 0x1752615C33AC8DD7ull,   0xA63480EDE820084Bull,  0xB56E016B0B86EC74ull,  0,    4u,  8u >;
 using RndFib6   =  RndFib< TMRND_U64, 7726,   6969, 0xC0A41A09D0C54CDBull,   0x7C1BC6ED29A27C5Dull,  0xD157DBA390BE1616ull,  0,    4u, 12u >;
+
+}

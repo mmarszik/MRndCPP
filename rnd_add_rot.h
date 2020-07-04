@@ -43,6 +43,8 @@
 #include "rnd_wyhash64.h"
 #include "rnd_wyhash64m.h"
 
+namespace MRnd {
+
 //#define TMRND_RND_ADD_ROOT_V1
 //#define TMRND_RND_ADD_ROOT_V2
 //#define TMRND_RND_ADD_ROOT_V3
@@ -187,7 +189,8 @@ private:
     TRND       rnd;
     TBUFF      buff;
     TMRND_U32 *i1,*i2;
-    TMRND_U32 *const end1, *const end2;
+    TMRND_U32 *const end1;
+    TMRND_U32 *const end2;
     TMRND_U32 i3;
 
 private:
@@ -199,10 +202,12 @@ private:
     inline static TMRND_RESULT rot( TMRND_RESULT *const v) {
         return *v = (*v << 1) | ( *v >> ( MLimits<TMRND_RESULT>::digits() - 1 ) );
     }
+
 public:
     RndAddRot( CMRND_RESULT __sd ) : end1(&buff[0]+SIZE1),end2(end1+SIZE2) {
         seed( __sd );
     }
+
     RndAddRot( const RndAddRot &other ) : end1(&buff[0]+SIZE1),end2(end1+SIZE2) {
         rnd = other.rnd;
         for( TMRND_U32 i=0 ; i<SIZE1+SIZE2 ; i++ ) {
@@ -212,15 +217,18 @@ public:
         this->i2  = this->buff + (other.i2 - &other.buff[0]);
         i3 = other.i3;
     }
+
     RndAddRot& operator = (const RndAddRot &other) {
         return *( new(this)RndAddRot( other ) );
     }
+
     void seed( CMRND_RESULT __sd ) {
         rnd.seed( __sd );
         i1 = end1;
         i2 = end2;
         i3 = RESET;
     }
+
     TMRND_RESULT operator()() {
         if( RESET == SIZE1*SIZE2 ) {
             if( i1 == end1 ) {
@@ -243,6 +251,7 @@ public:
             return rot(i1++) + rot(i2++);
         }
     }
+
 };
 
 #endif
@@ -254,3 +263,5 @@ using RndAddRot3   = RndAddRot<RndFib1         ,   3061,  2711 >;
 using RndAddRot4   = RndAddRot<RndMLin         ,   3061,  2711 >;
 using RndAddRot5   = RndAddRot<RndWyhash64_0   ,   3061,  2711 >;
 using RndAddRot6   = RndAddRot<RndWyhash64m_0  ,   3061,  2711 >;
+
+}

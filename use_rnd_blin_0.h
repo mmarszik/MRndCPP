@@ -36,7 +36,12 @@
 
 #include "rnd_blin.h"
 
+namespace MRnd {
+
 using TRnd = RndBLin;
+
+}
+
 /* TEST00
 time ./MRndCPP 12 
 209126189

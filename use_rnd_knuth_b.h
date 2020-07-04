@@ -34,8 +34,11 @@
 
 #include "rnd_knuthb.h"
 
+namespace MRnd {
+
 using TRnd = RndKnuthB;
 
+}
 
 /* TEST00
 time ./MRndCPP 

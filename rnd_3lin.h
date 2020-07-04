@@ -36,6 +36,8 @@
 
 #include "rnd_base.h"
 
+namespace MRnd {
+
 class Rnd3Lin : public RndBase {
 private:
     TMRND_U64 a,b,c;
@@ -76,3 +78,4 @@ public:
 
 };
 
+}

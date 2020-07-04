@@ -36,11 +36,13 @@
 
 #include "rnd_base.h"
 
+namespace MRnd {
 
 class Rnd4Lin  : public RndBase {
 private:
     TMRND_U64 a,b,c,d;
     TMRND_U32 sa,sb,sc,sd;
+
 private:
     static bool test( TMRND_U32 &s , CMRND_U32 max) {
         if( s++ < max ) {
@@ -49,19 +51,23 @@ private:
         s = 0;
         return true;
     }
+
     static void next( TMRND_U64 &v, CMRND_U64 A, CMRND_U64 B ) {
         v = v * A + B;
     }
+
     static void next( TMRND_U64 &v, TMRND_U32 &s, CMRND_U32 max, CMRND_U64 A, CMRND_U64 B ) {
         next( v , A , B );
         if( test( s , max ) ) {
             next( v , A , B );
         }
     }
+
 public:
     Rnd4Lin( CMRND_U64 __sd) {
         seed( __sd );
     }
+
     void seed( CMRND_U64 __sd ) {
         a = __sd ^ 0x055910041214AED9ULL;
         b = __sd ^ 0xAC1144C2DA18253EULL;
@@ -69,11 +75,12 @@ public:
         d = __sd ^ 0xC22556BCAAB6EC12ULL;
         sa = sb = sc = sd = 0;
     }
+
     TMRND_RESULT operator ()() {
-        next( a , sa , 10 , 119821673ull,  53695357673ull );
-        next( b , sb , 12 , 174990143ull,  67869171119ull );
-        next( c , sc , 16 , 139917857ull,  18819389437ull );
-        next( d , sd , 18 ,  11744023ull,  65463955637ull );
+        next( a , sa , 10 , 119821673ull,  53695357673ull ); // Double the generate once per 11 (11=10+1) generated
+        next( b , sb , 12 , 174990143ull,  67869171119ull ); // Double the generate once per 13 (13=12+1) generated
+        next( c , sc , 16 , 139917857ull,  18819389437ull ); // Double the generate once per 17 (17=16+1) generated
+        next( d , sd , 18 ,  11744023ull,  65463955637ull ); // Double the generate once per 19 (19=18+1) generated
         return (TMRND_RESULT) (
             (
               ( ( a >> (64-11) ) <<  0 ) |
@@ -85,3 +92,4 @@ public:
 
 };
 
+}

@@ -37,6 +37,7 @@
 #include "defs.h"
 #include <iostream>
 
+
 class A {
 public:
     void x() {
@@ -62,5 +63,6 @@ int main() {
     b(1,2);
     return 0;
 }
+
 
 #endif

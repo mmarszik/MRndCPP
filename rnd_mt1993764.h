@@ -38,6 +38,8 @@
 #include <MiscCPP/m_limits.h>
 #include "defs.h"
 
+namespace MRnd {
+
 class RndMt19937_64 : public std::mt19937_64 {
 public:
     RndMt19937_64( std::mt19937_64::result_type __sd) : std::mt19937_64(__sd) {
@@ -66,3 +68,5 @@ public:
     }
 
 };
+
+}

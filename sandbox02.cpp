@@ -39,6 +39,8 @@
 #include <iostream>
 #include <MxCPP/mx_array.h>
 
+using namespace MRnd;
+
 template<typename T>
 inline static void rot( T &v , CMRND_UINT bits ) {
     v = ( (v << 1) | ( ( v >> ( bits - 1 ) ) & 1 ) ) & ((1u<<bits)-1);

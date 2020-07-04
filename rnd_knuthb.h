@@ -2,6 +2,8 @@
 #include <MiscCPP/m_limits.h>
 #include <random>
 
+namespace MRnd {
+
 class RndKnuthB : public std::knuth_b {
 public:
     RndKnuthB( std::knuth_b::result_type __sd) : std::knuth_b(__sd) {
@@ -29,4 +31,4 @@ public:
 
 };
 
-
+}

@@ -38,6 +38,8 @@
 #include <MxCPP/mx_array.h>
 #include "init_chaos.h"
 
+namespace MRnd {
+
 //#define TMRND_WYHASH64M_V1
 //#define TMRND_WYHASH64M_V2
 
@@ -142,3 +144,4 @@ public:
 
 using RndWyhash64m_0 = RndWyhash64m<2549,3041>;
 
+}

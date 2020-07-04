@@ -32,6 +32,6 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#if defined(USE_RND_PROB_0)
+#if defined(USE_MRND_PROB_0)
     #include "use_rnd_prob_0.h"
 #endif

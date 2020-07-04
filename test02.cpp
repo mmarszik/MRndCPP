@@ -43,6 +43,8 @@
 
 #include <MiscCPP/m_limits.h>
 
+using namespace MRnd;
+
 std::ostream& operator<<( std::ostream& dest, __uint128_t value ) {
     std::string buf;
     while( value ) {
