@@ -72,6 +72,8 @@ public:
         return getFloat(0,_max);
     }
 
+#ifdef MRND_RANDOM_STRINGS
+
     //MM: Below method return buffer of letters.
     constexpr static const char* buffLetters() {
         return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -204,7 +206,7 @@ public:
         return chars[ this->range( size-1 ) ];
     }
 
-
+#endif
 
 };
 
