@@ -33,7 +33,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#ifdef TEST03_PROGRAM
+#ifdef MRND_TEST03_PROGRAM
 
 #include "defs.h"
 #include <iostream>

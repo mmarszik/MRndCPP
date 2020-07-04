@@ -14,7 +14,7 @@ do
    echo  $GENERATOR
    echo  $header
 
-   c++ -std=c++14 -O3 -mtune=native -march=native -D$GENERATOR -DTEST00_PROGRAM -I../vendor/ ../*.cpp  -o $prog
+   c++ -std=c++14 -O3 -mtune=native -march=native -D$GENERATOR -DMRND_TEST00_PROGRAM -I../vendor/ ../*.cpp  -o $prog
    { time ./$prog 14 > $test; } 2> $time
    echo "/* TEST00"                                                      >> $header
    echo "time ./MRndCPP 14 "                                             >> $header
@@ -22,7 +22,7 @@ do
    cat $time                                                             >> $header
    echo "*/"                                                             >> $header
 
-   c++ -std=c++14 -O3 -mtune=native -march=native -D$GENERATOR -DTEST01_PROGRAM -I../vendor/ ../*.cpp  -o $prog
+   c++ -std=c++14 -O3 -mtune=native -march=native -D$GENERATOR -DMRND_TEST01_PROGRAM -I../vendor/ ../*.cpp  -o $prog
    { time ./$prog | dieharder -g200 -a -k2 >  $test; } 2> $time
    echo "/* TEST01"                                                      >> $header
    echo "time ./MRndCPP | dieharder -g200 -a -k2 "                       >> $header

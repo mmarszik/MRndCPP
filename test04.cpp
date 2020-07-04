@@ -32,7 +32,7 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#ifdef TEST04_PROGRAM
+#ifdef MRND_TEST04_PROGRAM
 
 #include <iostream>
 #include <random>

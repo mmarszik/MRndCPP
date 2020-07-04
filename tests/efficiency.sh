@@ -1,4 +1,4 @@
-#c++ -std=c++14 -O3 -mtune=native -march=native -DUSE_MRND_WYHASH64_0 -DTEST00_PROGRAM -I../vendor/ ../*.cpp  -o MRndCPP
+#c++ -std=c++14 -O3 -mtune=native -march=native -DUSE_MRND_WYHASH64_0 -DMRND_TEST00_PROGRAM -I../vendor/ ../*.cpp  -o MRndCPP
 
 (
 ./MRndCPP 12 &

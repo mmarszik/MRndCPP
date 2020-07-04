@@ -32,7 +32,7 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#ifdef TEST00_PROGRAM
+#ifdef MRND_TEST00_PROGRAM
 
 #include "defs.h"
 #include <iostream>

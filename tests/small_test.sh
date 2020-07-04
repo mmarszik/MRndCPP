@@ -12,7 +12,7 @@ do
    echo  $def
    echo  $header
 
-   c++ -std=c++14 -O3 -D$def -DTEST00_PROGRAM -I../vendor/ ../*.cpp  -o MRndCPP
+   c++ -std=c++14 -O3 -D$def -DMRND_TEST00_PROGRAM -I../vendor/ ../*.cpp  -o MRndCPP
    { time ./MRndCPP 12 > test.txt; } 2> time.txt
    echo "/* TEST00"                                                      >> $header
    echo "time ./MRndCPP 12 "                                             >> $header
@@ -20,7 +20,7 @@ do
    cat time.txt                                                          >> $header
    echo "*/"                                                             >> $header
 
-   c++ -std=c++14 -O3 -D$def -DTEST01_PROGRAM -I../vendor/ ../*.cpp  -o MRndCPP
+   c++ -std=c++14 -O3 -D$def -DMRND_TEST01_PROGRAM -I../vendor/ ../*.cpp  -o MRndCPP
    { time ./MRndCPP | dieharder -g200 -a -k2 >  test.txt; } 2> time.txt
    echo "/* TEST01"                                                      >> $header
    echo "time ./MRndCPP | dieharder -g200 -a -k2 "                      >> $header

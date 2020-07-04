@@ -33,7 +33,7 @@
 ////////////////////////////////////////////////////////////////////////
 
 
-#ifdef TEST01_PROGRAM
+#ifdef MRND_TEST01_PROGRAM
 
 #include "defs.h"
 #include <cstdio>

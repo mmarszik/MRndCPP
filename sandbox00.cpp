@@ -32,7 +32,7 @@
 ///                                                                   //
 ////////////////////////////////////////////////////////////////////////
 
-#ifdef SANDBOX00
+#ifdef MRND_SANDBOX00
 
 #include "defs.h"
 #include <iostream>
