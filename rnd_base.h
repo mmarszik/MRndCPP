@@ -34,6 +34,7 @@
 
 #pragma once
 
+#include <cstring>
 
 #include "defs.h"
 #include <MiscCPP/m_limits.h>
@@ -61,15 +62,148 @@ public:
         return range(0,_max);
     }
 
-    //Get float between <_min,_max>
+    //MM: Get float between <_min,_max>
     TMRND_F64 getFloat(CMRND_F64 _min, CMRND_F64 _max) {
         return ( _max - _min ) * (*this)() / max() + _min;
     }
 
-    //Get float between <0,_max>
+    //MM: Get float between <0,_max>
     TMRND_F64 getFloat(CMRND_F64 _max=1) {
         return getFloat(0,_max);
     }
+
+    //MM: Below method return buffer of letters.
+    constexpr static const char* buffLetters() {
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    }
+
+    //MM: Below method return buffer of small letters.
+    constexpr static const char* buffSmallLetters() {
+        return "abcdefghijklmnopqrstuvwxyz";
+    }
+
+    //MM: Below method return buffer of digits.
+    constexpr static const char* buffDigits() {
+        return "0123456789";
+    }
+
+    //MM: The following method returns some subset of ascii characters.
+    constexpr static const char* buffPrintable() {
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
+    }
+
+    //MM: The very efficient and very dangerous method. The buffor
+    //MM: 'str' have to allocated 'size'+1 bytes of memory in order
+    //MM: place char zero on the end of string.
+    char* string(char str[], unsigned int sizeOut, const char chars[], const unsigned int sizeChars) {
+        for( unsigned int i=0 ; i<sizeOut ; i++ ) {
+            str[i] = chars[ this->range( sizeChars-1 ) ];
+        }
+        str[sizeOut] = '\0';
+        return str;
+    }
+    char* string(char str[], unsigned int sizeOut, const char chars[], const unsigned int sizeChars, const unsigned int skip) {
+        for( unsigned int i=0 ; i<sizeOut ; i++ ) {
+            for( unsigned int i=0 ; i<skip ; i++ ) {
+                (*this)();
+            }
+            str[i] = chars[ this->range( sizeChars-1 ) ];
+        }
+        str[sizeOut] = '\0';
+        return str;
+    }
+    char* letters(char str[], const unsigned int size) {
+        const char* const chars = buffLetters();
+        return string( str , size , chars , strlen(chars) );
+    }
+    char* letters(char str[], const unsigned int size, const unsigned int skip) {
+        const char* const chars = buffLetters();
+        return string( str , size , chars , strlen(chars) , skip );
+    }
+
+    char* smallLetters(char str[], const unsigned int size) {
+        const char* const chars = buffSmallLetters();
+        return string( str , size , chars , strlen(chars) );
+    }
+    char* smallLetters(char str[], const unsigned int size, const unsigned int skip) {
+        const char* const chars = buffSmallLetters();
+        return string( str , size , chars , strlen(chars) , skip );
+    }
+
+    char* digits(char str[], const unsigned int size) {
+        const char* const chars = buffDigits();
+        return string( str , size , chars , strlen(chars) );
+    }
+    char* digits(char str[], const unsigned int size, const unsigned int skip) {
+        const char* const chars = buffDigits();
+        return string( str , size , chars , strlen(chars) , skip );
+    }
+
+    char* printable(char str[], const unsigned int size) {
+        const char* const chars = buffPrintable();
+        return string( str , size , chars , strlen(chars) );
+    }
+    char* printable(char str[], const unsigned int size, const unsigned int skip) {
+        const char* const chars = buffPrintable();
+        return string( str , size , chars , strlen(chars) , skip );
+    }
+
+    char oneLetter() {
+        constexpr static const char* const chars = buffLetters();
+        constexpr static const unsigned int size = strlen(chars);
+        return chars[ this->range( size-1 ) ];
+    }
+    char oneLetter( const unsigned int skip) {
+        for( unsigned int i=0 ; i<skip ; i++ ) {
+            (*this)();
+        }
+        constexpr static const char* const chars = buffLetters();
+        constexpr static const unsigned int size = strlen(chars);
+        return chars[ this->range( size-1 ) ];
+    }
+
+    char oneSmallLetter() {
+        constexpr static const char* const chars = buffSmallLetters();
+        constexpr static const unsigned int size = strlen(chars);
+        return chars[ this->range( size-1 ) ];
+    }
+    char oneSmallLetter( const unsigned int skip) {
+        for( unsigned int i=0 ; i<skip ; i++ ) {
+            (*this)();
+        }
+        constexpr static const char* const chars = buffSmallLetters();
+        constexpr static const unsigned int size = strlen(chars);
+        return chars[ this->range( size-1 ) ];
+    }
+
+    char oneDigit() {
+        constexpr static const char* const chars = buffDigits();
+        constexpr static const unsigned int size = strlen(chars);
+        return chars[ this->range( size-1 ) ];
+    }
+    char oneDigit( const unsigned int skip) {
+        for( unsigned int i=0 ; i<skip ; i++ ) {
+            (*this)();
+        }
+        constexpr static const char* const chars = buffDigits();
+        constexpr static const unsigned int size = strlen(chars);
+        return chars[ this->range( size-1 ) ];
+    }
+
+    char onePrintable() {
+        constexpr static const char* const chars = buffPrintable();
+        constexpr static const unsigned int size = strlen(chars);
+        return chars[ this->range( size-1 ) ];
+    }
+    char onePrintable( const unsigned int skip ) {
+        for( unsigned int i=0 ; i<skip ; i++ ) {
+            (*this)();
+        }
+        constexpr static const char* const chars = buffPrintable();
+        constexpr static const unsigned int size = strlen(chars);
+        return chars[ this->range( size-1 ) ];
+    }
+
 
 
 };
