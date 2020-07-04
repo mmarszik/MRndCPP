@@ -38,6 +38,6 @@
 
 namespace MRnd {
 
-using TRnd = Rnd4Lin;
+using TMRnd = Rnd4Lin;
 
 }

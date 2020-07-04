@@ -51,7 +51,7 @@ int main() {
     for( TMRND_U32 i=0 ; i<8 ; i++ ) {
         seed = ( seed << 8 ) | ( rd() & 0xFF );
     }
-    TRnd rnd( seed );
+    TMRnd rnd( seed );
     for( TMRND_U64 loop=0 ;true ; loop++ ) {
         TMRND_U32 buf[ BUFFSIZE ];
         for( TMRND_U32 i=0 ; i<BUFFSIZE ; i++) {

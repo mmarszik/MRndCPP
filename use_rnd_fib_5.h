@@ -38,7 +38,7 @@
 
 namespace MRnd {
 
-using TRnd = RndFib5;
+using TMRnd = RndFib5;
 
 }
 /* TEST00

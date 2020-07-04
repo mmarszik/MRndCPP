@@ -41,12 +41,12 @@ namespace MRnd {
 
 class RndFBuff0 {
 private:
-    TRnd        &rnd; // Pseudo random number generator.
+    TMRnd        &rnd; // Pseudo random number generator.
     TMRND_F64 min;  // Min range.
     TMRND_F64 max;  // Max range.
 
 public:
-    RndFBuff0(TRnd &rnd, CMRND_F64 min=0, CMRND_F64 max=0) : rnd(rnd) {
+    RndFBuff0(TMRnd &rnd, CMRND_F64 min=0, CMRND_F64 max=0) : rnd(rnd) {
         setMinMax( min, max );
     }
     RndFBuff0( const RndFBuff0& other ) : rnd(other.rnd) {

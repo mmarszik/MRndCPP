@@ -38,7 +38,7 @@
 
 namespace MRnd {
 
-using TRnd = RndRanlux48;
+using TMRnd = RndRanlux48;
 
 }
 /* TEST00

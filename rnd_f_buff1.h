@@ -44,7 +44,7 @@ class RndFBuff1 {
 private:
     using TBuff1 = MxArray<TMRND_F64,SIZE1+SIZE2>;
 private:
-    TRnd       &rnd;         // Pseudo random number generator.
+    TMRnd       &rnd;         // Pseudo random number generator.
     TMRND_F64   min,max;     // Min-max range.
     TBuff1      buff;        // N-Cyclic buffers to number generator.
     TMRND_U32   select;      // Select first or second buffer.
@@ -60,7 +60,7 @@ private:
     }
 
 public:
-    RndFBuff1(TRnd &rnd, CMRND_F64  min=0, CMRND_F64  max=0) : rnd(rnd), end1(&buff[0]+SIZE1), end2(end1+SIZE2) {
+    RndFBuff1(TMRnd &rnd, CMRND_F64  min=0, CMRND_F64  max=0) : rnd(rnd), end1(&buff[0]+SIZE1), end2(end1+SIZE2) {
         setMinMax(min,max);
     }
     RndFBuff1(const RndFBuff1& other) : rnd(other.rnd), end1(&buff[0]+SIZE1), end2(end1+SIZE2) {

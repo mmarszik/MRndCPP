@@ -69,7 +69,7 @@ public:
 };
 
 
-using TRndProb0 = MRndProb<TRnd>;
+using TRndProb0 = MRndProb<TMRnd>;
 
 
 /*

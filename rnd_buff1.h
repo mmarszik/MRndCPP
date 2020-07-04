@@ -41,7 +41,7 @@ namespace MRnd {
 
 //MM: Attention: It is opposite of the good random number generator ;-)
 //MM: It is pseudo random number generator with the double cyclic buffer. It work fast
-//MM: but numbers are worse(!!!) than with class TRnd.
+//MM: but numbers are worse(!!!) than with class TMRnd.
 
 //#define TMRND_RND_BUFF_V1
 //#define TMRND_RND_BUFF_V2
@@ -52,7 +52,7 @@ namespace MRnd {
 template<CMRND_UINT SIZE1, CMRND_UINT SIZE2, CMRND_UINT RESET=SIZE1*SIZE2*2>
 class RndBuff1 {
 private:
-    TRnd           &rnd;        // Pseudo random number generator.
+    TMRnd           &rnd;        // Pseudo random number generator.
     TMRND_IRESULT  min,max;     // Min-max range.
     TMRND_IRESULT  *const buff; // N-Cyclic buffers to number generator.
     TMRND_UINT     select;      // Select first or second buffer.
@@ -66,7 +66,7 @@ private:
         }
     }
 public:
-    RndBuff1(TRnd &rnd, CMRND_IRESULT min=0, CMRND_IRESULT max=0) : rnd(rnd), buff(new TMRND_IRESULT[SIZE1+SIZE2]), end1(buff+SIZE1), end2(end1+SIZE2) {
+    RndBuff1(TMRnd &rnd, CMRND_IRESULT min=0, CMRND_IRESULT max=0) : rnd(rnd), buff(new TMRND_IRESULT[SIZE1+SIZE2]), end1(buff+SIZE1), end2(end1+SIZE2) {
         setMinMax(min,max);
     }
     RndBuff1(const RndBuff1& other) : rnd(other.rnd), buff(new TMRND_IRESULT[SIZE1+SIZE2]), end1(buff+SIZE1), end2(end1+SIZE2) {
@@ -133,7 +133,7 @@ class RndBuff1 {
 private:
     using TBuff1 = MxArray<TMRND_IRESULT,SIZE1+SIZE2>;
 private:
-    TRnd           &rnd;          // Pseudo random number generator.
+    TMRnd           &rnd;          // Pseudo random number generator.
     TMRND_IRESULT  min, max;      // The range.
     TBuff1         buff;          // N-Cyclic buffer to number generator.
     TMRND_UINT     i1,i2, select; // Select first or second buffer.
@@ -145,7 +145,7 @@ private:
         }
     }
 public:
-    RndBuff1(TRnd &rnd, CMRND_IRESULT min=0, CMRND_IRESULT max=0) : rnd(rnd) {
+    RndBuff1(TMRnd &rnd, CMRND_IRESULT min=0, CMRND_IRESULT max=0) : rnd(rnd) {
         setMinMax(min,max);
     }
     RndBuff1(const RndBuff1& other) : rnd(other.rnd) {
@@ -208,7 +208,7 @@ private:
     using TBuff1 = MxArray<TMRND_IRESULT,SIZE1+SIZE2>;
 private:
     TMRND_U32      i3;
-    TRnd           &rnd;        // Pseudo random number generator.
+    TMRnd           &rnd;        // Pseudo random number generator.
     TMRND_IRESULT  min, max;    // Min range.
     TBuff1         buff;        // N-Cyclic buffer to number generator.
     TMRND_U32      select;      // Select first or second buffer.
@@ -228,7 +228,7 @@ private:
         }
     }
 public:
-    RndBuff1(TRnd &rnd, CMRND_IRESULT min=0, CMRND_IRESULT max=0) : rnd(rnd), end1(&buff[0]+SIZE1), end2(end1+SIZE2) {
+    RndBuff1(TMRnd &rnd, CMRND_IRESULT min=0, CMRND_IRESULT max=0) : rnd(rnd), end1(&buff[0]+SIZE1), end2(end1+SIZE2) {
         setMinMax(min,max);
     }
     RndBuff1(const RndBuff1& other) : rnd(other.rnd), end1(other.end1), end2(other.end2) {

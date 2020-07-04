@@ -48,7 +48,7 @@ int main( int argc , char *argv[] ) {
         loops = 1ull << atoi(argv[1]);
     }
     CMRND_ULONG seed = 1234567890ull;
-    TRnd rnd( seed );
+    TMRnd rnd( seed );
     TRndBuff rndBuf(rnd,-23,23);
     TMRND_LONG x = 0;
     for( TMRND_UINT i=0 ; i<10 ; i++ ) {

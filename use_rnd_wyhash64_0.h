@@ -38,7 +38,7 @@
 
 namespace MRnd {
 
-using TRnd = RndWyhash64_0;
+using TMRnd = RndWyhash64_0;
 
 }
 /* TEST00

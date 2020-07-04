@@ -36,6 +36,6 @@
 
 namespace MRnd {
 
-using TRnd = RndAddRot6;
+using TMRnd = RndAddRot6;
 
 }

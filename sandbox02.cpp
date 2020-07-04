@@ -61,7 +61,7 @@ using TBuff = MxArray<TMRND_UINT,SIZE1+SIZE2>;
 int main( int argc , char *argv[] ) {
     (void)argc;
     (void)argv;
-    TRnd rnd(1250);
+    TMRnd rnd(1250);
     TBuff buff, copy, mask;
     for( TMRND_UINT i=0 ; i<SIZE ; i++ ) {
         mask[i] = MASK ^ ( 1u << ( rnd() % (BITS-1) ) );

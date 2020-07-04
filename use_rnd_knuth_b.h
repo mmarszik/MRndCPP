@@ -36,7 +36,7 @@
 
 namespace MRnd {
 
-using TRnd = RndKnuthB;
+using TMRnd = RndKnuthB;
 
 }
 

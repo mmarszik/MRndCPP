@@ -38,7 +38,7 @@
 
 namespace MRnd {
 
-using TRnd = Rnd3Lin;
+using TMRnd = Rnd3Lin;
 /* TEST00
 time ./MRndCPP 14 
 1538594075
