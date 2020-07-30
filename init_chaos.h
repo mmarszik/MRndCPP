@@ -44,9 +44,9 @@ extern CMRND_U64 CMRND_INIT_CHAOS[ 1u << CMRND_INIT_CHAOS_SIZE ];
 
 template<typename TARRAY>
 static void initByChaos(
-    TARRAY       &buff,
+    TARRAY      &buff,
     CMRND_U32   SIZE,
-    TMRND_U64  seed,
+    TMRND_U64   seed,
     CMRND_U32   XORS  = 17,
     CMRND_U32   SKIPS = 71
 ) {
