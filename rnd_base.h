@@ -45,6 +45,28 @@ class RndBase {
 public:
     using result_type = TMRND_RESULT;
 
+private:
+    //MM: Get float between <0,1)
+    template<typename T>
+    T _precisionFloat() {
+        T r = static_cast<T>( 0.0 );
+        T b = static_cast<T>( 0.5 );
+        while( r + b > r ) {
+            if( (*this)() & (1u<<28) ) {
+                r += b;
+            }
+            b /= 2;
+        }
+        return r;
+    }
+
+    //MM: Get float between <_min,_max)
+    template<typename T>
+    T _precisionFloat(const T _min, const T _max) {
+        return _precisionFloat<T>() * ( _max - _min ) + _min;
+    }
+
+
 public:
     static TMRND_RESULT max() {
         return MLimits<TMRND_RESULT>::max();
@@ -60,6 +82,14 @@ public:
     }
     TMRND_IRESULT range(CMRND_IRESULT _max) {
         return range(0,_max);
+    }
+
+    double precisionFloat(const double _min, const double _max) {
+        return _precisionFloat<double>(_min,_max);
+    }
+
+    double precisionFloat() {
+        return _precisionFloat<double>();
     }
 
     //MM: Get float between <_min,_max>
