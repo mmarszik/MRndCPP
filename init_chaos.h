@@ -43,7 +43,7 @@ constexpr CMRND_U32 CMRND_INIT_CHAOS_SIZE = 14U;
 extern CMRND_U64 CMRND_INIT_CHAOS[ 1u << CMRND_INIT_CHAOS_SIZE ];
 
 template<typename TARRAY>
-static void initByChaos(
+static void letBeChaos(
     TARRAY      &buff,
     CMRND_U32   SIZE,
     TMRND_U64   seed,
@@ -64,7 +64,7 @@ static void initByChaos(
             for( TMRND_U32 k=0 ; k<SKIPS ; k++ ) {
                 seed = seed * A + B;
             }
-            buff[j] ^= CMRND_INIT_CHAOS[v1] + seed;
+            buff[j] = buff[j] ^ (CMRND_INIT_CHAOS[v1] + seed);
         }
     }
 

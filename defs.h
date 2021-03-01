@@ -34,6 +34,11 @@
 
 #pragma once
 
+#ifdef NATIVE_U128_BIT
+#else
+#include "MiscCPP/m_uint128.h"
+#endif
+
 namespace MRnd {
 
 using TMRND_U8   = unsigned char;
@@ -42,15 +47,20 @@ using TMRND_U32  = unsigned int;
 using TMRND_I64  = long long;
 using TMRND_U64  = unsigned long long;
 using TMRND_F64  = double;
-using TMRND_I128 = __int128_t;
+//using TMRND_I128 = __int128_t;
+
+#ifdef NATIVE_U128_BIT
 using TMRND_U128 = __uint128_t;
+#else
+using TMRND_U128 = MUint128;
+#endif
 
 using CMRND_U8   = const TMRND_U8;
 using CMRND_U32  = const TMRND_U32;
 using CMRND_I64  = const TMRND_I64;
 using CMRND_U64  = const TMRND_U64;
 using CMRND_F64  = const TMRND_F64;
-using CMRND_I128 = const TMRND_I128;
+//using CMRND_I128 = const TMRND_I128;
 using CMRND_U128 = const TMRND_U128;
 
 using TMRND_RESULT  = TMRND_U32;

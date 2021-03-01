@@ -76,7 +76,7 @@ public:
         return *( new(this)RndWyhash64m(other) );
     }
     void seed(CMRND_ULONG __sd) {
-        initByChaos<TBUFF>(buff,SIZE1+SIZE2,__sd);
+        letBeChaos<TBUFF>(buff,SIZE1+SIZE2,__sd);
         i1 = &buff[0];
         i2 = end1;
     }
@@ -120,7 +120,7 @@ public:
         return *( new(this)RndWyhash64m(other) );
     }
     void seed(CMRND_U64 __sd) {
-        initByChaos<TBUFF>(buff, SIZE1+SIZE2, __sd );
+        letBeChaos<TBUFF>(buff, SIZE1+SIZE2, __sd );
         i1 = 0;
         i2 = SIZE1;
     }

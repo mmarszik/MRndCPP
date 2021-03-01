@@ -54,9 +54,9 @@ public:
     }
     TMRND_RESULT operator()() {
         x += A;
-        TMRND_U128 t = (TMRND_U128)x * B;
+        TMRND_U128 t = TMRND_U128(x) * B;
         CMRND_U64 m = (t >> 64) ^ t;
-        t = (TMRND_U128)m * C;
+        t = TMRND_U128(m) * C;
         return (t >> 64) ^ t;
     }
 };

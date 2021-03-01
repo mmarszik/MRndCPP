@@ -64,7 +64,7 @@ public:
         return *( new(this)RndFib(other) );
     }
     void seed(const T __sd) {
-        initByChaos<TBUFF>(buff, SIZE, __sd );
+        letBeChaos<TBUFF>(buff, SIZE, __sd );
         i1 = &buff[0] + SIZE - 1;
         i2 = &buff[0] + SIZE - 1 - R;
         for( TMRND_U32 i=0 ; i<SIZE*INIT ; i++ ) {

@@ -55,7 +55,7 @@ public:
         seed(__sd);
     }
     void seed(CMRND_U64 __sd) {
-        initByChaos<TBUFF>(buff, SIZE1, __sd );
+        letBeChaos<TBUFF>(buff, SIZE1, __sd );
     }
     TMRND_RESULT operator()() {
         v = v * 543657589ull + 4253133281ull;

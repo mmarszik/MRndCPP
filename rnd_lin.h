@@ -37,7 +37,7 @@
 
 namespace MRnd {
 
-template<typename T, const T A, const T B, const T M=0, CMRND_U32 BITS=32, CMRND_U32 SHIFT=0, CMRND_U32 SKIP=0>
+template<class T, const T A, const T B, const T M=0, CMRND_U32 BITS=32, CMRND_U32 SHIFT=0, CMRND_U32 SKIP=0>
 class RndLin : public RndBase {
     static_assert( sizeof(T) >= sizeof(TMRND_RESULT), "sizeof(T) >= sizeof(TMRND_RESULT)" );
 private:
@@ -77,11 +77,12 @@ public:
     }
 };
 
-using RndLin1 = RndLin<TMRND_U64,          219747164629ull,       152680993343ull, 0ull, 16u, 48u, 0>;
-using RndLin2 = RndLin<TMRND_U64,       178627919555669ull,   1420217663636021ull, 0ull, 16u, 48u, 1>;
-using RndLin3 = RndLin<TMRND_U64,         3638238676099ull,6441555549709350607ull, 0ull, 16u, 48u, 2>;
-using RndLin4 = RndLin<TMRND_U64,       965572862617007ull,    661186099983727ull, 0ull, 11u, 53u, 1>;
-using RndLin5 = RndLin<TMRND_U64,       661186099983727ull,   3390980202202013ull, 0ull,  8u, 56u, 1>;
-using RndLin6 = RndLin<TMRND_U128,  2018814029453857ull,   2082947326556573ull, 0ull, 32u, 96u, 0>;
-
+using RndLin1 = RndLin<TMRND_U64,      219747164629ull,        152680993343ull, 0ull, 16u, 48u, 0>;
+using RndLin2 = RndLin<TMRND_U64,   178627919555669ull,    1420217663636021ull, 0ull, 16u, 48u, 1>;
+using RndLin3 = RndLin<TMRND_U64,     3638238676099ull, 6441555549709350607ull, 0ull, 16u, 48u, 2>;
+using RndLin4 = RndLin<TMRND_U64,   965572862617007ull,     661186099983727ull, 0ull, 11u, 53u, 1>;
+using RndLin5 = RndLin<TMRND_U64,   661186099983727ull,    3390980202202013ull, 0ull,  8u, 56u, 1>;
+#ifdef NATIVE_U128_BIT
+using RndLin6 = RndLin<TMRND_U128, 2018814029453857ull,    2082947326556573ull, 0ull, 32u, 96u, 0>;
+#endif
 }
