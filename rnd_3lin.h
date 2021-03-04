@@ -60,7 +60,7 @@ private:
         }
     }
 public:
-    Rnd3Lin( CMRND_U64 __sd) {
+    Rnd3Lin( CMRND_U64 __sd = 0x25EC1CDA937545ECull) {
         seed( __sd );
     }
     void seed( CMRND_U64 __sd ) {
