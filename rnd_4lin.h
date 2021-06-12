@@ -64,7 +64,7 @@ private:
     }
 
 public:
-    Rnd4Lin( CMRND_U64 __sd) {
+    Rnd4Lin( CMRND_U64 __sd = 0x25EC1CDA937545ECull) {
         seed( __sd );
     }
 
@@ -83,10 +83,14 @@ public:
         next( d , sd , 18 ,  11744023ull,  65463955637ull ); // Double the generate once per 19 (19=18+1) generated
         return (TMRND_RESULT) (
             (
-              ( ( a >> (64-11) ) <<  0 ) |
-              ( ( b >> (64-11) ) << 11 ) |
+              ( ( a >> (64-11) ) <<  0 )
+                 |
+              ( ( b >> (64-11) ) << 11 )
+                 |
               ( ( c >> (64-10) ) << 22 )
-            ) ^ ( d >> 32 )
+            )
+              ^
+            ( d >> 32 )
         );
     }
 
